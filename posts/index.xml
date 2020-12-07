@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on LeaveIt</title>
+    <link>https://example.com/posts/</link>
+    <description>Recent content in Posts on LeaveIt</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 07 Dec 2020 18:12:25 +0800</lastBuildDate>
+    
+	<atom:link href="https://example.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ｑｔ操作mysql</title>
+      <link>https://example.com/2020/%EF%BD%91%EF%BD%94%E6%93%8D%E4%BD%9Cmysql/</link>
+      <pubDate>Mon, 07 Dec 2020 18:12:25 +0800</pubDate>
+      
+      <guid>https://example.com/2020/%EF%BD%91%EF%BD%94%E6%93%8D%E4%BD%9Cmysql/</guid>
+      <description>[TOC]
+1. 基本操作 1.1 添加模块 Qt数据库模块是独立模块，需要像core，gui一样在.pro文件中添加该模块
+QT+=sql  1.2 基本操作 获取可用连接 首先查看qt下支持的连接名
+qDebug() &amp;lt;&amp;lt; QSqlDatabase::drivers();  输出如下 (&amp;quot;QSQLITE&amp;quot;, &amp;quot;QMYSQL&amp;quot;, &amp;quot;QMYSQL3&amp;quot;, &amp;quot;QPSQL&amp;quot;, &amp;quot;QPSQL7&amp;quot;)
+建立连接 使用上一步获取到的连接名作为addDatabase的第一个参数
+QSqlDatabase db = QSqlDatabase::addDatabase(&amp;quot;QMYSQL&amp;quot;);  这样我们就获取到mysql的句柄了 接下来是mysql的基本操作
+db.setHostName(&amp;quot;localhost&amp;quot;); // 假定数据库在本机 db.setDatabaseName(&amp;quot;student&amp;quot;); // 打开数据库名 db.setUserName(&amp;quot;root&amp;quot;); // 数据库用户名 db.setPassword(&amp;quot;123456&amp;quot;); // 数据库密码  设置完之后调用open()打开mysql数据库,完整代码如下
+QSqlDatabase db = QSqlDatabase::addDatabase(&amp;quot;QMYSQL&amp;quot;); db.setHostName(&amp;quot;localhost&amp;quot;); // 假定数据库在本机 db.setDatabaseName(&amp;quot;server&amp;quot;); // 打开数据库名 db.setUserName(&amp;quot;root&amp;quot;); // 数据库用户名 db.setPassword(&amp;quot;123456&amp;quot;); // 数据库密码 if (!db.open()) { qDebug() &amp;lt;&amp;lt; &amp;quot;Failed to connect to root mysql!</description>
+    </item>
+    
+    <item>
+      <title>Creating a New Theme</title>
+      <link>https://example.com/2014/creating-a-new-theme/</link>
+      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/2014/creating-a-new-theme/</guid>
+      <description>Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&amp;rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&amp;rsquo;t cover using CSS to style your theme.
+We&amp;rsquo;ll start with creating a new site with a very basic template.</description>
+    </item>
+    
+    <item>
+      <title>(Hu)go Template Primer</title>
+      <link>https://example.com/2014/goisforlovers/</link>
+      <pubDate>Mon, 28 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/2014/goisforlovers/</guid>
+      <description>Hugo uses the excellent go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in go templates.
+This document is a brief primer on using go templates.</description>
+    </item>
+    
+    <item>
+      <title>Getting Started with Hugo</title>
+      <link>https://example.com/2014/hugoisforlovers/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/2014/hugoisforlovers/</guid>
+      <description>Step 1. Install Hugo Goto hugo releases and download the appropriate version for your os and architecture.
+Save it somewhere specific as we will be using it in the next step.
+More complete instructions are available at installing hugo
+Step 2. Build the Docs Hugo has its own example site which happens to also be the documentation site you are reading right now.
+Follow the following steps:
+ Clone the hugo repository Go into the repo Run hugo in server mode and build the docs Open your browser to http://localhost:1313  Corresponding pseudo commands:</description>
+    </item>
+    
+    <item>
+      <title>Migrate to Hugo from Jekyll</title>
+      <link>https://example.com/2014/migrate-from-jekyll/</link>
+      <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/2014/migrate-from-jekyll/</guid>
+      <description>Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
+▾ &amp;lt;root&amp;gt;/ ▾ images/ logo.png  should become
+▾ &amp;lt;root&amp;gt;/ ▾ static/ ▾ images/ logo.png  Additionally, you&amp;rsquo;ll want any files that should reside at the root (such as CNAME) to be moved to static.</description>
+    </item>
+    
+  </channel>
+</rss>
