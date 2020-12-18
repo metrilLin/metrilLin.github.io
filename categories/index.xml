@@ -10,32 +10,5 @@
 	<atom:link href="https://metrillin.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
-    <item>
-      <title>Releases</title>
-      <link>https://metrillin.github.io/categories/releases/</link>
-      <pubDate>Wed, 29 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://metrillin.github.io/categories/releases/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Uncategorized</title>
-      <link>https://metrillin.github.io/categories/uncategorized/</link>
-      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://metrillin.github.io/categories/uncategorized/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>blog</title>
-      <link>https://metrillin.github.io/categories/blog/</link>
-      <pubDate>Mon, 24 Jul 2017 18:36:00 +0200</pubDate>
-      
-      <guid>https://metrillin.github.io/categories/blog/</guid>
-      <description></description>
-    </item>
-    
   </channel>
 </rss>
