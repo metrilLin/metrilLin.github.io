@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="mentir.">
+  
+  
+  
+  <link rel="prev" href="/2020/vlc%E7%BC%96%E8%AF%91/" />
+  <link rel="next" href="/2020/%E7%BC%96%E8%AF%91android%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84openssl/" />
+  <link rel="canonical" href="/2020/opencv%E8%A7%86%E9%A2%91%E6%B5%81%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Opencv视频流处理方法 | LeaveIt
+       
+  </title>
+  <meta name="title" content="Opencv视频流处理方法 | LeaveIt">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": ""
+    },
+    "articleSection" : "posts",
+    "name" : "Opencv视频流处理方法",
+    "headline" : "Opencv视频流处理方法",
+    "description" : "opencv视频流处理方法 OpenCV提供了VideoCapture类和VideoWriter类来支持各种格式的视频流，支持的格式类型会因系统的不同而有所变化，但基本上都是支持avi格式的，且对于视频文件和摄像头画面的读写所用到的接口基本上都相同，因此，我们把它们放在一起来讲了。
+1. 获取VideoCapture类实例
+不管是读取视频文件还是捕获摄像头画面，都使用到了VideoCapture类，但不同的是传入的形参不一样，如果我们传给VideoCapture类的是一个视频文件路径那么将是读取来自视频文件的画面，而如果我们传给VideoCapture类的是摄像头编号那么将是读取来自摄像头的画面，其使用示例如下：
+ # 获取VideoCapture类实例，读取视频文件 fcap = cv2.VideoCapture('demo.mp4') # 读取摄像头画面 ccap = cv2.VideoCapture(0)  对于摄像头编号，可以使用如下命令获取：
+ ls -al /dev/ | grep video  对于输出信息以video开头的其数字后缀即为可能的摄像头编号，如果一台电脑有多个摄像头设备，那么将会出现从0开始的多个摄像头编号。
+2. 判断获取VideoCapture实例是否成功
+如果传入无效的视频文件或摄像头编号，那么VideoCapture类将会在后续的read()接口返回（False，None），为了避免此类事件发生，可以通过VideoCapture类的isOpened()接口进行判断，该接口返回一个boolean值，正常获取实例返回True，否则返回False，其使用示例如下：
+ # 判断是否正确获取VideoCapture类实例 while fcap.isOpened(): # next step operation  3. 获取视频流信息
+一般视频流主要的帧信息包含画面宽高还有帧率，对于视频文件，则会多出整个视频流多少帧，因此，我们一般主要关注这四个视频流信息即可，而我们用到的则是VideoCapture类的get接口，其使用示例如下：
+ # 获取视频帧的宽 w = fcap.get(cv2.CAP_PROP_FRAME_WIDTH) # 获取视频帧的高 h = fcap.get(cv2.CAP_PROP_FRAME_HEIGHT) # 获取视频帧的帧率 fps = fcap.get(cv2.CAP_PROP_FPS)  获取到的帧率对于摄像头设备来说，如果所使用的终端不支持查询，那么将会返回0值，且该值也不是非常精确的。
+ # 获取视频流的总帧数 fcount = fcap.get(cv2.CAP_PROP_FRAME_COUNT)  注意这个是对视频文件才有意义，对于摄像头是没意义的，且以上获取到的返回信息均是浮点型的，注意转换为整型。",
+    "inLanguage" : "en-us",
+    "author" : "mentir.",
+    "creator" : "mentir.",
+    "publisher": "mentir.",
+    "accountablePerson" : "mentir.",
+    "copyrightHolder" : "mentir.",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-10-15 18:27:07 &#43;0800 PST",
+    "dateModified" : "2020-10-15 18:27:07 &#43;0800 PST",
+    "url" : "/2020/opencv%E8%A7%86%E9%A2%91%E6%B5%81%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/",
+    "wordCount" : "284",
+    "keywords" : [ "Docker", "LeaveIt"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="">LeaveIt</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">博客</a>
+                
+                <a class="menu-item" href="/categories/" title="">分类</a>
+                
+                <a class="menu-item" href="/tags/" title="">标签</a>
+                
+                <a class="menu-item" href="/about/" title="">关于</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="">LeaveIt</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">博客</a>
+                
+                <a class="menu-item" href="/categories/" title="">分类</a>
+                
+                <a class="menu-item" href="/tags/" title="">标签</a>
+                
+                <a class="menu-item" href="/about/" title="">关于</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Opencv视频流处理方法</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="" rel="author">mentir.</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2020-10-15 itemprop="datePublished">October 15, 2020</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="/categories/docker/"> Docker </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h1 id="opencv视频流处理方法">opencv视频流处理方法</h1>
+
+<p>OpenCV提供了VideoCapture类和VideoWriter类来支持各种格式的视频流，支持的格式类型会因系统的不同而有所变化，但基本上都是支持avi格式的，且对于视频文件和摄像头画面的读写所用到的接口基本上都相同，因此，我们把它们放在一起来讲了。</p>
+
+<p><strong>1. 获取VideoCapture类实例</strong></p>
+
+<p>不管是读取视频文件还是捕获摄像头画面，都使用到了VideoCapture类，但不同的是传入的形参不一样，如果我们传给VideoCapture类的是一个视频文件路径那么将是读取来自视频文件的画面，而如果我们传给VideoCapture类的是摄像头编号那么将是读取来自摄像头的画面，其使用示例如下：</p>
+
+<pre><code>    # 获取VideoCapture类实例，读取视频文件
+    fcap = cv2.VideoCapture('demo.mp4')
+    # 读取摄像头画面
+    ccap = cv2.VideoCapture(0)
+</code></pre>
+
+<p>对于摄像头编号，可以使用如下命令获取：</p>
+
+<pre><code>    ls -al /dev/ | grep video
+</code></pre>
+
+<p>对于输出信息以video开头的其数字后缀即为可能的摄像头编号，如果一台电脑有多个摄像头设备，那么将会出现从0开始的多个摄像头编号。</p>
+
+<p><strong>2. 判断获取VideoCapture实例是否成功</strong></p>
+
+<p>如果传入无效的视频文件或摄像头编号，那么VideoCapture类将会在后续的read()接口返回（False，None），为了避免此类事件发生，可以通过VideoCapture类的isOpened()接口进行判断，该接口返回一个boolean值，正常获取实例返回True，否则返回False，其使用示例如下：</p>
+
+<pre><code>    # 判断是否正确获取VideoCapture类实例
+    while fcap.isOpened():
+        # next step operation
+</code></pre>
+
+<p><strong>3. 获取视频流信息</strong></p>
+
+<p>一般视频流主要的帧信息包含画面宽高还有帧率，对于视频文件，则会多出整个视频流多少帧，因此，我们一般主要关注这四个视频流信息即可，而我们用到的则是VideoCapture类的get接口，其使用示例如下：</p>
+
+<pre><code>    # 获取视频帧的宽
+    w = fcap.get(cv2.CAP_PROP_FRAME_WIDTH)
+    # 获取视频帧的高
+    h = fcap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+    # 获取视频帧的帧率
+    fps = fcap.get(cv2.CAP_PROP_FPS)
+</code></pre>
+
+<p>获取到的帧率对于摄像头设备来说，如果所使用的终端不支持查询，那么将会返回0值，且该值也不是非常精确的。</p>
+
+<pre><code>
+    # 获取视频流的总帧数
+    fcount = fcap.get(cv2.CAP_PROP_FRAME_COUNT)
+</code></pre>
+
+<p>注意这个是对视频文件才有意义，对于摄像头是没意义的，且以上获取到的返回信息均是浮点型的，注意转换为整型。</p>
+
+<p><strong>4. 获取帧画面</strong></p>
+
+<p>这个就相对简单，直接使用VideoCapture类的read接口即可，该接口会返回两个参数，第一个参数是读取成功与否标志位，成功为True否则为False，第二个参数则为具体的帧数据，其是一个numpy.ndarray的数组，其使用示例如下：</p>
+
+<pre><code>    # 获取帧画面
+    success, frame = fcap.read()
+</code></pre>
+
+<p>但在读取过程中，有可能会存在失败的情况出现，一般我们是在第二次读取时放入一个while循环来保障整个读取顺利进行，如下：</p>
+
+<pre><code>    # 判断读取视频流是否成功
+    while success:
+        success, frame = fcap.read()
+        # do something in here
+
+</code></pre>
+
+<p><strong>5. 针对一组或多头摄像头特殊处理</strong></p>
+
+<p>当需要同步一组摄像头或一个多头（multihead）摄像头（例如立体摄像头或Kinect）时，read()方法就不太适用了，这时，一般使用grab()和retrieve()方法代替它。对于一组摄像头，其使用示例如下：</p>
+
+<pre><code>
+    # 一组摄像头的特殊处理
+    success0 = fcap0.grab()
+    success1 = fcap1.grab()
+    if success0 and success1:
+        frame0 = fcap0.retrieve()
+        frame1 = fcap1.retrieve()
+
+</code></pre>
+
+<p><strong>6. 跳到视频流某一帧</strong></p>
+
+<p>对于视频文件，有时候我们需要直接跳到某一个感兴趣的帧并从该帧开始读取数据，那么可以使用VideoCapture类的set接口，其使用示例如下：</p>
+
+<pre><code>
+    # 跳到某一感兴趣帧并从此帧开始读取,如从第360帧开始读取
+    fcap.set(cv2.CAP_PROP_POS_FRAMES, 360)
+    success, frame = fcap.read()
+</code></pre>
+
+<p><strong>7. 设置摄像头分辨率</strong></p>
+
+<p>opencv读取到的摄像头画面大小一般为默认的640x480，但这并不一定满足我们的日常使用要求，比如摄像头支持超高清画面，那么我们就希望能捕获到超高清1920x1080的画面，好在VideoCapture类的set接口为我们提供了相应的功能，其使用示例如下：</p>
+
+<pre><code>    # 设置摄像头分辨率的高
+    fcap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+    # 设置摄像头分辨率的宽
+    fcap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+</code></pre>
+
+<p><strong>8. 获取VideoWriter类实例</strong></p>
+
+<p>不管是对视频文件的再存储还是对摄像头画面的保存，都是用到了VideoWriter类，且传入的形参意义是一致的，都需要我们传入保存的文件名包含视频格式、指定视频编解码器、保存视频的帧率以及保存视频的分辨率，一般来说，保存视频的帧率最好与读入的画面的帧率一致，但需要我们进行估计或使用计时器才会比较准确，而分辨率则可以更改，只是要求写入的帧其大小要与分辨率保持一致，其使用示例如下：</p>
+
+<pre><code>writer = cv2.VideoWriter('output.avi', cv2.VideoWriter_fourcc('X', 'V', 'I', 'D'), 30, (1080, 1920))
+</code></pre>
+
+<p>值得注意的是，我们必须要为VideoWriter类的构造函数传入所需的参数，且若指定的文件名已存在则会被直接覆盖。</p>
+
+<p><strong>9. VideoWriter类支持的视频编解码器</strong></p>
+
+<p>在构造VideoWriter类实例时，我们必须要指定视频编解码器，那么VideoWriter类都支持哪些视频编解码器呢？我们通过cv2.VideoWriter_fourcc来指定具体使用的编解码器：</p>
+
+<pre><code>    'I','4','2','0'：该选项是一个未压缩的YUV颜色编码，兼容性好，但产生文件较大，文件扩展名为.avi
+    'P','T','M','I'：该选项是MPEG-1编码类型，文件扩展名为.avi
+    'X','V','T','D'：该选项是MPEG-4编码类型，得到的视频大小处于平均值，文件扩展名为.avi
+    'T','H','E','O'：该选项是Ogg Vorbis，文件扩展名为.ogv
+    'F','L','V','1'：该选项是一个flash视频，文件扩展名为.flv
+</code></pre>
+
+<p>一般常用的是cv2.VideoWriter_fourcc(&lsquo;X&rsquo;,&lsquo;V&rsquo;,&rsquo;T&rsquo;,&rsquo;D&rsquo;)，mp4编码文件相对小一些，或cv2.VideoWriter_fourcc(&lsquo;I&rsquo;,&lsquo;4&rsquo;,&lsquo;2&rsquo;,&lsquo;0&rsquo;)，文件相对大一些，但为了缩小文件空间我们可能还需要用到ffmpeg工具进一步压缩文件。</p>
+
+<p><strong>10. 保存帧数据</strong></p>
+
+<p>这个也很简单，直接使用VideoWriter类的write接口即可，该接口一次可以保存一帧数据到制定文件中，其使用示例如下：</p>
+
+<pre><code># 保存帧数据
+writer.write(frame)
+</code></pre>
+
+<p><strong>11. 释放资源</strong></p>
+
+<p>不管是VideoCapture类还是VideoWriter类，当我们使用完了它们之后，都应该将它们释放掉，避免资源一直被占用，而这两个类都有提供了release()接口给我们，我们只需直接调用即可释放资源，使用示例如下：</p>
+
+<pre><code>    # 释放VideoCapture资源
+    fcap.release()
+    # 释放VideoWriter资源
+    writer.release()
+</code></pre>
+
+<p><strong>12. 一个完整的示例代码</strong></p>
+
+<pre><code>    # -*- coding: utf-8 -*-
+    # /usr/bin/env/python3
+    
+    '''use opencv3 to capture video frame, show and save its stream.'''
+    
+    import cv2
+    
+    def stream_processing():
+        # 获取VideoCapture类实例，读取视频文件
+        fcap = cv2.VideoCapture('demo.mp4')
+    
+        # 设置摄像头分辨率的高
+        fcap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+        # 设置摄像头分辨率的宽
+        fcap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+        # 跳到某一感兴趣帧并从此帧开始读取,如从第360帧开始读取
+        fcap.set(cv2.CAP_PROP_POS_FRAMES, 360)
+    
+        # 获取视频帧的宽
+        w = fcap.get(cv2.CAP_PROP_FRAME_WIDTH)
+        # 获取视频帧的高
+        h = fcap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+        # 获取视频帧的帧率
+        fps = fcap.get(cv2.CAP_PROP_FPS)
+        # 获取视频流的总帧数
+        fcount = fcap.get(cv2.CAP_PROP_FRAME_COUNT)
+        
+        # 获取VideoWriter类实例
+        writer = cv2.VideoWriter('output.avi', cv2.VideoWriter_fourcc('X', 'V', 'I', 'D'), int(fps), (int(w), int(h)))
+    
+        # 判断是否正确获取VideoCapture类实例
+        while fcap.isOpened():
+            # 获取帧画面
+            success, frame = fcap.read()
+            while success:
+                cv2.imshow(&quot;demo&quot;, frame)  ## 显示画面
+                # 获取帧画面
+                success,frame = fcap.read()
+    
+                # 保存帧数据
+                writer.write(frame)
+    
+                if (cv2.waitKey(20) &amp; 0xff) == ord('q'):  ## 等待20ms并判断是按“q”退出，相当于帧率是50hz，注意waitKey只能传入整数，
+                    break
+            # 释放VideoCapture资源
+            fcap.release()
+        # 释放VideoWriter资源
+        writer.release()
+        cv2.destroyAllWindows()  ## 销毁所有opencv显示窗口
+    
+    
+    if __name__ == &quot;__main__&quot;:
+        stream_processing()
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>mentir. </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=/2020/opencv%E8%A7%86%E9%A2%91%E6%B5%81%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/>/2020/opencv%E8%A7%86%E9%A2%91%E6%B5%81%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="tags/docker/">
+                    #Docker</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="/2020/vlc%E7%BC%96%E8%AF%91/" class="prev" rel="prev" title="VLC编译"><i class="iconfont icon-left"></i>&nbsp;VLC编译</a>
+         
+        
+        <a href="/2020/%E7%BC%96%E8%AF%91android%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84openssl/" class="next" rel="next" title="编译android对应版本的openssl">编译android对应版本的openssl&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2018 - 2021</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="">mentir.</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

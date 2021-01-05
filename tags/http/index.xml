@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Http on LeaveIt</title>
+    <link>/tags/http/</link>
+    <description>Recent content in Http on LeaveIt</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 05 Dec 2020 21:30:59 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/http/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>LibCurl编译</title>
+      <link>/2020/libcurl%E7%BC%96%E8%AF%91/</link>
+      <pubDate>Sat, 05 Dec 2020 21:30:59 +0800</pubDate>
+      
+      <guid>/2020/libcurl%E7%BC%96%E8%AF%91/</guid>
+      <description>libCurl编译 1.首先下载libCurl的源码，这里使用的是Github上的版本
+git clone https://github.com/curl/curl.git  或者
+git clone https://github.com/curl/curl  2.生成configure
+ ./buildconf  3.查看本地可开启的功能
+./configure --enable-pthreads  会显示默认环境下安装后能使用的功能，若是满足需求就直接make和sudo make install
+ 若要开启SSL support和zlib support:(Centos) yum install openssl-libs openssl-devel 若要支持https需安装libssh2:(Centos) yum install libssh2-devel 若要支持PSL 验证 Cookie 和证书的 Domain 信息，则安装libpsl:(Centos) yum psl libpsl-devel 若要支持HTTP2 ,则安装nghttp2:(Centos) yum install libnghttp2-devel nghttp2 若要支持IDN,则安装libidn:(Centos) yum install libidn2 libidn2-devel 若要支持metalink，则安装 libmetalink:(Centos) yum install libmetalink libmetalink-devel 若要支持RTMP实时流传输，则到官网下载安装,可以参考文章 linux下编译支持librtmp、libx264、libfaac的ffmpeg Ubuntu的可对应上面的centos库自行百度下载   4.编译libcurl 由于本人需要openssl 与SSH2的功能（从上图可以看到SSH为未链接状态，我们可以下载libssh2进行编译） 编译OpenssH（可选）</description>
+    </item>
+    
+  </channel>
+</rss>

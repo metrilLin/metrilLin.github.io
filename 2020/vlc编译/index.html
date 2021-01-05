@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="mentir.">
+  
+  
+  
+  <link rel="prev" href="/2020/docker%E5%AE%9E%E4%BE%8B/" />
+  <link rel="next" href="/2020/opencv%E8%A7%86%E9%A2%91%E6%B5%81%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/" />
+  <link rel="canonical" href="/2020/vlc%E7%BC%96%E8%AF%91/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           VLC编译 | LeaveIt
+       
+  </title>
+  <meta name="title" content="VLC编译 | LeaveIt">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": ""
+    },
+    "articleSection" : "posts",
+    "name" : "VLC编译",
+    "headline" : "VLC编译",
+    "description" : "VLC编译 git clone git://github.com/vlc-qt/vlc-qt.git sudo apt install libvlc-dev sudo apt-get install snapd sudo apt-get install snapcraft sudo snap install vlc export QTDIR=/Qt安装路径/5.12.3/gcc_64 export LD_LIBRARY_PATH=$QTDIR/lib export PATH=$PATH:$QTDIR/bin sudo cmake .. -DCMAKE_BUILD_TYPE=Debug sudo make -j8 sudo make install  core libvlc error: No plugins found! Check your VLC installation. VLC-Qt Error: libvlc failed to load! sudo apt-get install libvlc-dev sudo apt-get install vlc  CMake Error at config/Dependencies.cmake:28 (FIND_PACKAGE): By not providing &quot;FindQt5Core.",
+    "inLanguage" : "en-us",
+    "author" : "mentir.",
+    "creator" : "mentir.",
+    "publisher": "mentir.",
+    "accountablePerson" : "mentir.",
+    "copyrightHolder" : "mentir.",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-09-05 21:24:17 &#43;0800 PST",
+    "dateModified" : "2020-09-05 21:24:17 &#43;0800 PST",
+    "url" : "/2020/vlc%E7%BC%96%E8%AF%91/",
+    "wordCount" : "138",
+    "keywords" : [ "音视频", "LeaveIt"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="">LeaveIt</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">博客</a>
+                
+                <a class="menu-item" href="/categories/" title="">分类</a>
+                
+                <a class="menu-item" href="/tags/" title="">标签</a>
+                
+                <a class="menu-item" href="/about/" title="">关于</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="">LeaveIt</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">博客</a>
+                
+                <a class="menu-item" href="/categories/" title="">分类</a>
+                
+                <a class="menu-item" href="/tags/" title="">标签</a>
+                
+                <a class="menu-item" href="/about/" title="">关于</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">VLC编译</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="" rel="author">mentir.</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2020-09-05 itemprop="datePublished">September 5, 2020</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/"> 音视频 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h1 id="vlc编译">VLC编译</h1>
+
+<pre><code>git clone git://github.com/vlc-qt/vlc-qt.git
+sudo apt install libvlc-dev
+
+
+sudo apt-get install snapd
+sudo apt-get install snapcraft 
+sudo snap install vlc
+
+
+export QTDIR=/Qt安装路径/5.12.3/gcc_64
+export LD_LIBRARY_PATH=$QTDIR/lib
+export PATH=$PATH:$QTDIR/bin
+
+
+sudo  cmake .. -DCMAKE_BUILD_TYPE=Debug
+sudo make -j8
+sudo make install
+
+
+</code></pre>
+
+<pre><code>core libvlc error: No plugins found! Check your VLC installation.
+VLC-Qt Error: libvlc failed to load!
+
+sudo apt-get install libvlc-dev
+sudo apt-get install vlc
+</code></pre>
+
+<pre><code>CMake Error at config/Dependencies.cmake:28 (FIND_PACKAGE):
+  By not providing &quot;FindQt5Core.cmake&quot; in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by &quot;Qt5Core&quot;, but
+  CMake did not find one.
+1、打开vlc-qt源码目录下的CMakeLists.txt
+
+2、在SET(PROJECT_DESCRIPTION &quot;VLC-Qt - Qt bindings for libVLC&quot;)下方添加一行
+
+    SET(CMAKE_PREFIX_PATH &quot;/opt/Qt5.6.2/5.6/gcc_64&quot;)
+
+注意一点的是CMAKE_PREFIX_PATH的目录的指向必须是在包含有bin lib include等这些QT的安装目录。
+</code></pre>
+
+<p>USB摄像头权限不足时</p>
+
+<pre><code>
+snap connections vlc
+查看是否允许访问设备
+
+
+ snap connect vlc:camera :camera
+这将在接口和插槽之间建立连接：
+</code></pre>
+
+<p>ffmpeg安装</p>
+
+<pre><code>sudo apt-get install -y autoconf automake build-essential git libass-dev libfreetype6-dev libsdl2-dev libtheora-dev libtool libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev pkg-config texinfo wget zlib1g-dev
+
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>mentir. </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=/2020/vlc%E7%BC%96%E8%AF%91/>/2020/vlc%E7%BC%96%E8%AF%91/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="tags/%E9%9F%B3%E8%A7%86%E9%A2%91/">
+                    #音视频</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="/2020/docker%E5%AE%9E%E4%BE%8B/" class="prev" rel="prev" title="Docker实例"><i class="iconfont icon-left"></i>&nbsp;Docker实例</a>
+         
+        
+        <a href="/2020/opencv%E8%A7%86%E9%A2%91%E6%B5%81%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/" class="next" rel="next" title="Opencv视频流处理方法">Opencv视频流处理方法&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2018 - 2021</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="">mentir.</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

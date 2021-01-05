@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="mentir.">
+  
+  
+  
+  <link rel="prev" href="/2020/docker%E5%AE%89%E8%A3%85/" />
+  <link rel="next" href="/2020/docker%E5%AE%9E%E4%BE%8B/" />
+  <link rel="canonical" href="/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Docker常用命令 | LeaveIt
+       
+  </title>
+  <meta name="title" content="Docker常用命令 | LeaveIt">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": ""
+    },
+    "articleSection" : "posts",
+    "name" : "Docker常用命令",
+    "headline" : "Docker常用命令",
+    "description" : "docker常用命令 示例 1.helloworld的调用 从仓库将image抓取到本地
+docker image pull library/hello-world  docker image pull是抓取image文件的命令。ibrary/hello-world是镜像文件在仓库的位置，其中library是image文件所在的组，hello-world是 image 文件的名字。
+获得管理员权限（对宿主机的访问）
+ docker run -it --privileged --rm ubuntu:18.04 bash  查看本地镜像文件:
+docker image ls  运行镜像，会生成一个容器实例，镜像和容器的关系就像是类和对象的关系。 查看当前所有容器 &gt; docker container ls
+查看当前电脑所有容器，包括终止运行的容器 &gt; docker container ls &ndash;all
+终止运行的容器文件，依然会占据硬盘空间，下面是删除指令 &gt; docker container rm [containerID]
+除过以上我们使用的Docker命令外，Docker还有一些其它常用的命令
+拉取docker镜像
+docker pull image_name  设置docker开机自启动
+systemctl enable docker  从镜像中构建容器
+docker run -it ubuntu:18.04 bash  从镜像中构建容器，退出容器后不保留容器
+docker run -it --rm ubuntu:18.",
+    "inLanguage" : "en-us",
+    "author" : "mentir.",
+    "creator" : "mentir.",
+    "publisher": "mentir.",
+    "accountablePerson" : "mentir.",
+    "copyrightHolder" : "mentir.",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-04-06 21:19:44 &#43;0800 PST",
+    "dateModified" : "2020-04-06 21:19:44 &#43;0800 PST",
+    "url" : "/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/",
+    "wordCount" : "120",
+    "keywords" : [ "Docker", "LeaveIt"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="">LeaveIt</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">博客</a>
+                
+                <a class="menu-item" href="/categories/" title="">分类</a>
+                
+                <a class="menu-item" href="/tags/" title="">标签</a>
+                
+                <a class="menu-item" href="/about/" title="">关于</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="">LeaveIt</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">博客</a>
+                
+                <a class="menu-item" href="/categories/" title="">分类</a>
+                
+                <a class="menu-item" href="/tags/" title="">标签</a>
+                
+                <a class="menu-item" href="/about/" title="">关于</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Docker常用命令</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="" rel="author">mentir.</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2020-04-06 itemprop="datePublished">April 6, 2020</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="/categories/docker/"> Docker </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h1 id="docker常用命令">docker常用命令</h1>
+
+<h2 id="示例">示例</h2>
+
+<h3 id="1-helloworld的调用">1.helloworld的调用</h3>
+
+<p>从仓库将image抓取到本地</p>
+
+<pre><code>docker image pull library/hello-world
+</code></pre>
+
+<p><strong>docker image pull</strong>是抓取image文件的命令。<strong>ibrary/hello-world</strong>是镜像文件在仓库的位置，其中library是image文件所在的组，hello-world是 image 文件的名字。</p>
+
+<p>获得管理员权限（对宿主机的访问）</p>
+
+<pre><code> docker run -it --privileged  --rm ubuntu:18.04  bash
+</code></pre>
+
+<p>查看本地镜像文件:</p>
+
+<pre><code>docker image ls
+</code></pre>
+
+<p>运行镜像，会生成一个容器实例，镜像和容器的关系就像是类和对象的关系。
+查看当前所有容器
+&gt; docker container ls</p>
+
+<p>查看当前电脑所有容器，包括终止运行的容器
+&gt; docker container ls &ndash;all</p>
+
+<p>终止运行的容器文件，依然会占据硬盘空间，下面是删除指令
+&gt; docker container rm [containerID]</p>
+
+<p>除过以上我们使用的Docker命令外，Docker还有一些其它常用的命令</p>
+
+<p>拉取docker镜像</p>
+
+<pre><code>docker pull image_name
+</code></pre>
+
+<p>设置docker开机自启动</p>
+
+<pre><code>systemctl enable docker
+</code></pre>
+
+<p>从镜像中构建容器</p>
+
+<pre><code>docker run -it  ubuntu:18.04  bash
+</code></pre>
+
+<p>从镜像中构建容器，退出容器后不保留容器</p>
+
+<pre><code>docker run -it  --rm ubuntu:18.04  bash
+</code></pre>
+
+<p>开机自启动容器
+docker update &ndash;restart=always xxx</p>
+
+<p>查看宿主机上的镜像，Docker镜像保存在/var/lib/docker目录下:</p>
+
+<pre><code>docker images
+</code></pre>
+
+<p>删除镜像</p>
+
+<pre><code>docker rmi  docker.io/tomcat:7.0.77-jre7   或者  docker rmi b39c68b7af30
+</code></pre>
+
+<p>查看当前有哪些容器正在运行</p>
+
+<pre><code>docker ps
+</code></pre>
+
+<p>查看所有容器</p>
+
+<pre><code>docker ps -a
+</code></pre>
+
+<p>启动、停止、重启容器命令：</p>
+
+<pre><code>docker start container_name/container_id
+docker stop container_name/container_id
+docker restart container_name/container_id
+</code></pre>
+
+<p>后台启动一个容器后，如果想进入到这个容器，可以使用attach命令：</p>
+
+<pre><code>docker attach container_name/container_id
+</code></pre>
+
+<p>删除容器的命令：</p>
+
+<pre><code>docker rm container_name/container_id
+</code></pre>
+
+<p>查看当前系统Docker信息</p>
+
+<pre><code>docker info
+</code></pre>
+
+<p>从Docker hub上下载某个镜像:</p>
+
+<pre><code>docker pull centos:latest
+docker pull centos:latest
+</code></pre>
+
+<p>执行docker pull centos会将Centos这个仓库下面的所有镜像下载到本地repository。</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>mentir. </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/>/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="tags/docker/">
+                    #Docker</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="/2020/docker%E5%AE%89%E8%A3%85/" class="prev" rel="prev" title="Docker安装"><i class="iconfont icon-left"></i>&nbsp;Docker安装</a>
+         
+        
+        <a href="/2020/docker%E5%AE%9E%E4%BE%8B/" class="next" rel="next" title="Docker实例">Docker实例&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2018 - 2021</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="">mentir.</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

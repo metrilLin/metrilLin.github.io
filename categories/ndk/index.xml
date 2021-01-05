@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NDK on LeaveIt</title>
+    <link>/categories/ndk/</link>
+    <description>Recent content in NDK on LeaveIt</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 05 Nov 2020 20:29:23 +0800</lastBuildDate>
+    
+	<atom:link href="/categories/ndk/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>编译android对应版本的openssl</title>
+      <link>/2020/%E7%BC%96%E8%AF%91android%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84openssl/</link>
+      <pubDate>Thu, 05 Nov 2020 20:29:23 +0800</pubDate>
+      
+      <guid>/2020/%E7%BC%96%E8%AF%91android%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84openssl/</guid>
+      <description>编译android对应版本的openssl 版本 自行下载需要的NDK与openssl
+NDK: android-ndk-r15c openssl：openssl-1.0.2  下载交叉编译文件 #拉取setenv-android.sh，我们需要这个脚本来给我们配置环境 wget https://wiki.openssl.org/images/7/70/Setenv-android.sh  配置脚本 armv7a版本配置 _ANDROID_NDK=&amp;quot;android-ndk-r9&amp;quot; # 修改为： _ANDROID_NDK=&amp;quot;android-ndk-r15c&amp;quot; # 因为我们使用的是R14B这个版本的NDK  _ANDROID_EABI=&amp;quot;arm-linux-androideabi-4.8&amp;quot; 修改为GCC 4.9 _ANDROID_EABI=&amp;quot;arm-linux-androideabi-4.9&amp;quot;  arm64V8A版本配置 _ANDROID_NDK=&amp;quot;android-ndk-r9&amp;quot; # 修改为： _ANDROID_NDK=&amp;quot;android-ndk-r15c&amp;quot; # 因为我们使用的是r15c这个版本的NDK  _ANDROID_EABI=&amp;quot;arm-linux-androideabi-4.8&amp;quot; 修改为GCC 4.9 _ANDROID_EABI=&amp;quot;aarch64-linux-android-4.9&amp;quot; _ANDROID_ARCH=arch-arm 修改为 _ANDROID_ARCH=arch-arm64  编译 添加环境变量（仅在当前终端就可以了
+export ANDROID_NDK_ROOT=/home/ubuntu/android-ndk-r15c source ./Setenv-android.sh  FIPS_SIG的Error无所谓，本次不会使用到这个组件</description>
+    </item>
+    
+  </channel>
+</rss>

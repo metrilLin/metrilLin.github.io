@@ -21,11 +21,47 @@
     </item>
     
     <item>
+      <title>Docker</title>
+      <link>/categories/docker/</link>
+      <pubDate>Thu, 15 Oct 2020 18:27:07 +0800</pubDate>
+      
+      <guid>/categories/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Http</title>
+      <link>/categories/http/</link>
+      <pubDate>Sat, 05 Dec 2020 21:30:59 +0800</pubDate>
+      
+      <guid>/categories/http/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>NDK</title>
+      <link>/categories/ndk/</link>
+      <pubDate>Thu, 05 Nov 2020 20:29:23 +0800</pubDate>
+      
+      <guid>/categories/ndk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Qt</title>
       <link>/categories/qt/</link>
       <pubDate>Mon, 07 Dec 2020 18:12:25 +0800</pubDate>
       
       <guid>/categories/qt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>音视频</title>
+      <link>/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/</link>
+      <pubDate>Sat, 05 Sep 2020 21:24:17 +0800</pubDate>
+      
+      <guid>/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/</guid>
       <description></description>
     </item>
     
