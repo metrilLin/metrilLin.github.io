@@ -6,7 +6,413 @@
     <description>Recent content in LeaveIt on LeaveIt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Fri, 18 Dec 2020 14:35:37 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Const详解与constexpr</title>
+      <link>/2020/const%E8%AF%A6%E8%A7%A3%E4%B8%8Econstexpr/</link>
+      <pubDate>Fri, 18 Dec 2020 14:35:37 +0800</pubDate>
+      
+      <guid>/2020/const%E8%AF%A6%E8%A7%A3%E4%B8%8Econstexpr/</guid>
+      <description>
+
+&lt;h1 id=&#34;const详解&#34;&gt;const详解&lt;/h1&gt;
+
+&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
+
+&lt;p&gt;C++中的Const作为从C中继承下来的关键字，名叫常量限定符，用来限定特定变量，以通知编译器该变量是不可修改的。习惯性的使用const，可以避免在函数中对某些不应修改的变量造成可能的改动。&lt;/p&gt;
+
+&lt;h2 id=&#34;const-基本修饰&#34;&gt;const 基本修饰&lt;/h2&gt;
+
+&lt;p&gt;C语言中的&lt;strong&gt;const仅能维持编译期的值不变性，但是运行时值依然是可变&lt;/strong&gt;的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;int main(int argc, char *argv)
+{
+    const int a = 0;
+   // a = 10; // (编译期的const保持)编译错误，因为试图修改一个常量。
+    
+    // (运行时const属性失效)
+    int *pa = (int *)&amp;amp;a;
+    *pa = 20; // 正确，此时a的值被修改为20，失去常量属性。
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;由于a = 10编译时会报错，所以编译时屏蔽，运行结果：
+&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1608274931_20201007153902896_20433.png&#34; alt=&#34;&#34; /&gt;
+可以看到 C中的const只能在编译过程中保持数据不变，还是会被指针修改
+为了维持运行时的&lt;code&gt;const&lt;/code&gt;语义，c++引入了常量表来记录const对象的名称和值，并将之后所有对const对象的访问修改为访问常量表中的值，以此保证const对象始终如一的常量属性。同时为了保持向下兼容C，C++采取另外一种常量对象的内存分配方式，即： &lt;strong&gt;代码中的const常量并不会立刻分配内存，只有当需要该对象的地址时，才为其分配内存，但从不使用该内存。&lt;/strong&gt;
+同样的代码，让我们使用C++编译器编译
+&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1608274932_20201007154258305_7497.png&#34; alt=&#34;&#34; /&gt;
+接下来分析编译过程&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;int main(int argc, char *argv)
+{
+    const int a = 0; // a成为常量，&amp;lt;a, 0&amp;gt;被保存进入了常量区中，但是并未在栈上为a分配内存。
+    a = 10; // 编译错误，因为试图修改一个常量。
+    int *pa = (int *)&amp;amp;a; // 此时，需要常量a的地址，因此编译器被迫在栈上为a分配一块内存。
+    *pa = 20; // 此时，编译器被迫为a分配的内存被写为20，但是编译器不会使用这块内存。
+    printf(&amp;quot;a = %d\n&amp;quot;, a); // 但是，每次对a的访问都会去访问常量表，因此a仍然为0，保持了常量属性。
+    return 0;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然而，并非所有的常量值都能在编译期被确定。当只有在运行时才能确定常量的值时，该常量将不会进入常量区，仍然保持C语言的运行时不安全的常量属性：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;int situation1()
+{
+    int v = 0;
+    const int a = v; // 编译期间无法确定a的值，因此a不会进入常量区。
+    a = 10; // 编译错误，因为试图修改一个常量。
+
+    int *pa = (int *)&amp;amp;a; // 取得了真正a变量的地址。
+    *pa = 20; // 此时a的值被修改为20，失去常量属性。
+    return 0;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;int situation2()
+{
+    const volatile int a = 0; // 编译期间无法确定a的值，因此a不会进入常量区。
+    a = 10; // 编译错误，因为试图修改一个常量。
+    int *pa = (int *)&amp;amp;a; // 取得了真正a变量的地址。
+    *pa = 20; // 此时a的值被修改为20，失去常量属性。
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果赋值号两边的数据类型不同，那么将会产生&lt;code&gt;类型截断&lt;/code&gt;，此时const也会失去常量语义：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;int situation3()
+{
+    const long a = 0; // a成为常量，&amp;lt;a, 0&amp;gt;被保存进入了常量区中，但是并未在栈上为a分配内存。
+    const int b = a; // 发生了类型截断，因此即便编译期可以确定值，也不会进入常量表。
+    int *pb = (int *)&amp;amp;b; // 取得了真正a变量的地址。
+    *pb = 20; // 此时b的值被修改为20，失去常量属性。
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;const修饰指针&#34;&gt;const修饰指针&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;const&lt;/code&gt;用于指针时，其行为和C语言中基本一致。例如，&lt;code&gt;顶层const&lt;/code&gt;表示指针不能再指向其它地址，&lt;code&gt;底层const&lt;/code&gt;保证目前指向的地址中的数据不可被修改：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;int main(int argc, char *argv[])
+{
+    const int *a = nullptr; // 底层const，表示地址中的数据不可被修改(修饰指针指向的地址)
+    int *const b = nullptr; // 顶层const，表示指针不能指向其它位置。(修饰指针变量)
+    const int *const c = nullptr; // 顶层和底层const，表示指针不能指向其它位置，
+    							  // 并且地址中的数据不可被修改。(修饰指针指向的地址与指针变量)
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;const修饰引用&#34;&gt;const修饰引用&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;const引用&lt;/code&gt;没有顶层和底层之分，所有的&lt;code&gt;const引用&lt;/code&gt;都是底层的。当针对左值引用使用&lt;code&gt;const&lt;/code&gt;时，其行为如同C语言中的&lt;code&gt;const&lt;/code&gt;一样，会产生一个新的编译期常量：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;int main(int argc, char *argv[])
+{
+    const int &amp;amp;a = 0;
+    a = 10; // 编译错误，因为试图修改一个常量。
+    int *pa = (int *)&amp;amp;a;
+    *pa = 20; // 正确，a的值被修改为20.
+    return 0;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;右值不能绑定到左值引用上，但是可以绑定到常量左值引用上，这是因为它可以保证部分右值的不可修改属性。同理，从语义上来看，没有必要使用&lt;code&gt;const&lt;/code&gt;修饰右值引用。&lt;/p&gt;
+
+&lt;h2 id=&#34;const修饰函数&#34;&gt;const修饰函数&lt;/h2&gt;
+
+&lt;p&gt;在类的方法声明中使用&lt;code&gt;const&lt;/code&gt;，则表示这个方法不会导致当前对象的改变；同时，为了保持对象的常量属性，&lt;code&gt;const对象&lt;/code&gt;只能调用&lt;code&gt;const方法&lt;/code&gt;。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Object
+{
+    int _value;
+public:
+    Object(int value) : _value(value) {}
+    int get_value() const { return _value; }
+    void set_value(int value) { _value = value; }
+};
+
+int main(int argc, char *argv[])
+{
+    Object o1(10);
+    o1.get_value(); // 正确, 10
+    o1.set_value(20); // 正确
+
+    const Object o2(10);
+    o2.get_value(); // 正确, 10
+    o2.set_value(20); // 错误，const对象只能调用const方法。
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;c-11-constexpr-常量表达式&#34;&gt;C++11 constexpr（常量表达式）&lt;/h2&gt;
+
+&lt;p&gt;C++11引进了constexpr函数，目的是将运算尽量放在编译阶段，而不是运行阶段。&lt;strong&gt;const 变量的初始化可以延迟到运行时(见上文)，而 constexpr 变量必须在编译时进行初始化。&lt;/strong&gt; 所有constexpr对象都是const的，但是不是所有的const对象都是constexpr的。&lt;/p&gt;
+
+&lt;p&gt;事实上const并不能代表“常量”，它仅仅是对变量的一个修饰，告诉编译器这个变量只能被初始化，且不能被直接修改（实际上可以通过堆栈溢出等方式修改）。而这个变量的值，可以在运行时也可以在编译时指定&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;     int a3 = 5;                        // a3不是常量表达式
+     constexpr int a4 = a3;     // a4不是常量表达式，因为a3程序的执行到达其所在的声明处时才初始化
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;constexpr修饰函数&#34;&gt;constexpr修饰函数&lt;/h3&gt;
+
+&lt;p&gt;constexpr函数是指能用于常量表达式的函数。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;函数的返回类型以及所有形参的类型都得是字面值类型&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;函数体中必须有且仅有一条return语句&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;constexpr int lab(int i)
+{
+
+return  i*10;
+}
+int main()
+{
+int i ;
+constexpr int a = lab(i); // Error   the value of &#39;i&#39; is not usable in a constant expression (i不是一个字面值类型)
+constexpr int b = lab(10);//Success  形参为非字面值类型,但是实参为字面值类型，编译器会对其优化
+return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;同时，执行上述函数时，编译器会对constexpr函数的调用替换成其结果值，为了能在编译过程中随时展开，constexpr函数被隐式地指定为内联函数。既然内联函数，我们就需要遵守内联函数的规则即将 &lt;strong&gt;constexpr函数定义在头文件中&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;constexpr-修饰构造函数&#34;&gt;constexpr 修饰构造函数&lt;/h3&gt;
+
+&lt;p&gt;尽管构造函数不能是const的，但是&lt;strong&gt;字面值常量类&lt;/strong&gt;的构造函数可以是constexpr函数。&lt;/p&gt;
+
+&lt;h4 id=&#34;字面值常量类&#34;&gt;字面值常量类&lt;/h4&gt;
+
+&lt;p&gt;数据成员都是字面值类型的聚合类是字面值常量类，例如&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;struct Person
+{
+	std::string name;
+	int height;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;聚合类条件：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;所有成员都是public&lt;/li&gt;
+&lt;li&gt;没有定义构造函数&lt;/li&gt;
+&lt;li&gt;没有类内初始值&lt;/li&gt;
+&lt;li&gt;没有基类，也没有虚函数&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;如果一个类不是聚合类，成为一个字面值常量类符合的要求：
+*   数据成员都必须是字面值类型。
+*   类必须至少含有一个 constexpr 构造函数。
+*   如果一个数据成员含有类内初始值，则内置类型成员的初始值必须是一条常量表达式。或者如果成员属于某种类类型，则初始值必须使用成员自己的 constexpr 构造函数。
+*   类必须使用析构函数的默认定义，该成员负责销毁对象。&lt;/p&gt;
+
+&lt;p&gt;示例类：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Debug {
+private:
+    bool hw;
+    bool io;
+    bool other;
+public:
+    constexpr Debug(bool b = true) :hw(b), io(b), other(b) {}
+    constexpr Debug(bool h, bool i, bool o) : hw(h), io(i), other(o) {}
+    constexpr bool any()const { return hw || io || other; }
+    void set_io(bool b) { io = b; }
+    void set_hw(bool b) { hw = b; }
+    void set_other(bool b) { other = b; }
+};
+
+int main()
+{
+    constexpr Debug io_sub(false, true, false); //调试IO
+    if (io_sub.any())                           //等价于if(true)
+        cerr &amp;lt;&amp;lt; &amp;quot;print appropriate error messages&amp;quot; &amp;lt;&amp;lt; endl;
+    constexpr Debug prod(false);                //无调试
+    if (prod.any())                             //等价于if(false)
+        cerr &amp;lt;&amp;lt; &amp;quot;print an error message&amp;quot; &amp;lt;&amp;lt; endl;
+
+    
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;字面值常量类与字面值类型的用法相同，字面值常量类同样也会在编译期进行计算。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Ｑｔ操作mysql</title>
+      <link>/2020/qt%E6%93%8D%E4%BD%9Cmysql/</link>
+      <pubDate>Mon, 07 Dec 2020 18:12:25 +0800</pubDate>
+      
+      <guid>/2020/qt%E6%93%8D%E4%BD%9Cmysql/</guid>
+      <description>
+
+&lt;p&gt;[TOC]&lt;/p&gt;
+
+&lt;h1 id=&#34;1-基本操作&#34;&gt;1. 基本操作&lt;/h1&gt;
+
+&lt;h2 id=&#34;1-1-添加模块&#34;&gt;1.1 添加模块&lt;/h2&gt;
+
+&lt;p&gt;Qt数据库模块是独立模块，需要像core，gui一样在.pro文件中添加该模块&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;QT+=sql
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;1-2-基本操作&#34;&gt;1.2 基本操作&lt;/h1&gt;
+
+&lt;h2 id=&#34;获取可用连接&#34;&gt;获取可用连接&lt;/h2&gt;
+
+&lt;p&gt;首先查看qt下支持的连接名&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;qDebug() &amp;lt;&amp;lt; QSqlDatabase::drivers();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出如下
+&lt;code&gt;(&amp;quot;QSQLITE&amp;quot;, &amp;quot;QMYSQL&amp;quot;, &amp;quot;QMYSQL3&amp;quot;, &amp;quot;QPSQL&amp;quot;, &amp;quot;QPSQL7&amp;quot;)&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;建立连接&#34;&gt;建立连接&lt;/h2&gt;
+
+&lt;p&gt;使用上一步获取到的连接名作为&lt;strong&gt;&lt;em&gt;addDatabase&lt;/em&gt;&lt;/strong&gt;的第一个参数&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;QSqlDatabase db = QSqlDatabase::addDatabase(&amp;quot;QMYSQL&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样我们就获取到mysql的句柄了
+接下来是mysql的基本操作&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;    db.setHostName(&amp;quot;localhost&amp;quot;);  // 假定数据库在本机
+    db.setDatabaseName(&amp;quot;student&amp;quot;); // 打开数据库名
+    db.setUserName(&amp;quot;root&amp;quot;);  // 数据库用户名
+    db.setPassword(&amp;quot;123456&amp;quot;);  // 数据库密码
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;设置完之后调用open()打开mysql数据库,完整代码如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;    QSqlDatabase db = QSqlDatabase::addDatabase(&amp;quot;QMYSQL&amp;quot;);
+    db.setHostName(&amp;quot;localhost&amp;quot;);  // 假定数据库在本机
+    db.setDatabaseName(&amp;quot;server&amp;quot;); // 打开数据库名
+    db.setUserName(&amp;quot;root&amp;quot;);  // 数据库用户名
+    db.setPassword(&amp;quot;123456&amp;quot;);  // 数据库密码
+    if (!db.open())
+    {
+        qDebug() &amp;lt;&amp;lt; &amp;quot;Failed to connect to root mysql!&amp;quot;;
+    }
+    else
+    {
+        qDebug() &amp;lt;&amp;lt; &amp;quot;open success!&amp;quot;;
+    }
+    
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;增删改查&#34;&gt;增删改查&lt;/h2&gt;
+
+&lt;p&gt;数据库操作无非增删改查，基于我们获取到的句柄，我们可以对数据库进行操作。&lt;/p&gt;
+
+&lt;p&gt;QSqlQuery类提供了一种执行和操作SQL语句的方法&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;QSqlQuery sqlquery(db);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;插入数据Demo&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;    //插入新数据
+    QSqlQuery sql_query(db);
+    sql_query.prepare(&amp;quot;insert into stu(name,stuID,sex,score) values(&#39;stu2&#39;,&#39;123123&#39;,&#39;1&#39;,&#39;&#39;70)&amp;quot;);
+    if(!sql_query.exec())
+    {
+       qDebug()&amp;lt;&amp;lt;sql_query.lastError();
+    }
+    else
+    {
+        qDebug()&amp;lt;&amp;lt;&amp;quot;insert Success...&amp;quot;;
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;查询Demo&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;    QSqlQuery sql_query(db);
+    sql_query.prepare(&amp;quot;select * from stu&amp;quot;);
+    if(!sql_query.exec())
+    {
+       qDebug()&amp;lt;&amp;lt;sql_query.lastError();
+    }
+    else
+    {
+       while(sql_query.next())
+        {
+           QString name = sql_query.value(&amp;quot;name&amp;quot;).toString();
+           QString id = sql_query.value(&amp;quot;stuID&amp;quot;).toString();
+           QString sex = sql_query.value(&amp;quot;sex&amp;quot;).toString();
+            QString score = sql_query.value(&amp;quot;score&amp;quot;).toString();
+            qDebug()&amp;lt;&amp;lt;QString(&amp;quot;Name:%1     ID:%2    sex:%3    score:%4&amp;quot;).arg(name).arg(id).arg(sex).arg(score);
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1600329730_20200403142349526_31331.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;1-3-批量使用&#34;&gt;1.3 批量使用&lt;/h1&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;2-driver-not-loaded错误处理&#34;&gt;2. driver not loaded错误处理&lt;/h1&gt;
+
+&lt;h2 id=&#34;问题排查&#34;&gt;问题排查&lt;/h2&gt;
+
+&lt;p&gt;第一次使用Qtmysql的库时容易看到qDebug有如下打印&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;QSqlDatabase: QMYSQL driver not loaded
+QSqlDatabase: available drivers: QSQLITE QMYSQL QMYSQL3 QPSQL QPSQL7
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1600329726_20200402173143995_5048.png&#34; alt=&#34;clipboard&#34; /&gt;
+查看本机mysql，发现mysqlClient库安装正常&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ls /usr/lib/x86_64-linux-gnu/libmysql* -lsd
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1600329727_20200403101104397_31787.png&#34; alt=&#34;&#34; /&gt;
+查看Qt数据组件sql是否正常
+1）进入到Qt的安装目录下，进入对应编译器文件夹中，楼主的文件夹是
+&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1600329728_20200403101412861_21234.png&#34; alt=&#34;&#34; /&gt;
+查看&lt;strong&gt;libqsqlmysql.so&lt;/strong&gt;文件链接是否正常&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ldd libqsqlmysql.so
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1600329728_20200403101545125_14714.png&#34; alt=&#34;&#34; /&gt;
+结果发现Qt中mysql库链接的是18的版本，而当前环境没有该版本的mysql库&lt;/p&gt;
+
+&lt;h2 id=&#34;解决方案&#34;&gt;解决方案&lt;/h2&gt;
+
+&lt;h3 id=&#34;1-下载对应版本的libsqlclient&#34;&gt;1.下载对应版本的libsqlclient&lt;/h3&gt;
+
+&lt;p&gt;这个方式比较方便，适合绝大多数场景
+* 下载地址： &lt;a href=&#34;https://launchpad.net/ubuntu/xenial/amd64/libmysqlclient18/5.6.25-0ubuntu1&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://launchpad.net/ubuntu/xenial/amd64/libmysqlclient18/5.6.25-0ubuntu1&lt;/a&gt;
+* 下载 libmysqlclient18_5.6.25-0ubuntu1_amd64.deb，然后 dpkg -i libmysqlclient18_5.6.25-0ubuntu1_amd64.deb 即可。&lt;/p&gt;
+
+&lt;h3 id=&#34;2-重新编译qt中的libqsqlmysql库&#34;&gt;2.重新编译Qt中的libqsqlmysql库&lt;/h3&gt;
+
+&lt;p&gt;进入安装时下载的Qt源码，在对应版本的SRC文件夹下，对该库的源码进行重新编译
+&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1600329729_20200403102316916_2297.png&#34; alt=&#34;&#34; /&gt;
+最后将编译好的libqsqlmysql.so库放回原先的位置。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title></title>

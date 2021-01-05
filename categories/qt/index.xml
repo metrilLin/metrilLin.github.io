@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Qt on LeaveIt</title>
+    <link>/categories/qt/</link>
+    <description>Recent content in Qt on LeaveIt</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 07 Dec 2020 18:12:25 +0800</lastBuildDate>
+    
+	<atom:link href="/categories/qt/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ｑｔ操作mysql</title>
+      <link>/2020/qt%E6%93%8D%E4%BD%9Cmysql/</link>
+      <pubDate>Mon, 07 Dec 2020 18:12:25 +0800</pubDate>
+      
+      <guid>/2020/qt%E6%93%8D%E4%BD%9Cmysql/</guid>
+      <description>[TOC]
+1. 基本操作 1.1 添加模块 Qt数据库模块是独立模块，需要像core，gui一样在.pro文件中添加该模块
+QT+=sql  1.2 基本操作 获取可用连接 首先查看qt下支持的连接名
+qDebug() &amp;lt;&amp;lt; QSqlDatabase::drivers();  输出如下 (&amp;quot;QSQLITE&amp;quot;, &amp;quot;QMYSQL&amp;quot;, &amp;quot;QMYSQL3&amp;quot;, &amp;quot;QPSQL&amp;quot;, &amp;quot;QPSQL7&amp;quot;)
+建立连接 使用上一步获取到的连接名作为addDatabase的第一个参数
+QSqlDatabase db = QSqlDatabase::addDatabase(&amp;quot;QMYSQL&amp;quot;);  这样我们就获取到mysql的句柄了 接下来是mysql的基本操作
+db.setHostName(&amp;quot;localhost&amp;quot;); // 假定数据库在本机 db.setDatabaseName(&amp;quot;student&amp;quot;); // 打开数据库名 db.setUserName(&amp;quot;root&amp;quot;); // 数据库用户名 db.setPassword(&amp;quot;123456&amp;quot;); // 数据库密码  设置完之后调用open()打开mysql数据库,完整代码如下
+QSqlDatabase db = QSqlDatabase::addDatabase(&amp;quot;QMYSQL&amp;quot;); db.setHostName(&amp;quot;localhost&amp;quot;); // 假定数据库在本机 db.setDatabaseName(&amp;quot;server&amp;quot;); // 打开数据库名 db.setUserName(&amp;quot;root&amp;quot;); // 数据库用户名 db.setPassword(&amp;quot;123456&amp;quot;); // 数据库密码 if (!db.open()) { qDebug() &amp;lt;&amp;lt; &amp;quot;Failed to connect to root mysql!</description>
+    </item>
+    
+  </channel>
+</rss>

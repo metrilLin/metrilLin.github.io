@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on LeaveIt</title>
+    <link>/posts/</link>
+    <description>Recent content in Posts on LeaveIt</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 18 Dec 2020 14:35:37 +0800</lastBuildDate>
+    
+	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Const详解与constexpr</title>
+      <link>/2020/const%E8%AF%A6%E8%A7%A3%E4%B8%8Econstexpr/</link>
+      <pubDate>Fri, 18 Dec 2020 14:35:37 +0800</pubDate>
+      
+      <guid>/2020/const%E8%AF%A6%E8%A7%A3%E4%B8%8Econstexpr/</guid>
+      <description>const详解 简介 C++中的Const作为从C中继承下来的关键字，名叫常量限定符，用来限定特定变量，以通知编译器该变量是不可修改的。习惯性的使用const，可以避免在函数中对某些不应修改的变量造成可能的改动。
+const 基本修饰 C语言中的const仅能维持编译期的值不变性，但是运行时值依然是可变的：
+int main(int argc, char *argv) { const int a = 0; // a = 10; // (编译期的const保持)编译错误，因为试图修改一个常量。 // (运行时const属性失效) int *pa = (int *)&amp;amp;a; *pa = 20; // 正确，此时a的值被修改为20，失去常量属性。 return 0; }  由于a = 10编译时会报错，所以编译时屏蔽，运行结果： 可以看到 C中的const只能在编译过程中保持数据不变，还是会被指针修改 为了维持运行时的const语义，c++引入了常量表来记录const对象的名称和值，并将之后所有对const对象的访问修改为访问常量表中的值，以此保证const对象始终如一的常量属性。同时为了保持向下兼容C，C++采取另外一种常量对象的内存分配方式，即： 代码中的const常量并不会立刻分配内存，只有当需要该对象的地址时，才为其分配内存，但从不使用该内存。 同样的代码，让我们使用C++编译器编译 接下来分析编译过程
+int main(int argc, char *argv) { const int a = 0; // a成为常量，&amp;lt;a, 0&amp;gt;被保存进入了常量区中，但是并未在栈上为a分配内存。 a = 10; // 编译错误，因为试图修改一个常量。 int *pa = (int *)&amp;amp;a; // 此时，需要常量a的地址，因此编译器被迫在栈上为a分配一块内存。 *pa = 20; // 此时，编译器被迫为a分配的内存被写为20，但是编译器不会使用这块内存。 printf(&amp;quot;a = %d\n&amp;quot;, a); // 但是，每次对a的访问都会去访问常量表，因此a仍然为0，保持了常量属性。 return 0; }  然而，并非所有的常量值都能在编译期被确定。当只有在运行时才能确定常量的值时，该常量将不会进入常量区，仍然保持C语言的运行时不安全的常量属性：</description>
+    </item>
+    
+    <item>
+      <title>Ｑｔ操作mysql</title>
+      <link>/2020/qt%E6%93%8D%E4%BD%9Cmysql/</link>
+      <pubDate>Mon, 07 Dec 2020 18:12:25 +0800</pubDate>
+      
+      <guid>/2020/qt%E6%93%8D%E4%BD%9Cmysql/</guid>
+      <description>[TOC]
+1. 基本操作 1.1 添加模块 Qt数据库模块是独立模块，需要像core，gui一样在.pro文件中添加该模块
+QT+=sql  1.2 基本操作 获取可用连接 首先查看qt下支持的连接名
+qDebug() &amp;lt;&amp;lt; QSqlDatabase::drivers();  输出如下 (&amp;quot;QSQLITE&amp;quot;, &amp;quot;QMYSQL&amp;quot;, &amp;quot;QMYSQL3&amp;quot;, &amp;quot;QPSQL&amp;quot;, &amp;quot;QPSQL7&amp;quot;)
+建立连接 使用上一步获取到的连接名作为addDatabase的第一个参数
+QSqlDatabase db = QSqlDatabase::addDatabase(&amp;quot;QMYSQL&amp;quot;);  这样我们就获取到mysql的句柄了 接下来是mysql的基本操作
+db.setHostName(&amp;quot;localhost&amp;quot;); // 假定数据库在本机 db.setDatabaseName(&amp;quot;student&amp;quot;); // 打开数据库名 db.setUserName(&amp;quot;root&amp;quot;); // 数据库用户名 db.setPassword(&amp;quot;123456&amp;quot;); // 数据库密码  设置完之后调用open()打开mysql数据库,完整代码如下
+QSqlDatabase db = QSqlDatabase::addDatabase(&amp;quot;QMYSQL&amp;quot;); db.setHostName(&amp;quot;localhost&amp;quot;); // 假定数据库在本机 db.setDatabaseName(&amp;quot;server&amp;quot;); // 打开数据库名 db.setUserName(&amp;quot;root&amp;quot;); // 数据库用户名 db.setPassword(&amp;quot;123456&amp;quot;); // 数据库密码 if (!db.open()) { qDebug() &amp;lt;&amp;lt; &amp;quot;Failed to connect to root mysql!</description>
+    </item>
+    
+  </channel>
+</rss>
