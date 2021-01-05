@@ -163,7 +163,7 @@ int main(int argc, char *argv) { const int a = 0; // a成为常量，&lt;a, 0&gt
 
 <p>C语言中的<strong>const仅能维持编译期的值不变性，但是运行时值依然是可变</strong>的：</p>
 
-<pre><code class="language-c">int main(int argc, char *argv)
+<pre><code class="language-cpp">int main(int argc, char *argv)
 {
     const int a = 0;
    // a = 10; // (编译期的const保持)编译错误，因为试图修改一个常量。
@@ -183,7 +183,7 @@ int main(int argc, char *argv) { const int a = 0; // a成为常量，&lt;a, 0&gt
 <figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://gitee.com/linMentri/mapdepot/raw/master/1608274932_20201007154258305_7497.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
 接下来分析编译过程</p>
 
-<pre><code class="language-c">int main(int argc, char *argv)
+<pre><code class="language-cpp">int main(int argc, char *argv)
 {
     const int a = 0; // a成为常量，&lt;a, 0&gt;被保存进入了常量区中，但是并未在栈上为a分配内存。
     a = 10; // 编译错误，因为试图修改一个常量。

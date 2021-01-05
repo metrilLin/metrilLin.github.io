@@ -27,7 +27,7 @@
 
 &lt;p&gt;C语言中的&lt;strong&gt;const仅能维持编译期的值不变性，但是运行时值依然是可变&lt;/strong&gt;的：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;int main(int argc, char *argv)
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;int main(int argc, char *argv)
 {
     const int a = 0;
    // a = 10; // (编译期的const保持)编译错误，因为试图修改一个常量。
@@ -47,7 +47,7 @@
 &lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1608274932_20201007154258305_7497.png&#34; alt=&#34;&#34; /&gt;
 接下来分析编译过程&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;int main(int argc, char *argv)
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;int main(int argc, char *argv)
 {
     const int a = 0; // a成为常量，&amp;lt;a, 0&amp;gt;被保存进入了常量区中，但是并未在栈上为a分配内存。
     a = 10; // 编译错误，因为试图修改一个常量。
