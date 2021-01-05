@@ -164,7 +164,7 @@ openssl：openssl-1.0.2
 
 <h2 id="下载交叉编译文件">下载交叉编译文件</h2>
 
-<pre><code>#拉取setenv-android.sh，我们需要这个脚本来给我们配置环境
+<pre><code class="language-c">#拉取setenv-android.sh，我们需要这个脚本来给我们配置环境
 wget https://wiki.openssl.org/images/7/70/Setenv-android.sh
 </code></pre>
 
@@ -172,13 +172,13 @@ wget https://wiki.openssl.org/images/7/70/Setenv-android.sh
 
 <h3 id="armv7a版本配置">armv7a版本配置</h3>
 
-<pre><code>_ANDROID_NDK=&quot;android-ndk-r9&quot;
+<pre><code class="language-c">_ANDROID_NDK=&quot;android-ndk-r9&quot;
 # 修改为：
 _ANDROID_NDK=&quot;android-ndk-r15c&quot;
 # 因为我们使用的是R14B这个版本的NDK
 </code></pre>
 
-<pre><code>_ANDROID_EABI=&quot;arm-linux-androideabi-4.8&quot;
+<pre><code class="language-c">_ANDROID_EABI=&quot;arm-linux-androideabi-4.8&quot;
 修改为GCC 4.9
 _ANDROID_EABI=&quot;arm-linux-androideabi-4.9&quot;
 </code></pre>
@@ -187,13 +187,13 @@ _ANDROID_EABI=&quot;arm-linux-androideabi-4.9&quot;
 
 <h3 id="arm64v8a版本配置">arm64V8A版本配置</h3>
 
-<pre><code>_ANDROID_NDK=&quot;android-ndk-r9&quot;
+<pre><code class="language-c">_ANDROID_NDK=&quot;android-ndk-r9&quot;
 # 修改为：
 _ANDROID_NDK=&quot;android-ndk-r15c&quot;
 # 因为我们使用的是r15c这个版本的NDK
 </code></pre>
 
-<pre><code>_ANDROID_EABI=&quot;arm-linux-androideabi-4.8&quot;
+<pre><code class="language-c">_ANDROID_EABI=&quot;arm-linux-androideabi-4.8&quot;
 修改为GCC 4.9
 _ANDROID_EABI=&quot;aarch64-linux-android-4.9&quot;
 
@@ -207,7 +207,7 @@ _ANDROID_ARCH=arch-arm64
 
 <p>添加环境变量（仅在当前终端就可以了</p>
 
-<pre><code>export ANDROID_NDK_ROOT=/home/ubuntu/android-ndk-r15c
+<pre><code class="language-c">export ANDROID_NDK_ROOT=/home/ubuntu/android-ndk-r15c
  source ./Setenv-android.sh
 </code></pre>
 

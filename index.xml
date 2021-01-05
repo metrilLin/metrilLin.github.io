@@ -159,7 +159,7 @@ int main(int argc, char *argv[])
 
 &lt;p&gt;事实上const并不能代表“常量”，它仅仅是对变量的一个修饰，告诉编译器这个变量只能被初始化，且不能被直接修改（实际上可以通过堆栈溢出等方式修改）。而这个变量的值，可以在运行时也可以在编译时指定&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;     int a3 = 5;                        // a3不是常量表达式
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;     int a3 = 5;                        // a3不是常量表达式
      constexpr int a4 = a3;     // a4不是常量表达式，因为a3程序的执行到达其所在的声明处时才初始化
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -172,7 +172,7 @@ int main(int argc, char *argv[])
 
 &lt;li&gt;&lt;p&gt;函数体中必须有且仅有一条return语句&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;constexpr int lab(int i)
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;constexpr int lab(int i)
 {
 
 return  i*10;
@@ -197,7 +197,7 @@ return 0;
 
 &lt;p&gt;数据成员都是字面值类型的聚合类是字面值常量类，例如&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;struct Person
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;struct Person
 {
 	std::string name;
 	int height;
@@ -376,14 +376,14 @@ int main()
 
 &lt;p&gt;第一次使用Qtmysql的库时容易看到qDebug有如下打印&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;QSqlDatabase: QMYSQL driver not loaded
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;QSqlDatabase: QMYSQL driver not loaded
 QSqlDatabase: available drivers: QSQLITE QMYSQL QMYSQL3 QPSQL QPSQL7
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1600329726_20200402173143995_5048.png&#34; alt=&#34;clipboard&#34; /&gt;
 查看本机mysql，发现mysqlClient库安装正常&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;ls /usr/lib/x86_64-linux-gnu/libmysql* -lsd
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;ls /usr/lib/x86_64-linux-gnu/libmysql* -lsd
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1600329727_20200403101104397_31787.png&#34; alt=&#34;&#34; /&gt;
@@ -392,7 +392,7 @@ QSqlDatabase: available drivers: QSQLITE QMYSQL QMYSQL3 QPSQL QPSQL7
 &lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1600329728_20200403101412861_21234.png&#34; alt=&#34;&#34; /&gt;
 查看&lt;strong&gt;libqsqlmysql.so&lt;/strong&gt;文件链接是否正常&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;ldd libqsqlmysql.so
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;ldd libqsqlmysql.so
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1600329728_20200403101545125_14714.png&#34; alt=&#34;&#34; /&gt;
@@ -426,22 +426,22 @@ QSqlDatabase: available drivers: QSQLITE QMYSQL QMYSQL3 QPSQL QPSQL7
 
 &lt;p&gt;1.首先下载libCurl的源码，这里使用的是Github上的版本&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/curl/curl.git
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;git clone https://github.com/curl/curl.git
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;或者&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/curl/curl
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;git clone https://github.com/curl/curl
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;2.生成configure&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt; ./buildconf
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt; ./buildconf
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;3.查看本地可开启的功能&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;./configure --enable-pthreads
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;./configure --enable-pthreads
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;会显示默认环境下安装后能使用的功能，若是满足需求就直接make和sudo make install&lt;/p&gt;
@@ -462,7 +462,7 @@ QSqlDatabase: available drivers: QSQLITE QMYSQL QMYSQL3 QPSQL QPSQL7
 由于本人需要openssl 与SSH2的功能（从上图可以看到SSH为未链接状态，我们可以下载libssh2进行编译）
 &lt;strong&gt;编译OpenssH（可选）&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt; wget http://www.libssh2.org/download/libssh2-1.4.3.tar.gz
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt; wget http://www.libssh2.org/download/libssh2-1.4.3.tar.gz
  tar -zxvf libssh2-1.4.3.tar.gz
  cd libssh2-1.4.3/
 //由于我/usr/local的openssl版本太高了，编译会报错，所以使用低版本的openssl
@@ -473,7 +473,7 @@ make insatll
 
 &lt;p&gt;将openssh与openssl链接到libcurl中&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;进入libcurl文件夹
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;进入libcurl文件夹
 ./configure --prefix=/home/lin/libcurl/outputFile --enable-debug --with-openssl CPPFLAGS=&amp;quot;-I/home/lin/openssl/include&amp;quot; LDFLAGS=&amp;quot;-L/home/lin/openssl/lib&amp;quot; --with-libssh2 CPPFLAGS=&amp;quot;-I/usr/local/libssh2/include&amp;quot; LDFLAGS=&amp;quot;-L//usr/local/libssh2/lib&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -484,7 +484,7 @@ make insatll
 &lt;p&gt;5.编译与安装
 接下来就是make与makeinstall了&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;make -j4 
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;make -j4 
 make install
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -513,7 +513,7 @@ openssl：openssl-1.0.2
 
 &lt;h2 id=&#34;下载交叉编译文件&#34;&gt;下载交叉编译文件&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code&gt;#拉取setenv-android.sh，我们需要这个脚本来给我们配置环境
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;#拉取setenv-android.sh，我们需要这个脚本来给我们配置环境
 wget https://wiki.openssl.org/images/7/70/Setenv-android.sh
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -521,13 +521,13 @@ wget https://wiki.openssl.org/images/7/70/Setenv-android.sh
 
 &lt;h3 id=&#34;armv7a版本配置&#34;&gt;armv7a版本配置&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;_ANDROID_NDK=&amp;quot;android-ndk-r9&amp;quot;
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;_ANDROID_NDK=&amp;quot;android-ndk-r9&amp;quot;
 # 修改为：
 _ANDROID_NDK=&amp;quot;android-ndk-r15c&amp;quot;
 # 因为我们使用的是R14B这个版本的NDK
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;_ANDROID_EABI=&amp;quot;arm-linux-androideabi-4.8&amp;quot;
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;_ANDROID_EABI=&amp;quot;arm-linux-androideabi-4.8&amp;quot;
 修改为GCC 4.9
 _ANDROID_EABI=&amp;quot;arm-linux-androideabi-4.9&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
@@ -536,13 +536,13 @@ _ANDROID_EABI=&amp;quot;arm-linux-androideabi-4.9&amp;quot;
 
 &lt;h3 id=&#34;arm64v8a版本配置&#34;&gt;arm64V8A版本配置&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;_ANDROID_NDK=&amp;quot;android-ndk-r9&amp;quot;
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;_ANDROID_NDK=&amp;quot;android-ndk-r9&amp;quot;
 # 修改为：
 _ANDROID_NDK=&amp;quot;android-ndk-r15c&amp;quot;
 # 因为我们使用的是r15c这个版本的NDK
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;_ANDROID_EABI=&amp;quot;arm-linux-androideabi-4.8&amp;quot;
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;_ANDROID_EABI=&amp;quot;arm-linux-androideabi-4.8&amp;quot;
 修改为GCC 4.9
 _ANDROID_EABI=&amp;quot;aarch64-linux-android-4.9&amp;quot;
 
@@ -556,7 +556,7 @@ _ANDROID_ARCH=arch-arm64
 
 &lt;p&gt;添加环境变量（仅在当前终端就可以了&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;export ANDROID_NDK_ROOT=/home/ubuntu/android-ndk-r15c
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;export ANDROID_NDK_ROOT=/home/ubuntu/android-ndk-r15c
  source ./Setenv-android.sh
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -580,7 +580,7 @@ _ANDROID_ARCH=arch-arm64
 
 &lt;p&gt;不管是读取视频文件还是捕获摄像头画面，都使用到了VideoCapture类，但不同的是传入的形参不一样，如果我们传给VideoCapture类的是一个视频文件路径那么将是读取来自视频文件的画面，而如果我们传给VideoCapture类的是摄像头编号那么将是读取来自摄像头的画面，其使用示例如下：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;    # 获取VideoCapture类实例，读取视频文件
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;    # 获取VideoCapture类实例，读取视频文件
     fcap = cv2.VideoCapture(&#39;demo.mp4&#39;)
     # 读取摄像头画面
     ccap = cv2.VideoCapture(0)
@@ -588,7 +588,7 @@ _ANDROID_ARCH=arch-arm64
 
 &lt;p&gt;对于摄像头编号，可以使用如下命令获取：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;    ls -al /dev/ | grep video
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;    ls -al /dev/ | grep video
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;对于输出信息以video开头的其数字后缀即为可能的摄像头编号，如果一台电脑有多个摄像头设备，那么将会出现从0开始的多个摄像头编号。&lt;/p&gt;
@@ -597,7 +597,7 @@ _ANDROID_ARCH=arch-arm64
 
 &lt;p&gt;如果传入无效的视频文件或摄像头编号，那么VideoCapture类将会在后续的read()接口返回（False，None），为了避免此类事件发生，可以通过VideoCapture类的isOpened()接口进行判断，该接口返回一个boolean值，正常获取实例返回True，否则返回False，其使用示例如下：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;    # 判断是否正确获取VideoCapture类实例
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;    # 判断是否正确获取VideoCapture类实例
     while fcap.isOpened():
         # next step operation
 &lt;/code&gt;&lt;/pre&gt;
@@ -606,7 +606,7 @@ _ANDROID_ARCH=arch-arm64
 
 &lt;p&gt;一般视频流主要的帧信息包含画面宽高还有帧率，对于视频文件，则会多出整个视频流多少帧，因此，我们一般主要关注这四个视频流信息即可，而我们用到的则是VideoCapture类的get接口，其使用示例如下：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;    # 获取视频帧的宽
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;    # 获取视频帧的宽
     w = fcap.get(cv2.CAP_PROP_FRAME_WIDTH)
     # 获取视频帧的高
     h = fcap.get(cv2.CAP_PROP_FRAME_HEIGHT)
@@ -616,7 +616,7 @@ _ANDROID_ARCH=arch-arm64
 
 &lt;p&gt;获取到的帧率对于摄像头设备来说，如果所使用的终端不支持查询，那么将会返回0值，且该值也不是非常精确的。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;
     # 获取视频流的总帧数
     fcount = fcap.get(cv2.CAP_PROP_FRAME_COUNT)
 &lt;/code&gt;&lt;/pre&gt;
@@ -627,13 +627,13 @@ _ANDROID_ARCH=arch-arm64
 
 &lt;p&gt;这个就相对简单，直接使用VideoCapture类的read接口即可，该接口会返回两个参数，第一个参数是读取成功与否标志位，成功为True否则为False，第二个参数则为具体的帧数据，其是一个numpy.ndarray的数组，其使用示例如下：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;    # 获取帧画面
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;    # 获取帧画面
     success, frame = fcap.read()
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;但在读取过程中，有可能会存在失败的情况出现，一般我们是在第二次读取时放入一个while循环来保障整个读取顺利进行，如下：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;    # 判断读取视频流是否成功
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;    # 判断读取视频流是否成功
     while success:
         success, frame = fcap.read()
         # do something in here
@@ -644,7 +644,7 @@ _ANDROID_ARCH=arch-arm64
 
 &lt;p&gt;当需要同步一组摄像头或一个多头（multihead）摄像头（例如立体摄像头或Kinect）时，read()方法就不太适用了，这时，一般使用grab()和retrieve()方法代替它。对于一组摄像头，其使用示例如下：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;
     # 一组摄像头的特殊处理
     success0 = fcap0.grab()
     success1 = fcap1.grab()
@@ -658,7 +658,7 @@ _ANDROID_ARCH=arch-arm64
 
 &lt;p&gt;对于视频文件，有时候我们需要直接跳到某一个感兴趣的帧并从该帧开始读取数据，那么可以使用VideoCapture类的set接口，其使用示例如下：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;
     # 跳到某一感兴趣帧并从此帧开始读取,如从第360帧开始读取
     fcap.set(cv2.CAP_PROP_POS_FRAMES, 360)
     success, frame = fcap.read()
@@ -668,7 +668,7 @@ _ANDROID_ARCH=arch-arm64
 
 &lt;p&gt;opencv读取到的摄像头画面大小一般为默认的640x480，但这并不一定满足我们的日常使用要求，比如摄像头支持超高清画面，那么我们就希望能捕获到超高清1920x1080的画面，好在VideoCapture类的set接口为我们提供了相应的功能，其使用示例如下：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;    # 设置摄像头分辨率的高
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;    # 设置摄像头分辨率的高
     fcap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
     # 设置摄像头分辨率的宽
     fcap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
@@ -678,7 +678,8 @@ _ANDROID_ARCH=arch-arm64
 
 &lt;p&gt;不管是对视频文件的再存储还是对摄像头画面的保存，都是用到了VideoWriter类，且传入的形参意义是一致的，都需要我们传入保存的文件名包含视频格式、指定视频编解码器、保存视频的帧率以及保存视频的分辨率，一般来说，保存视频的帧率最好与读入的画面的帧率一致，但需要我们进行估计或使用计时器才会比较准确，而分辨率则可以更改，只是要求写入的帧其大小要与分辨率保持一致，其使用示例如下：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;writer = cv2.VideoWriter(&#39;output.avi&#39;, cv2.VideoWriter_fourcc(&#39;X&#39;, &#39;V&#39;, &#39;I&#39;, &#39;D&#39;), 30, (1080, 1920))
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;
+    writer = cv2.VideoWriter(&#39;output.avi&#39;, cv2.VideoWriter_fourcc(&#39;X&#39;, &#39;V&#39;, &#39;I&#39;, &#39;D&#39;), 30, (1080, 1920))
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;值得注意的是，我们必须要为VideoWriter类的构造函数传入所需的参数，且若指定的文件名已存在则会被直接覆盖。&lt;/p&gt;
@@ -687,7 +688,7 @@ _ANDROID_ARCH=arch-arm64
 
 &lt;p&gt;在构造VideoWriter类实例时，我们必须要指定视频编解码器，那么VideoWriter类都支持哪些视频编解码器呢？我们通过cv2.VideoWriter_fourcc来指定具体使用的编解码器：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;    &#39;I&#39;,&#39;4&#39;,&#39;2&#39;,&#39;0&#39;：该选项是一个未压缩的YUV颜色编码，兼容性好，但产生文件较大，文件扩展名为.avi
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;    &#39;I&#39;,&#39;4&#39;,&#39;2&#39;,&#39;0&#39;：该选项是一个未压缩的YUV颜色编码，兼容性好，但产生文件较大，文件扩展名为.avi
     &#39;P&#39;,&#39;T&#39;,&#39;M&#39;,&#39;I&#39;：该选项是MPEG-1编码类型，文件扩展名为.avi
     &#39;X&#39;,&#39;V&#39;,&#39;T&#39;,&#39;D&#39;：该选项是MPEG-4编码类型，得到的视频大小处于平均值，文件扩展名为.avi
     &#39;T&#39;,&#39;H&#39;,&#39;E&#39;,&#39;O&#39;：该选项是Ogg Vorbis，文件扩展名为.ogv
@@ -700,15 +701,16 @@ _ANDROID_ARCH=arch-arm64
 
 &lt;p&gt;这个也很简单，直接使用VideoWriter类的write接口即可，该接口一次可以保存一帧数据到制定文件中，其使用示例如下：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;# 保存帧数据
-writer.write(frame)
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;    # 保存帧数据
+    writer.write(frame)
+
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;11. 释放资源&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;不管是VideoCapture类还是VideoWriter类，当我们使用完了它们之后，都应该将它们释放掉，避免资源一直被占用，而这两个类都有提供了release()接口给我们，我们只需直接调用即可释放资源，使用示例如下：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;    # 释放VideoCapture资源
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;    # 释放VideoCapture资源
     fcap.release()
     # 释放VideoWriter资源
     writer.release()
@@ -716,7 +718,7 @@ writer.write(frame)
 
 &lt;p&gt;&lt;strong&gt;12. 一个完整的示例代码&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;    # -*- coding: utf-8 -*-
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;    # -*- coding: utf-8 -*-
     # /usr/bin/env/python3
     
     &#39;&#39;&#39;use opencv3 to capture video frame, show and save its stream.&#39;&#39;&#39;
@@ -783,7 +785,7 @@ writer.write(frame)
 
 &lt;h1 id=&#34;vlc编译&#34;&gt;VLC编译&lt;/h1&gt;
 
-&lt;pre&gt;&lt;code&gt;git clone git://github.com/vlc-qt/vlc-qt.git
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;git clone git://github.com/vlc-qt/vlc-qt.git
 sudo apt install libvlc-dev
 
 
@@ -804,14 +806,14 @@ sudo make install
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;core libvlc error: No plugins found! Check your VLC installation.
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;core libvlc error: No plugins found! Check your VLC installation.
 VLC-Qt Error: libvlc failed to load!
 
 sudo apt-get install libvlc-dev
 sudo apt-get install vlc
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;CMake Error at config/Dependencies.cmake:28 (FIND_PACKAGE):
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;CMake Error at config/Dependencies.cmake:28 (FIND_PACKAGE):
   By not providing &amp;quot;FindQt5Core.cmake&amp;quot; in CMAKE_MODULE_PATH this project has
   asked CMake to find a package configuration file provided by &amp;quot;Qt5Core&amp;quot;, but
   CMake did not find one.
@@ -826,7 +828,7 @@ sudo apt-get install vlc
 
 &lt;p&gt;USB摄像头权限不足时&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;
 snap connections vlc
 查看是否允许访问设备
 
@@ -837,7 +839,7 @@ snap connections vlc
 
 &lt;p&gt;ffmpeg安装&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;sudo apt-get install -y autoconf automake build-essential git libass-dev libfreetype6-dev libsdl2-dev libtheora-dev libtool libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev pkg-config texinfo wget zlib1g-dev
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;sudo apt-get install -y autoconf automake build-essential git libass-dev libfreetype6-dev libsdl2-dev libtheora-dev libtool libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev pkg-config texinfo wget zlib1g-dev
 
 &lt;/code&gt;&lt;/pre&gt;
 </description>
@@ -861,12 +863,12 @@ snap connections vlc
 
 &lt;h3 id=&#34;1-1-1-获取镜像&#34;&gt;1.1.1. 获取镜像&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;docker pull ubuntu:18.04
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;docker pull ubuntu:18.04
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;等待下载完成后,查看宿主机镜像&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;docker images 
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;docker images 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;我们可以看刚刚下载下来的镜像
@@ -874,7 +876,7 @@ snap connections vlc
 
 &lt;h3 id=&#34;1-1-2-运行镜像&#34;&gt;1.1.2. 运行镜像&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;docker run -it  ubuntu:18.04  bash
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;docker run -it  ubuntu:18.04  bash
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;此时我们即启动了该镜像
@@ -882,7 +884,7 @@ snap connections vlc
 &lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1586940600_20200414170507937_18320.png&#34; alt=&#34;&#34; /&gt;
 此处需要说明，每一次使用镜像运行，都会生成一个容器,退出的容器并不会立即删除，除非手动 docker rm,如果不需要排障和保留结果可以使用以下命令&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;docker run -it  --rm ubuntu:18.04  bash
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;docker run -it  --rm ubuntu:18.04  bash
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;ul&gt;
@@ -892,30 +894,30 @@ snap connections vlc
 
 &lt;p&gt;当使用&lt;strong&gt;docker run -it  ubuntu:18.04  bash&lt;/strong&gt;会在本地生成一个容器，容器和镜像的关系相当于对象和类，查看本地容器&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;docker ps -a
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;docker ps -a
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1586940600_20200415142739990_7538.png&#34; alt=&#34;&#34; /&gt;
 启动一个已经停止的容器&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;docker start b8ed1b0ee812 //containerID/name
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;docker start b8ed1b0ee812 //containerID/name
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;捕获一个正在运行的容器，使其转到前台bash&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;docker attach b8ed1b0ee812 //containerID/name
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;docker attach b8ed1b0ee812 //containerID/name
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;attach捕获后推出容器，此容器会停止，如果想推出后继续在后台运行使用exec命令&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;docker exec -it b8ed1b0ee812 /bin/bash
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;docker exec -it b8ed1b0ee812 /bin/bash
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;1-1-4-网络端口映射&#34;&gt;1.1.4. 网络端口映射&lt;/h3&gt;
 
 &lt;p&gt;当在docker中的服务需要监听宿主机的某些网络应用时，我们使用网络端口映射来达成访问。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;docker run -itd -p 5000:5000 ubuntu bash
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;docker run -itd -p 5000:5000 ubuntu bash
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;-p&lt;/strong&gt; 是容器内部端口绑定到指定的主机端口。&lt;/p&gt;&lt;/li&gt;
@@ -924,18 +926,18 @@ snap connections vlc
 &lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1586940602_20200415150710911_3372.png&#34; alt=&#34;&#34; /&gt;
 查看结果：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;docker ps
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;docker ps
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1586940602_20200415150900679_2631.png&#34; alt=&#34;&#34; /&gt;
 绑定特殊IP&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;docker run -itd -p 127.0.0.1:5000:5000 ubuntu bash
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;docker run -itd -p 127.0.0.1:5000:5000 ubuntu bash
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;使用udp&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;docker run -itd -p 127.0.0.1:5000:5000/udp ubuntu bash
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;docker run -itd -p 127.0.0.1:5000:5000/udp ubuntu bash
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -950,23 +952,23 @@ snap connections vlc
 &lt;p&gt;有时需要在镜像中安装一些软件，又不需要重新搭建环境，这是可以从已经创建的容器中更新镜像，并且提交这个镜像。就可以得到一个修改过的镜像
 进入镜像中:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;docker exec -it b8ed1b0ee812 /bin/bash
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;docker exec -it b8ed1b0ee812 /bin/bash
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;这个例子我们对容器进行ping工具安装&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;apt-get update
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;apt-get update
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1586940600_20200415144915573_7417.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;apt-get install inetutils-ping
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;apt-get install inetutils-ping
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1586940601_20200415145007590_1471.png&#34; alt=&#34;&#34; /&gt;
 此时&lt;strong&gt;ping&lt;/strong&gt;安装完成，使用exit退出容器，使用该容器对镜像进行更新&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;docker commit -m=&amp;quot;has update&amp;quot; -a=&amp;quot;linjg&amp;quot; b8ed1b0ee812 testimage/pingubuntu:v2
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;docker commit -m=&amp;quot;has update&amp;quot; -a=&amp;quot;linjg&amp;quot; b8ed1b0ee812 testimage/pingubuntu:v2
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;各个参数说明:
@@ -978,7 +980,7 @@ snap connections vlc
 &lt;p&gt;&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1586940601_20200415145244734_18760.png&#34; alt=&#34;&#34; /&gt;
 镜像提交成功后我们查看镜像&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;docker images
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;docker images
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1586940601_20200415145411271_23764.png&#34; alt=&#34;&#34; /&gt;
@@ -990,7 +992,7 @@ snap connections vlc
 &lt;p&gt;Dockerfile 是一个文本文件，其内包含了一条条的 &lt;strong&gt;指令(Instruction)&lt;/strong&gt;，每一条指令构建一层，因此每一条指令的内容，就是描述该层应当如何构建。
 在一个空白目录中新建一个Dockerfile文件添加内容：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt; FROM testimage/pingubuntu:v2
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt; FROM testimage/pingubuntu:v2
  RUN apt-get update
  RUN apt install -y build-essential
 &lt;/code&gt;&lt;/pre&gt;
@@ -999,7 +1001,7 @@ snap connections vlc
 此处主要讲制作流程，更多指令请参考docker官方文档:&lt;a href=&#34;https://docs.docker.com/engine/reference/builder/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://docs.docker.com/engine/reference/builder/&lt;/a&gt;
 保存Dockerfile文件并执行&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;docker build -t dockfileimage:v3 .
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;docker build -t dockfileimage:v3 .
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;docker会对程序进行构建,等待镜像构建完成
@@ -1008,12 +1010,12 @@ snap connections vlc
 &lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1586940603_20200415154436105_29555.png&#34; alt=&#34;&#34; /&gt;
 生成容器查看是否正常。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;docker run -it  --rm dockfileimage:v3  bash
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;docker run -it  --rm dockfileimage:v3  bash
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;查看插入的gcc环境是否正常&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;gcc -v
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;gcc -v
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1586940603_20200415154631898_5299.png&#34; alt=&#34;&#34; /&gt;

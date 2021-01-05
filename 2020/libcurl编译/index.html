@@ -49,9 +49,10 @@
     "description" : "libCurl编译 1.首先下载libCurl的源码，这里使用的是Github上的版本
 git clone https://github.com/curl/curl.git  或者
 git clone https://github.com/curl/curl  2.生成configure
- ./buildconf  3.查看本地可开启的功能
+./buildconf  3.查看本地可开启的功能
 ./configure --enable-pthreads  会显示默认环境下安装后能使用的功能，若是满足需求就直接make和sudo make install
- 若要开启SSL support和zlib support:(Centos) yum install openssl-libs openssl-devel 若要支持https需安装libssh2:(Centos) yum install libssh2-devel 若要支持PSL 验证 Cookie 和证书的 Domain 信息，则安装libpsl:(Centos) yum psl libpsl-devel 若要支持HTTP2 ,则安装nghttp2:(Centos) yum install libnghttp2-devel nghttp2 若要支持IDN,则安装libidn:(Centos) yum install libidn2 libidn2-devel 若要支持metalink，则安装 libmetalink:(Centos) yum install libmetalink libmetalink-devel 若要支持RTMP实时流传输，则到官网下载安装,可以参考文章 linux下编译支持librtmp、libx264、libfaac的ffmpeg Ubuntu的可对应上面的centos库自行百度下载   4.编译libcurl 由于本人需要openssl 与SSH2的功能（从上图可以看到SSH为未链接状态，我们可以下载libssh2进行编译） 编译OpenssH（可选）",
+ 若要开启SSL support和zlib support:(Centos) yum install openssl-libs openssl-devel 若要支持https需安装libssh2:(Centos) yum install libssh2-devel 若要支持PSL 验证 Cookie 和证书的 Domain 信息，则安装libpsl:(Centos) yum psl libpsl-devel 若要支持HTTP2 ,则安装nghttp2:(Centos) yum install libnghttp2-devel nghttp2 若要支持IDN,则安装libidn:(Centos) yum install libidn2 libidn2-devel 若要支持metalink，则安装 libmetalink:(Centos) yum install libmetalink libmetalink-devel 若要支持RTMP实时流传输，则到官网下载安装,可以参考文章 linux下编译支持librtmp、libx264、libfaac的ffmpeg Ubuntu的可对应上面的centos库自行百度下载   4.编译libcurl 由于本人需要openssl 与SSH2的功能（从上图可以看到SSH为未链接状态，我们可以下载libssh2进行编译） 编译OpenssH（可选）
+wget http://www.",
     "inLanguage" : "en-us",
     "author" : "mentir.",
     "creator" : "mentir.",
@@ -159,22 +160,22 @@ git clone https://github.com/curl/curl  2.生成configure
 
 <p>1.首先下载libCurl的源码，这里使用的是Github上的版本</p>
 
-<pre><code>git clone https://github.com/curl/curl.git
+<pre><code class="language-c">git clone https://github.com/curl/curl.git
 </code></pre>
 
 <p>或者</p>
 
-<pre><code>git clone https://github.com/curl/curl
+<pre><code class="language-c">git clone https://github.com/curl/curl
 </code></pre>
 
 <p>2.生成configure</p>
 
-<pre><code> ./buildconf
+<pre><code class="language-c"> ./buildconf
 </code></pre>
 
 <p>3.查看本地可开启的功能</p>
 
-<pre><code>./configure --enable-pthreads
+<pre><code class="language-c">./configure --enable-pthreads
 </code></pre>
 
 <p>会显示默认环境下安装后能使用的功能，若是满足需求就直接make和sudo make install</p>
@@ -195,7 +196,7 @@ git clone https://github.com/curl/curl  2.生成configure
 由于本人需要openssl 与SSH2的功能（从上图可以看到SSH为未链接状态，我们可以下载libssh2进行编译）
 <strong>编译OpenssH（可选）</strong></p>
 
-<pre><code> wget http://www.libssh2.org/download/libssh2-1.4.3.tar.gz
+<pre><code class="language-c"> wget http://www.libssh2.org/download/libssh2-1.4.3.tar.gz
  tar -zxvf libssh2-1.4.3.tar.gz
  cd libssh2-1.4.3/
 //由于我/usr/local的openssl版本太高了，编译会报错，所以使用低版本的openssl
@@ -206,7 +207,7 @@ make insatll
 
 <p>将openssh与openssl链接到libcurl中</p>
 
-<pre><code>进入libcurl文件夹
+<pre><code class="language-c">进入libcurl文件夹
 ./configure --prefix=/home/lin/libcurl/outputFile --enable-debug --with-openssl CPPFLAGS=&quot;-I/home/lin/openssl/include&quot; LDFLAGS=&quot;-L/home/lin/openssl/lib&quot; --with-libssh2 CPPFLAGS=&quot;-I/usr/local/libssh2/include&quot; LDFLAGS=&quot;-L//usr/local/libssh2/lib&quot;
 </code></pre>
 
@@ -217,7 +218,7 @@ make insatll
 <p>5.编译与安装
 接下来就是make与makeinstall了</p>
 
-<pre><code>make -j4 
+<pre><code class="language-c">make -j4 
 make install
 </code></pre>
 

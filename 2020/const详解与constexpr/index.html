@@ -295,7 +295,7 @@ int main(int argc, char *argv[])
 
 <p>事实上const并不能代表“常量”，它仅仅是对变量的一个修饰，告诉编译器这个变量只能被初始化，且不能被直接修改（实际上可以通过堆栈溢出等方式修改）。而这个变量的值，可以在运行时也可以在编译时指定</p>
 
-<pre><code>     int a3 = 5;                        // a3不是常量表达式
+<pre><code class="language-c">     int a3 = 5;                        // a3不是常量表达式
      constexpr int a4 = a3;     // a4不是常量表达式，因为a3程序的执行到达其所在的声明处时才初始化
 </code></pre>
 
@@ -308,7 +308,7 @@ int main(int argc, char *argv[])
 
 <li><p>函数体中必须有且仅有一条return语句</p>
 
-<pre><code>constexpr int lab(int i)
+<pre><code class="language-c">constexpr int lab(int i)
 {
 
 return  i*10;
@@ -333,7 +333,7 @@ return 0;
 
 <p>数据成员都是字面值类型的聚合类是字面值常量类，例如</p>
 
-<pre><code>struct Person
+<pre><code class="language-c">struct Person
 {
 	std::string name;
 	int height;

@@ -20,14 +20,17 @@
       <description>opencv视频流处理方法 OpenCV提供了VideoCapture类和VideoWriter类来支持各种格式的视频流，支持的格式类型会因系统的不同而有所变化，但基本上都是支持avi格式的，且对于视频文件和摄像头画面的读写所用到的接口基本上都相同，因此，我们把它们放在一起来讲了。
 1. 获取VideoCapture类实例
 不管是读取视频文件还是捕获摄像头画面，都使用到了VideoCapture类，但不同的是传入的形参不一样，如果我们传给VideoCapture类的是一个视频文件路径那么将是读取来自视频文件的画面，而如果我们传给VideoCapture类的是摄像头编号那么将是读取来自摄像头的画面，其使用示例如下：
- # 获取VideoCapture类实例，读取视频文件 fcap = cv2.VideoCapture(&#39;demo.mp4&#39;) # 读取摄像头画面 ccap = cv2.VideoCapture(0)  对于摄像头编号，可以使用如下命令获取：
- ls -al /dev/ | grep video  对于输出信息以video开头的其数字后缀即为可能的摄像头编号，如果一台电脑有多个摄像头设备，那么将会出现从0开始的多个摄像头编号。
+# 获取VideoCapture类实例，读取视频文件 fcap = cv2.VideoCapture(&#39;demo.mp4&#39;) # 读取摄像头画面 ccap = cv2.VideoCapture(0)  对于摄像头编号，可以使用如下命令获取：
+ls -al /dev/ | grep video  对于输出信息以video开头的其数字后缀即为可能的摄像头编号，如果一台电脑有多个摄像头设备，那么将会出现从0开始的多个摄像头编号。
 2. 判断获取VideoCapture实例是否成功
 如果传入无效的视频文件或摄像头编号，那么VideoCapture类将会在后续的read()接口返回（False，None），为了避免此类事件发生，可以通过VideoCapture类的isOpened()接口进行判断，该接口返回一个boolean值，正常获取实例返回True，否则返回False，其使用示例如下：
- # 判断是否正确获取VideoCapture类实例 while fcap.isOpened(): # next step operation  3. 获取视频流信息
+# 判断是否正确获取VideoCapture类实例 while fcap.isOpened(): # next step operation  3. 获取视频流信息
 一般视频流主要的帧信息包含画面宽高还有帧率，对于视频文件，则会多出整个视频流多少帧，因此，我们一般主要关注这四个视频流信息即可，而我们用到的则是VideoCapture类的get接口，其使用示例如下：
- # 获取视频帧的宽 w = fcap.get(cv2.CAP_PROP_FRAME_WIDTH) # 获取视频帧的高 h = fcap.get(cv2.CAP_PROP_FRAME_HEIGHT) # 获取视频帧的帧率 fps = fcap.get(cv2.CAP_PROP_FPS)  获取到的帧率对于摄像头设备来说，如果所使用的终端不支持查询，那么将会返回0值，且该值也不是非常精确的。
- # 获取视频流的总帧数 fcount = fcap.get(cv2.CAP_PROP_FRAME_COUNT)  注意这个是对视频文件才有意义，对于摄像头是没意义的，且以上获取到的返回信息均是浮点型的，注意转换为整型。</description>
+# 获取视频帧的宽 w = fcap.get(cv2.CAP_PROP_FRAME_WIDTH) # 获取视频帧的高 h = fcap.get(cv2.CAP_PROP_FRAME_HEIGHT) # 获取视频帧的帧率 fps = fcap.get(cv2.CAP_PROP_FPS)  获取到的帧率对于摄像头设备来说，如果所使用的终端不支持查询，那么将会返回0值，且该值也不是非常精确的。
+# 获取视频流的总帧数 fcount = fcap.get(cv2.CAP_PROP_FRAME_COUNT)  注意这个是对视频文件才有意义，对于摄像头是没意义的，且以上获取到的返回信息均是浮点型的，注意转换为整型。
+4. 获取帧画面
+这个就相对简单，直接使用VideoCapture类的read接口即可，该接口会返回两个参数，第一个参数是读取成功与否标志位，成功为True否则为False，第二个参数则为具体的帧数据，其是一个numpy.ndarray的数组，其使用示例如下：
+# 获取帧画面 success, frame = fcap.</description>
     </item>
     
     <item>

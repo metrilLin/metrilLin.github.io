@@ -271,14 +271,14 @@ QSqlDatabase db = QSqlDatabase::addDatabase(&quot;QMYSQL&quot;); db.setHostName(
 
 <p>第一次使用Qtmysql的库时容易看到qDebug有如下打印</p>
 
-<pre><code>QSqlDatabase: QMYSQL driver not loaded
+<pre><code class="language-c">QSqlDatabase: QMYSQL driver not loaded
 QSqlDatabase: available drivers: QSQLITE QMYSQL QMYSQL3 QPSQL QPSQL7
 </code></pre>
 
 <p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://gitee.com/linMentri/mapdepot/raw/master/1600329726_20200402173143995_5048.png" alt="clipboard" class="lazyload"><figcaption class="image-caption">clipboard</figcaption></figure>
 查看本机mysql，发现mysqlClient库安装正常</p>
 
-<pre><code>ls /usr/lib/x86_64-linux-gnu/libmysql* -lsd
+<pre><code class="language-c">ls /usr/lib/x86_64-linux-gnu/libmysql* -lsd
 </code></pre>
 
 <p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://gitee.com/linMentri/mapdepot/raw/master/1600329727_20200403101104397_31787.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
@@ -287,7 +287,7 @@ QSqlDatabase: available drivers: QSQLITE QMYSQL QMYSQL3 QPSQL QPSQL7
 <figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://gitee.com/linMentri/mapdepot/raw/master/1600329728_20200403101412861_21234.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
 查看<strong>libqsqlmysql.so</strong>文件链接是否正常</p>
 
-<pre><code>ldd libqsqlmysql.so
+<pre><code class="language-c">ldd libqsqlmysql.so
 </code></pre>
 
 <p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://gitee.com/linMentri/mapdepot/raw/master/1600329728_20200403101545125_14714.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>

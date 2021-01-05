@@ -169,12 +169,12 @@ docker exec -it b8ed1b0ee812 /bin/bash  1.",
 
 <h3 id="1-1-1-获取镜像">1.1.1. 获取镜像</h3>
 
-<pre><code>docker pull ubuntu:18.04
+<pre><code class="language-c">docker pull ubuntu:18.04
 </code></pre>
 
 <p>等待下载完成后,查看宿主机镜像</p>
 
-<pre><code>docker images 
+<pre><code class="language-c">docker images 
 </code></pre>
 
 <p>我们可以看刚刚下载下来的镜像
@@ -182,7 +182,7 @@ docker exec -it b8ed1b0ee812 /bin/bash  1.",
 
 <h3 id="1-1-2-运行镜像">1.1.2. 运行镜像</h3>
 
-<pre><code>docker run -it  ubuntu:18.04  bash
+<pre><code class="language-c">docker run -it  ubuntu:18.04  bash
 </code></pre>
 
 <p>此时我们即启动了该镜像
@@ -190,7 +190,7 @@ docker exec -it b8ed1b0ee812 /bin/bash  1.",
 <figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://gitee.com/linMentri/mapdepot/raw/master/1586940600_20200414170507937_18320.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
 此处需要说明，每一次使用镜像运行，都会生成一个容器,退出的容器并不会立即删除，除非手动 docker rm,如果不需要排障和保留结果可以使用以下命令</p>
 
-<pre><code>docker run -it  --rm ubuntu:18.04  bash
+<pre><code class="language-c">docker run -it  --rm ubuntu:18.04  bash
 </code></pre>
 
 <ul>
@@ -200,30 +200,30 @@ docker exec -it b8ed1b0ee812 /bin/bash  1.",
 
 <p>当使用<strong>docker run -it  ubuntu:18.04  bash</strong>会在本地生成一个容器，容器和镜像的关系相当于对象和类，查看本地容器</p>
 
-<pre><code>docker ps -a
+<pre><code class="language-c">docker ps -a
 </code></pre>
 
 <p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://gitee.com/linMentri/mapdepot/raw/master/1586940600_20200415142739990_7538.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
 启动一个已经停止的容器</p>
 
-<pre><code>docker start b8ed1b0ee812 //containerID/name
+<pre><code class="language-c">docker start b8ed1b0ee812 //containerID/name
 </code></pre>
 
 <p>捕获一个正在运行的容器，使其转到前台bash</p>
 
-<pre><code>docker attach b8ed1b0ee812 //containerID/name
+<pre><code class="language-c">docker attach b8ed1b0ee812 //containerID/name
 </code></pre>
 
 <p>attach捕获后推出容器，此容器会停止，如果想推出后继续在后台运行使用exec命令</p>
 
-<pre><code>docker exec -it b8ed1b0ee812 /bin/bash
+<pre><code class="language-c">docker exec -it b8ed1b0ee812 /bin/bash
 </code></pre>
 
 <h3 id="1-1-4-网络端口映射">1.1.4. 网络端口映射</h3>
 
 <p>当在docker中的服务需要监听宿主机的某些网络应用时，我们使用网络端口映射来达成访问。</p>
 
-<pre><code>docker run -itd -p 5000:5000 ubuntu bash
+<pre><code class="language-c">docker run -itd -p 5000:5000 ubuntu bash
 </code></pre></li>
 
 <li><p><strong>-p</strong> 是容器内部端口绑定到指定的主机端口。</p></li>
@@ -232,18 +232,18 @@ docker exec -it b8ed1b0ee812 /bin/bash  1.",
 <figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://gitee.com/linMentri/mapdepot/raw/master/1586940602_20200415150710911_3372.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
 查看结果：</p>
 
-<pre><code>docker ps
+<pre><code class="language-c">docker ps
 </code></pre>
 
 <p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://gitee.com/linMentri/mapdepot/raw/master/1586940602_20200415150900679_2631.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
 绑定特殊IP</p>
 
-<pre><code>docker run -itd -p 127.0.0.1:5000:5000 ubuntu bash
+<pre><code class="language-c">docker run -itd -p 127.0.0.1:5000:5000 ubuntu bash
 </code></pre>
 
 <p>使用udp</p>
 
-<pre><code>docker run -itd -p 127.0.0.1:5000:5000/udp ubuntu bash
+<pre><code class="language-c">docker run -itd -p 127.0.0.1:5000:5000/udp ubuntu bash
 </code></pre></li>
 </ul>
 
@@ -258,23 +258,23 @@ docker exec -it b8ed1b0ee812 /bin/bash  1.",
 <p>有时需要在镜像中安装一些软件，又不需要重新搭建环境，这是可以从已经创建的容器中更新镜像，并且提交这个镜像。就可以得到一个修改过的镜像
 进入镜像中:</p>
 
-<pre><code>docker exec -it b8ed1b0ee812 /bin/bash
+<pre><code class="language-c">docker exec -it b8ed1b0ee812 /bin/bash
 </code></pre>
 
 <p>这个例子我们对容器进行ping工具安装</p>
 
-<pre><code>apt-get update
+<pre><code class="language-c">apt-get update
 </code></pre>
 
 <p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://gitee.com/linMentri/mapdepot/raw/master/1586940600_20200415144915573_7417.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
-<pre><code>apt-get install inetutils-ping
+<pre><code class="language-c">apt-get install inetutils-ping
 </code></pre>
 
 <p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://gitee.com/linMentri/mapdepot/raw/master/1586940601_20200415145007590_1471.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
 此时<strong>ping</strong>安装完成，使用exit退出容器，使用该容器对镜像进行更新</p>
 
-<pre><code>docker commit -m=&quot;has update&quot; -a=&quot;linjg&quot; b8ed1b0ee812 testimage/pingubuntu:v2
+<pre><code class="language-c">docker commit -m=&quot;has update&quot; -a=&quot;linjg&quot; b8ed1b0ee812 testimage/pingubuntu:v2
 </code></pre>
 
 <p>各个参数说明:
@@ -286,7 +286,7 @@ docker exec -it b8ed1b0ee812 /bin/bash  1.",
 <p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://gitee.com/linMentri/mapdepot/raw/master/1586940601_20200415145244734_18760.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
 镜像提交成功后我们查看镜像</p>
 
-<pre><code>docker images
+<pre><code class="language-c">docker images
 </code></pre>
 
 <p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://gitee.com/linMentri/mapdepot/raw/master/1586940601_20200415145411271_23764.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
@@ -298,7 +298,7 @@ docker exec -it b8ed1b0ee812 /bin/bash  1.",
 <p>Dockerfile 是一个文本文件，其内包含了一条条的 <strong>指令(Instruction)</strong>，每一条指令构建一层，因此每一条指令的内容，就是描述该层应当如何构建。
 在一个空白目录中新建一个Dockerfile文件添加内容：</p>
 
-<pre><code> FROM testimage/pingubuntu:v2
+<pre><code class="language-c"> FROM testimage/pingubuntu:v2
  RUN apt-get update
  RUN apt install -y build-essential
 </code></pre>
@@ -307,7 +307,7 @@ docker exec -it b8ed1b0ee812 /bin/bash  1.",
 此处主要讲制作流程，更多指令请参考docker官方文档:<a href="https://docs.docker.com/engine/reference/builder/" rel="nofollow noreferrer" target="_blank">https://docs.docker.com/engine/reference/builder/</a>
 保存Dockerfile文件并执行</p>
 
-<pre><code>docker build -t dockfileimage:v3 .
+<pre><code class="language-c">docker build -t dockfileimage:v3 .
 </code></pre>
 
 <p>docker会对程序进行构建,等待镜像构建完成
@@ -316,12 +316,12 @@ docker exec -it b8ed1b0ee812 /bin/bash  1.",
 <figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://gitee.com/linMentri/mapdepot/raw/master/1586940603_20200415154436105_29555.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
 生成容器查看是否正常。</p>
 
-<pre><code>docker run -it  --rm dockfileimage:v3  bash
+<pre><code class="language-c">docker run -it  --rm dockfileimage:v3  bash
 </code></pre>
 
 <p>查看插入的gcc环境是否正常</p>
 
-<pre><code>gcc -v
+<pre><code class="language-c">gcc -v
 </code></pre>
 
 <p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://gitee.com/linMentri/mapdepot/raw/master/1586940603_20200415154631898_5299.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
