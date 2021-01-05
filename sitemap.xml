@@ -185,18 +185,6 @@
     </url>
   
     <url>
-      <loc>https://metrillin.github.io/</loc>
-      
-      <lastmod>2020-12-18T14:35:37+08:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
       <loc>https://metrillin.github.io/tags/ndk/</loc>
       
       <lastmod>2020-11-05T20:29:23+08:00</lastmod>
@@ -258,6 +246,18 @@
   
     <url>
       <loc>https://metrillin.github.io/tags/</loc>
+      
+      <lastmod>2020-12-18T14:35:37+08:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://metrillin.github.io/</loc>
       
       <lastmod>2020-12-18T14:35:37+08:00</lastmod>
       
