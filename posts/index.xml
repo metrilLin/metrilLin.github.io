@@ -149,6 +149,23 @@ $ curl \-fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt\-key add \
     </item>
     
     <item>
+      <title>PYQT环境搭建与QT异同分析</title>
+      <link>https://metrillin.github.io/2019/pyqt%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8Eqt%E5%BC%82%E5%90%8C%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sat, 19 Oct 2019 22:43:08 +0800</pubDate>
+      
+      <guid>https://metrillin.github.io/2019/pyqt%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8Eqt%E5%BC%82%E5%90%8C%E5%88%86%E6%9E%90/</guid>
+      <description>PYQT环境搭建与QT异同分析 简介 Qt是C++的跨平台框架，Pyqt是一个跨平台的工具包。我们可以直接使用Qt designer绘制出QT的UI界面，使用Pyqt将ui文件转换成Python语法。此外，由于Pyqt使用python语法，本质上是一个解释器，即不需要交叉编译。
+PYQT环境搭建 pyqt使用环境需要以下几个软件支持
+Python主程序 Pycharm Qt5&amp;lt;主要使用QT5中的designer&amp;gt; PyQt库  Python主程序下载安装 python官网下载地址 https://www.python.org/downloads/  windows下选择executable安装包进行安装 下载完对应版本后，双击可执行文件对Python进行安装，注意勾选 Add Python 3.7 to PATH （否则需要自己添加系统变量） 默认全部 勾选，点击Next 注意：Python所在的路径建议不要有中文路径。
+PyCharm安装 下面链接为Pycharm安装包以及破解包，具体安装及破解可以点击链接下载。 链接: https://pan.baidu.com/s/1rPwaMzfUKbisYaAAwwzihg 提取码: mqut
+QT5下载 下面链接提供QT全部版本。建议选择QT5以上，目前本人使用版本为Qt5.9.2 链接: https://download.qt.io/archive/qt/ 下载后安装即可，编译器及组件可根据需要选择下载。
+PyQt下载 在安装好Python之后，打开命令行，输入以下命令（如果无效，请将Python安装路径加到环境变量中）
+pip install PyQt5  如果需要指定版本请输入
+installpip install PyQt5==5.10.1  5.10.1为对应的版本号，等待Pyqt下载完成后，我们打开PYcharm进行环境配置。
+PyQT+PyCharm+Qt designer搭建 打开 Pycharm，Files-&amp;gt;Settings-&amp;gt;External Tools，添加两个 tools，Qt Designer、PyUIC： 点击+号添加tools Programs:的地方找到你自己的 designer.exe 所在的位置 Working directory:的地方填上$ProjectFileDir$ 同样的我们添加Pyqt工具 Programs:的地方找到你自己的 python.exe 所在的位置 Arguments:的地方填上-m PyQt5.uic.pyuic$FileName$ -o $FileNameWithoutExtension$.</description>
+    </item>
+    
+    <item>
       <title>Linux内存分布</title>
       <link>https://metrillin.github.io/2019/linux%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/</link>
       <pubDate>Tue, 15 Oct 2019 22:11:18 +0800</pubDate>

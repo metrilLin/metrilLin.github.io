@@ -1230,6 +1230,362 @@ sub   rsa4096 2017-02-22 [S]
     </item>
     
     <item>
+      <title>PYQT环境搭建与QT异同分析</title>
+      <link>https://metrillin.github.io/2019/pyqt%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8Eqt%E5%BC%82%E5%90%8C%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sat, 19 Oct 2019 22:43:08 +0800</pubDate>
+      
+      <guid>https://metrillin.github.io/2019/pyqt%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8Eqt%E5%BC%82%E5%90%8C%E5%88%86%E6%9E%90/</guid>
+      <description>
+
+&lt;h1 id=&#34;pyqt环境搭建与qt异同分析&#34;&gt;PYQT环境搭建与QT异同分析&lt;/h1&gt;
+
+&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
+
+&lt;p&gt;Qt是C++的跨平台框架，Pyqt是一个跨平台的工具包。我们可以直接使用Qt designer绘制出QT的UI界面，使用Pyqt将ui文件转换成Python语法。此外，由于Pyqt使用python语法，本质上是一个解释器，即不需要交叉编译。&lt;/p&gt;
+
+&lt;h2 id=&#34;pyqt环境搭建&#34;&gt;PYQT环境搭建&lt;/h2&gt;
+
+&lt;p&gt;pyqt使用环境需要以下几个软件支持&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Python主程序
+Pycharm
+Qt5&amp;lt;主要使用QT5中的designer&amp;gt;
+PyQt库
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;python主程序下载安装&#34;&gt;Python主程序下载安装&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;python官网下载地址 https://www.python.org/downloads/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;windows下选择executable安装包进行安装
+&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1609857803_20210105222628796_31645.png&#34; alt=&#34;&#34; /&gt;
+下载完对应版本后，双击可执行文件对Python进行安装，注意勾选 Add Python 3.7 to PATH （否则需要自己添加系统变量）
+&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1609857803_20210105222706118_22771.png&#34; alt=&#34;&#34; /&gt;
+默认全部    勾选，点击Next
+&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1609857804_20210105222720689_7921.png&#34; alt=&#34;&#34; /&gt;
+注意：Python所在的路径建议不要有中文路径。&lt;/p&gt;
+
+&lt;h2 id=&#34;pycharm安装&#34;&gt;PyCharm安装&lt;/h2&gt;
+
+&lt;p&gt;下面链接为Pycharm安装包以及破解包，具体安装及破解可以点击链接下载。
+链接: &lt;a href=&#34;https://pan.baidu.com/s/1rPwaMzfUKbisYaAAwwzihg&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://pan.baidu.com/s/1rPwaMzfUKbisYaAAwwzihg&lt;/a&gt; 提取码: mqut&lt;/p&gt;
+
+&lt;h2 id=&#34;qt5下载&#34;&gt;QT5下载&lt;/h2&gt;
+
+&lt;p&gt;下面链接提供QT全部版本。建议选择QT5以上，目前本人使用版本为Qt5.9.2
+链接: &lt;a href=&#34;https://download.qt.io/archive/qt/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://download.qt.io/archive/qt/&lt;/a&gt;
+&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1609857805_20210105222828077_25766.png&#34; alt=&#34;&#34; /&gt;
+下载后安装即可，编译器及组件可根据需要选择下载。&lt;/p&gt;
+
+&lt;h2 id=&#34;pyqt下载&#34;&gt;PyQt下载&lt;/h2&gt;
+
+&lt;p&gt;在安装好Python之后，打开命令行，输入以下命令（如果无效，请将Python安装路径加到环境变量中）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pip install PyQt5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果需要指定版本请输入&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;installpip install PyQt5==5.10.1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;5.10.1为对应的版本号，等待Pyqt下载完成后，我们打开PYcharm进行环境配置。&lt;/p&gt;
+
+&lt;h2 id=&#34;pyqt-pycharm-qt-designer搭建&#34;&gt;PyQT+PyCharm+Qt designer搭建&lt;/h2&gt;
+
+&lt;p&gt;打开 Pycharm，Files-&amp;gt;Settings-&amp;gt;External Tools，添加两个 tools，Qt Designer、PyUIC：
+&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1609857805_20210105223207453_30573.png&#34; alt=&#34;&#34; /&gt;
+点击+号添加tools
+&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1609857806_20210105223225039_21140.png&#34; alt=&#34;&#34; /&gt;
+Programs:的地方找到你自己的 designer.exe 所在的位置
+Working directory:的地方填上&lt;code&gt;$ProjectFileDir$&lt;/code&gt;
+同样的我们添加Pyqt工具
+&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1609857806_20210105223331153_2326.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Programs:的地方找到你自己的 python.exe 所在的位置
+Arguments:的地方填上-m PyQt5.uic.pyuic&lt;code&gt;$FileName$ -o $FileNameWithoutExtension$.py&lt;/code&gt;
+Working directory:的地方填上&lt;code&gt;$FileDir$&lt;/code&gt;
+至此，Pyqt与Python的环境就搭建完成了&lt;/p&gt;
+
+&lt;h1 id=&#34;示例&#34;&gt;示例&lt;/h1&gt;
+
+&lt;p&gt;搭建完程序，我们就开始写出我们的第一个Pyqt程序。
+点击file&amp;mdash;&amp;gt;New project添加新的项目
+&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1609857806_20210105223432402_18013.png&#34; alt=&#34;&#34; /&gt;
+点击tools &amp;ndash; External Tools &amp;ndash; Qt Designer 来打开设计师界面
+&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1609857807_20210105223447675_530.png&#34; alt=&#34;&#34; /&gt;
+随便先选择一个Widget窗体
+&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1609857807_20210105223527653_29317.png&#34; alt=&#34;&#34; /&gt;
+点击保存，存放到项目路径下，接着右击该文件，点击PyUIC进行翻译
+&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1609857807_20210105223542820_31716.png&#34; alt=&#34;&#34; /&gt;
+可以看到生成一个同名的.py程序。
+&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1609857808_20210105223611972_18280.png&#34; alt=&#34;&#34; /&gt;
+我们新建一个mian.py主程序来调用此界面程序。
+在main.py中添加以下代码&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# -*- coding: utf-8 -*-
+import sys
+import untitled
+from PyQt5 import QtWidgets,QtCore
+if __name__ == &#39;__main__&#39;:
+    app = QtWidgets.QApplication(sys.argv)
+    widget = QtWidgets.QWidget()
+    ui = untitled.Ui_Form()
+    ui.setupUi(widget)
+    widget.show()
+    sys.exit(app.exec_())
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后右击main.py 点击Run即可看到界面显示出来。
+&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1609857808_20210105223711649_9536.png&#34; alt=&#34;&#34; /&gt;
+界面如下。我们的第一个Pyqt程序就好了。.
+&lt;img src=&#34;https://gitee.com/linMentri/mapdepot/raw/master/1609857808_20210105223729517_8638.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;与qt的语法差异&#34;&gt;与QT的语法差异&lt;/h1&gt;
+
+&lt;h2 id=&#34;qwidget&#34;&gt;QWidget&lt;/h2&gt;
+
+&lt;p&gt;下面使用Pyqt和Qt实现相同功能的程序，分析两者之间的差距。
+ Pyqt实现:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# -*- coding: utf-8 -*-
+import sys
+#这里我们提供必要的引用。基本控件位于pyqt5.qtwidgets模块中。
+from PyQt5.QtWidgets import QApplication, QWidget
+if __name__ == &#39;__main__&#39;:
+    #每一pyqt5应用程序必须创建一个应用程序对象。sys.argv参数是一个列表，从命令行输入参数。
+    app = QApplication(sys.argv)
+    #QWidget部件是pyqt5所有用户界面对象的基类。他为QWidget提供默认构造函数。默认构造函数没有父类。
+    w = QWidget()
+    #resize()方法调整窗口的大小。这离是250px宽150px高
+    w.resize(250, 150)
+    #move()方法移动窗口在屏幕上的位置到x = 300，y = 300坐标。
+    w.move(300, 300)
+    #设置窗口的标题
+    w.setWindowTitle(&#39;Simple&#39;)
+    #显示在屏幕上
+    w.show()
+    #系统exit()方法确保应用程序干净的退出
+    #的exec_()方法有下划线。因为执行是一个Python关键词。因此，exec_()代替
+    sys.exit(app.exec_())
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;QT实现:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;#include &amp;lt;QApplication&amp;gt;
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    QWidget w;
+    w.resize(250,150);
+    w.move(300,300);
+    w.setWindowTitle(&amp;quot;Simple&amp;quot;);
+    w.show();
+    return a.exec();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可以看到，Pyqt和Qt除了C++和Python语法之间的区别之外。库之间的方法命名，调用方式极为相似。&lt;/p&gt;
+
+&lt;h2 id=&#34;信号槽&#34;&gt;信号槽&lt;/h2&gt;
+
+&lt;p&gt;Qt引以为傲的信号和槽，也完全保留在Pyqt组件上。不过写法略有不同。
+下面的例子为按钮点击时触发槽函数的连接语句
+Pyqt按钮信号槽示例:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;self.pushButton.clicked.connect(self.CameraStop)#CameraStop为槽函数
+def CameraStop(self):
+    print(&#39;暂停截图&#39;)
+    self.timer.stop()
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Qt按钮信号槽示例:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;connect(ui-&amp;gt;pushButton,SIGNAL(clicked(bool)),ui-&amp;gt;label,SLOT(CameraStop()));
+void CameraStop()
+{
+    std::cout&amp;lt;&amp;lt;暂停截图&amp;lt;&amp;lt;endl;
+    this-&amp;gt;timer-&amp;gt;stop();
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;通过以上示例，pyqt信号的格式为&lt;code&gt;Sender.signal.connect(receiver.slot)&lt;/code&gt;，通过调用pushButton的clicked中的connect方法来绑定槽函数。Qt则是通过外部静态函数&lt;code&gt;QObject::connect(sender, SIGNAL(what), receiver, SLOT(doWhat()))&lt;/code&gt;。来将clicked点击信号和CameraStop接收信号绑定在一起。&lt;/p&gt;
+
+&lt;h2 id=&#34;控件重写&#34;&gt;控件重写&lt;/h2&gt;
+
+&lt;p&gt;下面重写一个QT的QLabal，实现绘制多矩形框与输出坐标的功能。
+Pyqt实现：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class MyLabel(QLabel):
+    flag = False
+    isDraw = False
+    isSuccess = False
+    tempRect =QRect() #保存一个矩形坐标数据
+    rectVector = list()
+    #重写鼠标单击事件
+    def mousePressEvent(self,event):
+        if self.isDraw:
+            self.flag = True
+            self.tempRect.setX(event.x())
+            self.tempRect.setY(event.y())
+    #重写鼠标释放事件
+    def mouseReleaseEvent(self,event):
+        self.flag = False
+        if self.isDraw:
+            self.flag = False
+            self.isSuccess = True
+            self.rectVector.append(copy.deepcopy(self.tempRect))
+            print(self.rectVector)
+            self.tempRect.setCoords(0,0,0,0)
+
+    #重写鼠标移动事件
+    def mouseMoveEvent(self,event):
+        if self.isDraw and self.flag:
+            self.tempRect.setHeight(event.y()-self.tempRect.y())
+            self.tempRect.setWidth(event.x()-self.tempRect.x())
+            self.update()
+    #重写绘图事件
+    def paintEvent(self, event):
+        super().paintEvent(event)#调用父类绘图
+        painter = QPainter(self)
+        painter.setPen(QPen(Qt.red,2,Qt.SolidLine))
+        for Rect in self.rectVector:
+            painter.drawRect(Rect)
+            print(Rect.x())
+        if self.isDraw:
+             painter.drawRect(self.tempRect)
+        print(len(self.rectVector))
+    def rollback(self):
+        if len(self.rectVector) != 0:
+            self.rectVector.pop()
+            self.update()
+    def RectClean(self):
+        self.rectVector.clear()
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Qt实现&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;//头文件
+#include&amp;lt;QtWidgets&amp;gt;
+#include&amp;lt;QObject&amp;gt;
+#include &amp;lt;QWidget&amp;gt;
+#include&amp;lt;QVector&amp;gt;
+class QmyLabel :public QLabel
+{
+    Q_OBJECT
+public:
+    QmyLabel(QWidget *parent = 0);
+    //重写事件
+    void mousePressEvent(QMouseEvent *ev);
+    void mouseReleaseEvent(QMouseEvent *ev);
+    void mouseMoveEvent(QMouseEvent *ev);
+    void paintEvent(QPaintEvent *ev);
+    void RectsClear();
+    QVector&amp;lt;QRect&amp;gt; getVector();
+    bool isDraw;//是否能够绘制
+public slots:
+    void rollback();//撤销
+private:
+    bool flag;//判断是否在绘制
+    bool isSuccess;
+    QRect tempRect;
+    QVector&amp;lt;QRect&amp;gt; rectVector;//保存全部点的坐标
+};
+
+
+//.cpp文件
+#include &amp;quot;qmylabel.h&amp;quot;
+QmyLabel::QmyLabel(QWidget *parent):
+    QLabel(parent)
+{
+    this-&amp;gt;flag=false;
+    this-&amp;gt;isDraw = false;
+    this-&amp;gt;isSuccess = false;
+    //tempRect.setRect(0,0,0,0);
+}
+void QmyLabel::mousePressEvent(QMouseEvent *ev)
+{
+    //鼠标点击事件,获取左上角位置
+    if(this-&amp;gt;isDraw == true)
+    {
+        this-&amp;gt;flag=true;
+        //this-&amp;gt;tempRect.setTopLeft(QPoint(ev-&amp;gt;x(),ev-&amp;gt;y()));
+        this-&amp;gt;tempRect.setX(ev-&amp;gt;x());
+        this-&amp;gt;tempRect.setY(ev-&amp;gt;y());
+        qDebug()&amp;lt;&amp;lt;&amp;quot;mousePressEvent...&amp;quot;;
+    }
+}
+void QmyLabel::mouseReleaseEvent(QMouseEvent *ev)
+{
+    if(this-&amp;gt;isDraw == true)
+    {
+        //鼠标释放事件,将tempRect数据存放进数组中.
+        this-&amp;gt;flag = false;
+        this-&amp;gt;isSuccess = true;
+        this-&amp;gt;rectVector.append(tempRect);
+        tempRect.setCoords(0,0,0,0);
+        qDebug()&amp;lt;&amp;lt;&amp;quot;mouseReleaseEvent...&amp;quot;;
+    }
+}
+void QmyLabel::mouseMoveEvent(QMouseEvent *ev)
+{
+    if(this-&amp;gt;flag &amp;amp;&amp;amp;this-&amp;gt;isDraw == true)
+    {
+        this-&amp;gt;tempRect.setHeight(ev-&amp;gt;y()-this-&amp;gt;tempRect.y());
+        this-&amp;gt;tempRect.setWidth(ev-&amp;gt;x()-this-&amp;gt;tempRect.x());
+        this-&amp;gt;update();
+    }
+}
+void QmyLabel::paintEvent(QPaintEvent *ev)
+{
+    QLabel::paintEvent(ev); //绘制背景的图片
+    QPainter paint;
+    paint.begin(this);
+    paint.setPen(QPen(Qt::red, 2, Qt::SolidLine, Qt::RoundCap));
+    for(int i=0;i&amp;lt;this-&amp;gt;rectVector.size();i++)
+    {
+        paint.drawRect(rectVector.value(i));
+    }
+    if(this-&amp;gt;isDraw == true)
+    {
+        paint.drawRect(tempRect);
+    }
+    paint.end();
+}
+void QmyLabel::RectsClear()
+{
+    this-&amp;gt;rectVector.clear();
+}
+QVector&amp;lt;QRect&amp;gt; QmyLabel::getVector()
+{
+    return this-&amp;gt;rectVector;
+}
+void QmyLabel::rollback()
+{
+    if(this-&amp;gt;rectVector.size()!=0)//有值
+    {
+        this-&amp;gt;rectVector.removeLast();
+        update();
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pyqt和Qt重写控件的方式基本相同，但是需要注意，Python在list中添加一个对象，如rectVector.append(对象)，当我们修改对象的某个属性，再次将其添加进list。这时候之前添加进list的对象属性也会改变，但是在QT中不会发生此类事情。推测，Python中的链表添加数据时使用的不是拷贝，而是引用。所以这里需要使用深拷贝&lt;code&gt;copy.deepcopy()&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;注意事项&#34;&gt;注意事项&lt;/h2&gt;
+
+&lt;p&gt;PyQt不支持使用QVector,QList等Qt容器，可以使用Python中自带的容器list,dict等进行替换。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Linux内存分布</title>
       <link>https://metrillin.github.io/2019/linux%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/</link>
       <pubDate>Tue, 15 Oct 2019 22:11:18 +0800</pubDate>
