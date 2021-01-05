@@ -10,8 +10,8 @@
   
   
   
-  <link rel="next" href="/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" />
-  <link rel="canonical" href="/2020/docker%E5%AE%89%E8%A3%85/" />
+  <link rel="next" href="https://metrillin.github.io/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" />
+  <link rel="canonical" href="https://metrillin.github.io/2020/docker%E5%AE%89%E8%A3%85/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -41,7 +41,7 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": ""
+         "@id": "https://metrillin.github.io/"
     },
     "articleSection" : "posts",
     "name" : "Docker安装",
@@ -60,7 +60,7 @@ $ curl \-fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt\-key add \
     "copyrightYear" : "2020",
     "datePublished": "2020-04-05 21:18:19 &#43;0800 PST",
     "dateModified" : "2020-04-05 21:18:19 &#43;0800 PST",
-    "url" : "/2020/docker%E5%AE%89%E8%A3%85/",
+    "url" : "https://metrillin.github.io/2020/docker%E5%AE%89%E8%A3%85/",
     "wordCount" : "145",
     "keywords" : [ "Docker", "LeaveIt"]
 }
@@ -76,7 +76,7 @@ $ curl \-fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt\-key add \
         <nav class="navbar">
     <div class="container">
         <div class="navbar-header header-logo">
-        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="">LeaveIt</a>
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://metrillin.github.io/">LeaveIt</a>
         </div>
         <div class="menu navbar-right">
                 
@@ -95,7 +95,7 @@ $ curl \-fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt\-key add \
 <nav class="navbar-mobile" id="nav-mobile" style="display: none">
      <div class="container">
         <div class="navbar-header">
-            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="">LeaveIt</a></div>
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://metrillin.github.io/">LeaveIt</a></div>
             <div class="menu-toggle">
                 <span></span><span></span><span></span>
             </div>
@@ -122,14 +122,14 @@ $ curl \-fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt\-key add \
     <header class="post-header">
         <h1 class="post-title" itemprop="name headline">Docker安装</h1>
         <div class="post-meta">
-                Written by <a itemprop="name" href="" rel="author">mentir.</a> with ♥ 
+                Written by <a itemprop="name" href="https://metrillin.github.io/" rel="author">mentir.</a> with ♥ 
                 <span class="post-time">
                 on <time datetime=2020-04-05 itemprop="datePublished">April 5, 2020</time>
                 </span>
                 in
                 <i class="iconfont icon-folder"></i>
                 <span class="post-category">
-                        <a href="/categories/docker/"> Docker </a>
+                        <a href="https://metrillin.github.io/categories/docker/"> Docker </a>
                         
                 </span>
         </div>
@@ -162,17 +162,17 @@ $ curl \-fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt\-key add \
 
 <p>Docker 的旧版本被称为 docker，docker.io 或 docker-engine 。如果已安装，请卸载它们：</p>
 
-<pre><code>sudo apt-get remove docker docker-engine docker.io containerd runc
+<pre><code class="language-cpp">sudo apt-get remove docker docker-engine docker.io containerd runc
 </code></pre>
 
 <h2 id="2-使用-apt-安装">2.使用 APT 安装</h2>
 
-<pre><code>sudo apt-get update
+<pre><code class="language-cpp">sudo apt-get update
 </code></pre>
 
 <p>安装 apt 依赖包，用于通过HTTPS来获取仓库:</p>
 
-<pre><code>sudo apt-get install \
+<pre><code class="language-cpp">sudo apt-get install \
     apt-transport-https \
     ca-certificates \
     curl \
@@ -183,12 +183,12 @@ $ curl \-fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt\-key add \
 <p>为了确认所下载软件包的合法性，需要添加软件源的 GPG 密钥
 添加 Docker 的官方 GPG 密钥：</p>
 
-<pre><code>$ curl \-fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt\-key add \-
+<pre><code class="language-cpp*-">$ curl \-fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt\-key add \-
 </code></pre>
 
 <p>9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88 通过搜索指纹的后8个字符，验证您现在是否拥有带有指纹的密钥。</p>
 
-<pre><code>$ sudo apt-key fingerprint 0EBFCD88
+<pre><code class="language-cpp">$ sudo apt-key fingerprint 0EBFCD88
    
 pub   rsa4096 2017-02-22 [SCEA]
       9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
@@ -200,7 +200,7 @@ sub   rsa4096 2017-02-22 [S]
 
 <p>安装最新版本的 Docker Engine-Community 和 containerd</p>
 
-<pre><code>sudo apt-get install docker-ce docker-ce-cli containerd.io
+<pre><code class="language-cpp">sudo apt-get install docker-ce docker-ce-cli containerd.io
 </code></pre>
 
 <h2 id="修改image-仓库的镜像网址">修改image 仓库的镜像网址</h2>
@@ -208,17 +208,17 @@ sub   rsa4096 2017-02-22 [S]
 <p>国内访问 Docker 的官方仓库很慢，还经常断线，所以要把仓库网址改成国内的镜像站。
 打开/etc/default/docker文件（需要sudo权限)</p>
 
-<pre><code>sudo gedit /etc/default/docker
+<pre><code class="language-cpp">sudo gedit /etc/default/docker
 </code></pre>
 
 <p>在文件的底部加上一行。</p>
 
-<pre><code>DOCKER_OPTS=&quot;--registry-mirror=https://registry.docker-cn.com&quot;
+<pre><code class="language-cpp">DOCKER_OPTS=&quot;--registry-mirror=https://registry.docker-cn.com&quot;
 </code></pre>
 
 <p>然后，重启 Docker 服务。</p>
 
-<pre><code>$ sudo service docker restart
+<pre><code class="language-cpp">$ sudo service docker restart
 </code></pre>
 
 <p>现在就会自动从镜像仓库下载 image 文件了。</p>
@@ -227,7 +227,7 @@ sub   rsa4096 2017-02-22 [S]
 
 <p>测试 Docker 是否安装成功，输入以下指令，打印出以下信息则安装成功:</p>
 
-<pre><code>sudo docker run hello-world
+<pre><code class="language-cpp">sudo docker run hello-world
 </code></pre>
 
 <p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://gitee.com/linMentri/mapdepot/raw/master/1609852747_20200414151848751_30290.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
@@ -245,7 +245,7 @@ sub   rsa4096 2017-02-22 [S]
              
             <p class="copyright-item">
                     <span>Link:</span>
-                    <a href=/2020/docker%E5%AE%89%E8%A3%85/>/2020/docker%E5%AE%89%E8%A3%85/</span>
+                    <a href=https://metrillin.github.io/2020/docker%E5%AE%89%E8%A3%85/>https://metrillin.github.io/2020/docker%E5%AE%89%E8%A3%85/</span>
             </p>
             
              
@@ -261,21 +261,21 @@ sub   rsa4096 2017-02-22 [S]
             <section>
             <i class="iconfont icon-tag"></i>Tag(s): 
             
-            <span class="tag"><a href="tags/docker/">
+            <span class="tag"><a href="https://metrillin.github.io/tags/docker/">
                     #Docker</a></span>
             
             </section>
         
         <section>
                 <a href="javascript:window.history.back();">back</a></span> · 
-                <span><a href="">home</a></span>
+                <span><a href="https://metrillin.github.io/">home</a></span>
         </section>
     </div>
 
     <div class="post-nav">
          
         
-        <a href="/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="next" rel="next" title="Docker常用命令">Docker常用命令&nbsp;<i class="iconfont icon-right"></i></a>
+        <a href="https://metrillin.github.io/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="next" rel="next" title="Docker常用命令">Docker常用命令&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 
@@ -297,7 +297,7 @@ sub   rsa4096 2017-02-22 [S]
     	 <i class="iconfont icon-love"></i> 
          </span>
          
-            <span class="author" itemprop="copyrightHolder"><a href="">mentir.</a> | </span> 
+            <span class="author" itemprop="copyrightHolder"><a href="https://metrillin.github.io/">mentir.</a> | </span> 
          
 
          

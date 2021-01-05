@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>C&#43;&#43; on LeaveIt</title>
-    <link>/tags/c&#43;&#43;/</link>
+    <link>https://metrillin.github.io/tags/c&#43;&#43;/</link>
     <description>Recent content in C&#43;&#43; on LeaveIt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 18 Dec 2020 14:35:37 +0800</lastBuildDate>
     
-	<atom:link href="/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://metrillin.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Const详解与constexpr</title>
-      <link>/2020/const%E8%AF%A6%E8%A7%A3%E4%B8%8Econstexpr/</link>
+      <link>https://metrillin.github.io/2020/const%E8%AF%A6%E8%A7%A3%E4%B8%8Econstexpr/</link>
       <pubDate>Fri, 18 Dec 2020 14:35:37 +0800</pubDate>
       
-      <guid>/2020/const%E8%AF%A6%E8%A7%A3%E4%B8%8Econstexpr/</guid>
+      <guid>https://metrillin.github.io/2020/const%E8%AF%A6%E8%A7%A3%E4%B8%8Econstexpr/</guid>
       <description>const详解 简介 C++中的Const作为从C中继承下来的关键字，名叫常量限定符，用来限定特定变量，以通知编译器该变量是不可修改的。习惯性的使用const，可以避免在函数中对某些不应修改的变量造成可能的改动。
 const 基本修饰 C语言中的const仅能维持编译期的值不变性，但是运行时值依然是可变的：
 int main(int argc, char *argv) { const int a = 0; // a = 10; // (编译期的const保持)编译错误，因为试图修改一个常量。 // (运行时const属性失效) int *pa = (int *)&amp;amp;a; *pa = 20; // 正确，此时a的值被修改为20，失去常量属性。 return 0; }  由于a = 10编译时会报错，所以编译时屏蔽，运行结果： 可以看到 C中的const只能在编译过程中保持数据不变，还是会被指针修改 为了维持运行时的const语义，c++引入了常量表来记录const对象的名称和值，并将之后所有对const对象的访问修改为访问常量表中的值，以此保证const对象始终如一的常量属性。同时为了保持向下兼容C，C++采取另外一种常量对象的内存分配方式，即： 代码中的const常量并不会立刻分配内存，只有当需要该对象的地址时，才为其分配内存，但从不使用该内存。 同样的代码，让我们使用C++编译器编译 接下来分析编译过程

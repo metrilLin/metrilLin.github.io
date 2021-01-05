@@ -9,9 +9,9 @@
   
   
   
-  <link rel="prev" href="/2020/docker%E5%AE%89%E8%A3%85/" />
-  <link rel="next" href="/2020/docker%E5%AE%9E%E4%BE%8B/" />
-  <link rel="canonical" href="/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" />
+  <link rel="prev" href="https://metrillin.github.io/2020/docker%E5%AE%89%E8%A3%85/" />
+  <link rel="next" href="https://metrillin.github.io/2020/docker%E5%AE%9E%E4%BE%8B/" />
+  <link rel="canonical" href="https://metrillin.github.io/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -41,7 +41,7 @@
     "@type" : "BlogPosting",
     "mainEntityOfPage": {
          "@type": "WebPage",
-         "@id": ""
+         "@id": "https://metrillin.github.io/"
     },
     "articleSection" : "posts",
     "name" : "Docker常用命令",
@@ -49,7 +49,7 @@
     "description" : "docker常用命令 示例 1.helloworld的调用 从仓库将image抓取到本地
 docker image pull library/hello-world  docker image pull是抓取image文件的命令。ibrary/hello-world是镜像文件在仓库的位置，其中library是image文件所在的组，hello-world是 image 文件的名字。
 获得管理员权限（对宿主机的访问）
- docker run -it --privileged --rm ubuntu:18.04 bash  查看本地镜像文件:
+docker run -it --privileged --rm ubuntu:18.04 bash  查看本地镜像文件:
 docker image ls  运行镜像，会生成一个容器实例，镜像和容器的关系就像是类和对象的关系。 查看当前所有容器 &gt; docker container ls
 查看当前电脑所有容器，包括终止运行的容器 &gt; docker container ls &ndash;all
 终止运行的容器文件，依然会占据硬盘空间，下面是删除指令 &gt; docker container rm [containerID]
@@ -68,7 +68,7 @@ docker run -it --rm ubuntu:18.",
     "copyrightYear" : "2020",
     "datePublished": "2020-04-06 21:19:44 &#43;0800 PST",
     "dateModified" : "2020-04-06 21:19:44 &#43;0800 PST",
-    "url" : "/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/",
+    "url" : "https://metrillin.github.io/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/",
     "wordCount" : "120",
     "keywords" : [ "Docker", "LeaveIt"]
 }
@@ -84,7 +84,7 @@ docker run -it --rm ubuntu:18.",
         <nav class="navbar">
     <div class="container">
         <div class="navbar-header header-logo">
-        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="">LeaveIt</a>
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://metrillin.github.io/">LeaveIt</a>
         </div>
         <div class="menu navbar-right">
                 
@@ -103,7 +103,7 @@ docker run -it --rm ubuntu:18.",
 <nav class="navbar-mobile" id="nav-mobile" style="display: none">
      <div class="container">
         <div class="navbar-header">
-            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="">LeaveIt</a></div>
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://metrillin.github.io/">LeaveIt</a></div>
             <div class="menu-toggle">
                 <span></span><span></span><span></span>
             </div>
@@ -130,14 +130,14 @@ docker run -it --rm ubuntu:18.",
     <header class="post-header">
         <h1 class="post-title" itemprop="name headline">Docker常用命令</h1>
         <div class="post-meta">
-                Written by <a itemprop="name" href="" rel="author">mentir.</a> with ♥ 
+                Written by <a itemprop="name" href="https://metrillin.github.io/" rel="author">mentir.</a> with ♥ 
                 <span class="post-time">
                 on <time datetime=2020-04-06 itemprop="datePublished">April 6, 2020</time>
                 </span>
                 in
                 <i class="iconfont icon-folder"></i>
                 <span class="post-category">
-                        <a href="/categories/docker/"> Docker </a>
+                        <a href="https://metrillin.github.io/categories/docker/"> Docker </a>
                         
                 </span>
         </div>
@@ -168,19 +168,19 @@ docker run -it --rm ubuntu:18.",
 
 <p>从仓库将image抓取到本地</p>
 
-<pre><code>docker image pull library/hello-world
+<pre><code class="language-cpp">docker image pull library/hello-world
 </code></pre>
 
 <p><strong>docker image pull</strong>是抓取image文件的命令。<strong>ibrary/hello-world</strong>是镜像文件在仓库的位置，其中library是image文件所在的组，hello-world是 image 文件的名字。</p>
 
 <p>获得管理员权限（对宿主机的访问）</p>
 
-<pre><code> docker run -it --privileged  --rm ubuntu:18.04  bash
+<pre><code class="language-cpp"> docker run -it --privileged  --rm ubuntu:18.04  bash
 </code></pre>
 
 <p>查看本地镜像文件:</p>
 
-<pre><code>docker image ls
+<pre><code class="language-cpp">docker image ls
 </code></pre>
 
 <p>运行镜像，会生成一个容器实例，镜像和容器的关系就像是类和对象的关系。
@@ -197,22 +197,22 @@ docker run -it --rm ubuntu:18.",
 
 <p>拉取docker镜像</p>
 
-<pre><code>docker pull image_name
+<pre><code class="language-cpp">docker pull image_name
 </code></pre>
 
 <p>设置docker开机自启动</p>
 
-<pre><code>systemctl enable docker
+<pre><code class="language-cpp">systemctl enable docker
 </code></pre>
 
 <p>从镜像中构建容器</p>
 
-<pre><code>docker run -it  ubuntu:18.04  bash
+<pre><code class="language-cpp">docker run -it  ubuntu:18.04  bash
 </code></pre>
 
 <p>从镜像中构建容器，退出容器后不保留容器</p>
 
-<pre><code>docker run -it  --rm ubuntu:18.04  bash
+<pre><code class="language-cpp">docker run -it  --rm ubuntu:18.04  bash
 </code></pre>
 
 <p>开机自启动容器
@@ -220,49 +220,49 @@ docker update &ndash;restart=always xxx</p>
 
 <p>查看宿主机上的镜像，Docker镜像保存在/var/lib/docker目录下:</p>
 
-<pre><code>docker images
+<pre><code class="language-cpp">docker images
 </code></pre>
 
 <p>删除镜像</p>
 
-<pre><code>docker rmi  docker.io/tomcat:7.0.77-jre7   或者  docker rmi b39c68b7af30
+<pre><code class="language-cpp">docker rmi  docker.io/tomcat:7.0.77-jre7   或者  docker rmi b39c68b7af30
 </code></pre>
 
 <p>查看当前有哪些容器正在运行</p>
 
-<pre><code>docker ps
+<pre><code class="language-cpp">docker ps
 </code></pre>
 
 <p>查看所有容器</p>
 
-<pre><code>docker ps -a
+<pre><code class="language-cpp">docker ps -a
 </code></pre>
 
 <p>启动、停止、重启容器命令：</p>
 
-<pre><code>docker start container_name/container_id
+<pre><code class="language-cpp">docker start container_name/container_id
 docker stop container_name/container_id
 docker restart container_name/container_id
 </code></pre>
 
 <p>后台启动一个容器后，如果想进入到这个容器，可以使用attach命令：</p>
 
-<pre><code>docker attach container_name/container_id
+<pre><code class="language-cpp">docker attach container_name/container_id
 </code></pre>
 
 <p>删除容器的命令：</p>
 
-<pre><code>docker rm container_name/container_id
+<pre><code class="language-cpp">docker rm container_name/container_id
 </code></pre>
 
 <p>查看当前系统Docker信息</p>
 
-<pre><code>docker info
+<pre><code class="language-cpp">docker info
 </code></pre>
 
 <p>从Docker hub上下载某个镜像:</p>
 
-<pre><code>docker pull centos:latest
+<pre><code class="language-cpp">docker pull centos:latest
 docker pull centos:latest
 </code></pre>
 
@@ -281,7 +281,7 @@ docker pull centos:latest
              
             <p class="copyright-item">
                     <span>Link:</span>
-                    <a href=/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/>/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</span>
+                    <a href=https://metrillin.github.io/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/>https://metrillin.github.io/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</span>
             </p>
             
              
@@ -297,23 +297,23 @@ docker pull centos:latest
             <section>
             <i class="iconfont icon-tag"></i>Tag(s): 
             
-            <span class="tag"><a href="tags/docker/">
+            <span class="tag"><a href="https://metrillin.github.io/tags/docker/">
                     #Docker</a></span>
             
             </section>
         
         <section>
                 <a href="javascript:window.history.back();">back</a></span> · 
-                <span><a href="">home</a></span>
+                <span><a href="https://metrillin.github.io/">home</a></span>
         </section>
     </div>
 
     <div class="post-nav">
         
-        <a href="/2020/docker%E5%AE%89%E8%A3%85/" class="prev" rel="prev" title="Docker安装"><i class="iconfont icon-left"></i>&nbsp;Docker安装</a>
+        <a href="https://metrillin.github.io/2020/docker%E5%AE%89%E8%A3%85/" class="prev" rel="prev" title="Docker安装"><i class="iconfont icon-left"></i>&nbsp;Docker安装</a>
          
         
-        <a href="/2020/docker%E5%AE%9E%E4%BE%8B/" class="next" rel="next" title="Docker实例">Docker实例&nbsp;<i class="iconfont icon-right"></i></a>
+        <a href="https://metrillin.github.io/2020/docker%E5%AE%9E%E4%BE%8B/" class="next" rel="next" title="Docker实例">Docker实例&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 
@@ -335,7 +335,7 @@ docker pull centos:latest
     	 <i class="iconfont icon-love"></i> 
          </span>
          
-            <span class="author" itemprop="copyrightHolder"><a href="">mentir.</a> | </span> 
+            <span class="author" itemprop="copyrightHolder"><a href="https://metrillin.github.io/">mentir.</a> | </span> 
          
 
          

@@ -2,66 +2,66 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on LeaveIt</title>
-    <link>/categories/</link>
+    <link>https://metrillin.github.io/categories/</link>
     <description>Recent content in Categories on LeaveIt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 18 Dec 2020 14:35:37 +0800</lastBuildDate>
     
-	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://metrillin.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>C&#43;&#43;</title>
-      <link>/categories/c&#43;&#43;/</link>
+      <link>https://metrillin.github.io/categories/c&#43;&#43;/</link>
       <pubDate>Fri, 18 Dec 2020 14:35:37 +0800</pubDate>
       
-      <guid>/categories/c&#43;&#43;/</guid>
+      <guid>https://metrillin.github.io/categories/c&#43;&#43;/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Docker</title>
-      <link>/categories/docker/</link>
+      <link>https://metrillin.github.io/categories/docker/</link>
       <pubDate>Thu, 15 Oct 2020 18:27:07 +0800</pubDate>
       
-      <guid>/categories/docker/</guid>
+      <guid>https://metrillin.github.io/categories/docker/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Http</title>
-      <link>/categories/http/</link>
+      <link>https://metrillin.github.io/categories/http/</link>
       <pubDate>Sat, 05 Dec 2020 21:30:59 +0800</pubDate>
       
-      <guid>/categories/http/</guid>
+      <guid>https://metrillin.github.io/categories/http/</guid>
       <description></description>
     </item>
     
     <item>
       <title>NDK</title>
-      <link>/categories/ndk/</link>
+      <link>https://metrillin.github.io/categories/ndk/</link>
       <pubDate>Thu, 05 Nov 2020 20:29:23 +0800</pubDate>
       
-      <guid>/categories/ndk/</guid>
+      <guid>https://metrillin.github.io/categories/ndk/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Qt</title>
-      <link>/categories/qt/</link>
+      <link>https://metrillin.github.io/categories/qt/</link>
       <pubDate>Mon, 07 Dec 2020 18:12:25 +0800</pubDate>
       
-      <guid>/categories/qt/</guid>
+      <guid>https://metrillin.github.io/categories/qt/</guid>
       <description></description>
     </item>
     
     <item>
       <title>音视频</title>
-      <link>/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/</link>
+      <link>https://metrillin.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/</link>
       <pubDate>Sat, 05 Sep 2020 21:24:17 +0800</pubDate>
       
-      <guid>/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/</guid>
+      <guid>https://metrillin.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/</guid>
       <description></description>
     </item>
     

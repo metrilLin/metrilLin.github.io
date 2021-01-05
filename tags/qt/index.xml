@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Qt on LeaveIt</title>
-    <link>/tags/qt/</link>
+    <link>https://metrillin.github.io/tags/qt/</link>
     <description>Recent content in Qt on LeaveIt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 07 Dec 2020 18:12:25 +0800</lastBuildDate>
     
-	<atom:link href="/tags/qt/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://metrillin.github.io/tags/qt/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Ｑｔ操作mysql</title>
-      <link>/2020/qt%E6%93%8D%E4%BD%9Cmysql/</link>
+      <link>https://metrillin.github.io/2020/qt%E6%93%8D%E4%BD%9Cmysql/</link>
       <pubDate>Mon, 07 Dec 2020 18:12:25 +0800</pubDate>
       
-      <guid>/2020/qt%E6%93%8D%E4%BD%9Cmysql/</guid>
+      <guid>https://metrillin.github.io/2020/qt%E6%93%8D%E4%BD%9Cmysql/</guid>
       <description>[TOC]
 1. 基本操作 1.1 添加模块 Qt数据库模块是独立模块，需要像core，gui一样在.pro文件中添加该模块
 QT+=sql  1.2 基本操作 获取可用连接 首先查看qt下支持的连接名

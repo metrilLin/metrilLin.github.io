@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Http on LeaveIt</title>
-    <link>/tags/http/</link>
+    <link>https://metrillin.github.io/tags/http/</link>
     <description>Recent content in Http on LeaveIt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 05 Dec 2020 21:30:59 +0800</lastBuildDate>
     
-	<atom:link href="/tags/http/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://metrillin.github.io/tags/http/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>LibCurl编译</title>
-      <link>/2020/libcurl%E7%BC%96%E8%AF%91/</link>
+      <link>https://metrillin.github.io/2020/libcurl%E7%BC%96%E8%AF%91/</link>
       <pubDate>Sat, 05 Dec 2020 21:30:59 +0800</pubDate>
       
-      <guid>/2020/libcurl%E7%BC%96%E8%AF%91/</guid>
+      <guid>https://metrillin.github.io/2020/libcurl%E7%BC%96%E8%AF%91/</guid>
       <description>libCurl编译 1.首先下载libCurl的源码，这里使用的是Github上的版本
 git clone https://github.com/curl/curl.git  或者
 git clone https://github.com/curl/curl  2.生成configure

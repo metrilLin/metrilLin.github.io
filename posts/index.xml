@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on LeaveIt</title>
-    <link>/posts/</link>
+    <link>https://metrillin.github.io/posts/</link>
     <description>Recent content in Posts on LeaveIt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 18 Dec 2020 14:35:37 +0800</lastBuildDate>
     
-	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://metrillin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Const详解与constexpr</title>
-      <link>/2020/const%E8%AF%A6%E8%A7%A3%E4%B8%8Econstexpr/</link>
+      <link>https://metrillin.github.io/2020/const%E8%AF%A6%E8%A7%A3%E4%B8%8Econstexpr/</link>
       <pubDate>Fri, 18 Dec 2020 14:35:37 +0800</pubDate>
       
-      <guid>/2020/const%E8%AF%A6%E8%A7%A3%E4%B8%8Econstexpr/</guid>
+      <guid>https://metrillin.github.io/2020/const%E8%AF%A6%E8%A7%A3%E4%B8%8Econstexpr/</guid>
       <description>const详解 简介 C++中的Const作为从C中继承下来的关键字，名叫常量限定符，用来限定特定变量，以通知编译器该变量是不可修改的。习惯性的使用const，可以避免在函数中对某些不应修改的变量造成可能的改动。
 const 基本修饰 C语言中的const仅能维持编译期的值不变性，但是运行时值依然是可变的：
 int main(int argc, char *argv) { const int a = 0; // a = 10; // (编译期的const保持)编译错误，因为试图修改一个常量。 // (运行时const属性失效) int *pa = (int *)&amp;amp;a; *pa = 20; // 正确，此时a的值被修改为20，失去常量属性。 return 0; }  由于a = 10编译时会报错，所以编译时屏蔽，运行结果： 可以看到 C中的const只能在编译过程中保持数据不变，还是会被指针修改 为了维持运行时的const语义，c++引入了常量表来记录const对象的名称和值，并将之后所有对const对象的访问修改为访问常量表中的值，以此保证const对象始终如一的常量属性。同时为了保持向下兼容C，C++采取另外一种常量对象的内存分配方式，即： 代码中的const常量并不会立刻分配内存，只有当需要该对象的地址时，才为其分配内存，但从不使用该内存。 同样的代码，让我们使用C++编译器编译 接下来分析编译过程
@@ -25,10 +25,10 @@ int main(int argc, char *argv) { const int a = 0; // a成为常量，&amp;lt;a, 
     
     <item>
       <title>Ｑｔ操作mysql</title>
-      <link>/2020/qt%E6%93%8D%E4%BD%9Cmysql/</link>
+      <link>https://metrillin.github.io/2020/qt%E6%93%8D%E4%BD%9Cmysql/</link>
       <pubDate>Mon, 07 Dec 2020 18:12:25 +0800</pubDate>
       
-      <guid>/2020/qt%E6%93%8D%E4%BD%9Cmysql/</guid>
+      <guid>https://metrillin.github.io/2020/qt%E6%93%8D%E4%BD%9Cmysql/</guid>
       <description>[TOC]
 1. 基本操作 1.1 添加模块 Qt数据库模块是独立模块，需要像core，gui一样在.pro文件中添加该模块
 QT+=sql  1.2 基本操作 获取可用连接 首先查看qt下支持的连接名
@@ -41,10 +41,10 @@ QSqlDatabase db = QSqlDatabase::addDatabase(&amp;quot;QMYSQL&amp;quot;); db.setH
     
     <item>
       <title>LibCurl编译</title>
-      <link>/2020/libcurl%E7%BC%96%E8%AF%91/</link>
+      <link>https://metrillin.github.io/2020/libcurl%E7%BC%96%E8%AF%91/</link>
       <pubDate>Sat, 05 Dec 2020 21:30:59 +0800</pubDate>
       
-      <guid>/2020/libcurl%E7%BC%96%E8%AF%91/</guid>
+      <guid>https://metrillin.github.io/2020/libcurl%E7%BC%96%E8%AF%91/</guid>
       <description>libCurl编译 1.首先下载libCurl的源码，这里使用的是Github上的版本
 git clone https://github.com/curl/curl.git  或者
 git clone https://github.com/curl/curl  2.生成configure
@@ -55,10 +55,10 @@ git clone https://github.com/curl/curl  2.生成configure
     
     <item>
       <title>编译android对应版本的openssl</title>
-      <link>/2020/%E7%BC%96%E8%AF%91android%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84openssl/</link>
+      <link>https://metrillin.github.io/2020/%E7%BC%96%E8%AF%91android%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84openssl/</link>
       <pubDate>Thu, 05 Nov 2020 20:29:23 +0800</pubDate>
       
-      <guid>/2020/%E7%BC%96%E8%AF%91android%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84openssl/</guid>
+      <guid>https://metrillin.github.io/2020/%E7%BC%96%E8%AF%91android%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84openssl/</guid>
       <description>编译android对应版本的openssl 版本 自行下载需要的NDK与openssl
 NDK: android-ndk-r15c openssl：openssl-1.0.2  下载交叉编译文件 #拉取setenv-android.sh，我们需要这个脚本来给我们配置环境 wget https://wiki.openssl.org/images/7/70/Setenv-android.sh  配置脚本 armv7a版本配置 _ANDROID_NDK=&amp;quot;android-ndk-r9&amp;quot; # 修改为： _ANDROID_NDK=&amp;quot;android-ndk-r15c&amp;quot; # 因为我们使用的是R14B这个版本的NDK  _ANDROID_EABI=&amp;quot;arm-linux-androideabi-4.8&amp;quot; 修改为GCC 4.9 _ANDROID_EABI=&amp;quot;arm-linux-androideabi-4.9&amp;quot;  arm64V8A版本配置 _ANDROID_NDK=&amp;quot;android-ndk-r9&amp;quot; # 修改为： _ANDROID_NDK=&amp;quot;android-ndk-r15c&amp;quot; # 因为我们使用的是r15c这个版本的NDK  _ANDROID_EABI=&amp;quot;arm-linux-androideabi-4.8&amp;quot; 修改为GCC 4.9 _ANDROID_EABI=&amp;quot;aarch64-linux-android-4.9&amp;quot; _ANDROID_ARCH=arch-arm 修改为 _ANDROID_ARCH=arch-arm64  编译 添加环境变量（仅在当前终端就可以了
 export ANDROID_NDK_ROOT=/home/ubuntu/android-ndk-r15c source ./Setenv-android.sh  FIPS_SIG的Error无所谓，本次不会使用到这个组件</description>
@@ -66,10 +66,10 @@ export ANDROID_NDK_ROOT=/home/ubuntu/android-ndk-r15c source ./Setenv-android.sh
     
     <item>
       <title>Opencv视频流处理方法</title>
-      <link>/2020/opencv%E8%A7%86%E9%A2%91%E6%B5%81%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/</link>
+      <link>https://metrillin.github.io/2020/opencv%E8%A7%86%E9%A2%91%E6%B5%81%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/</link>
       <pubDate>Thu, 15 Oct 2020 18:27:07 +0800</pubDate>
       
-      <guid>/2020/opencv%E8%A7%86%E9%A2%91%E6%B5%81%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/</guid>
+      <guid>https://metrillin.github.io/2020/opencv%E8%A7%86%E9%A2%91%E6%B5%81%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/</guid>
       <description>opencv视频流处理方法 OpenCV提供了VideoCapture类和VideoWriter类来支持各种格式的视频流，支持的格式类型会因系统的不同而有所变化，但基本上都是支持avi格式的，且对于视频文件和摄像头画面的读写所用到的接口基本上都相同，因此，我们把它们放在一起来讲了。
 1. 获取VideoCapture类实例
 不管是读取视频文件还是捕获摄像头画面，都使用到了VideoCapture类，但不同的是传入的形参不一样，如果我们传给VideoCapture类的是一个视频文件路径那么将是读取来自视频文件的画面，而如果我们传给VideoCapture类的是摄像头编号那么将是读取来自摄像头的画面，其使用示例如下：
@@ -85,19 +85,19 @@ export ANDROID_NDK_ROOT=/home/ubuntu/android-ndk-r15c source ./Setenv-android.sh
     
     <item>
       <title>VLC编译</title>
-      <link>/2020/vlc%E7%BC%96%E8%AF%91/</link>
+      <link>https://metrillin.github.io/2020/vlc%E7%BC%96%E8%AF%91/</link>
       <pubDate>Sat, 05 Sep 2020 21:24:17 +0800</pubDate>
       
-      <guid>/2020/vlc%E7%BC%96%E8%AF%91/</guid>
+      <guid>https://metrillin.github.io/2020/vlc%E7%BC%96%E8%AF%91/</guid>
       <description>VLC编译 git clone git://github.com/vlc-qt/vlc-qt.git sudo apt install libvlc-dev sudo apt-get install snapd sudo apt-get install snapcraft sudo snap install vlc export QTDIR=/Qt安装路径/5.12.3/gcc_64 export LD_LIBRARY_PATH=$QTDIR/lib export PATH=$PATH:$QTDIR/bin sudo cmake .. -DCMAKE_BUILD_TYPE=Debug sudo make -j8 sudo make install  core libvlc error: No plugins found! Check your VLC installation. VLC-Qt Error: libvlc failed to load! sudo apt-get install libvlc-dev sudo apt-get install vlc  CMake Error at config/Dependencies.cmake:28 (FIND_PACKAGE): By not providing &amp;quot;FindQt5Core.</description>
     </item>
     
     <item>
       <title>Docker实例</title>
-      <link>/2020/docker%E5%AE%9E%E4%BE%8B/</link>
+      <link>https://metrillin.github.io/2020/docker%E5%AE%9E%E4%BE%8B/</link>
       <pubDate>Tue, 05 May 2020 21:21:43 +0800</pubDate>
       
-      <guid>/2020/docker%E5%AE%9E%E4%BE%8B/</guid>
+      <guid>https://metrillin.github.io/2020/docker%E5%AE%9E%E4%BE%8B/</guid>
       <description>[TOC]
 1. docker实例 下面使用ubuntu:18.04作为例子
 1.1. 镜像使用 1.1.1. 获取镜像 docker pull ubuntu:18.04  等待下载完成后,查看宿主机镜像
@@ -112,14 +112,14 @@ docker exec -it b8ed1b0ee812 /bin/bash  1.</description>
     
     <item>
       <title>Docker常用命令</title>
-      <link>/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+      <link>https://metrillin.github.io/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Mon, 06 Apr 2020 21:19:44 +0800</pubDate>
       
-      <guid>/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      <guid>https://metrillin.github.io/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
       <description>docker常用命令 示例 1.helloworld的调用 从仓库将image抓取到本地
 docker image pull library/hello-world  docker image pull是抓取image文件的命令。ibrary/hello-world是镜像文件在仓库的位置，其中library是image文件所在的组，hello-world是 image 文件的名字。
 获得管理员权限（对宿主机的访问）
- docker run -it --privileged --rm ubuntu:18.04 bash  查看本地镜像文件:
+docker run -it --privileged --rm ubuntu:18.04 bash  查看本地镜像文件:
 docker image ls  运行镜像，会生成一个容器实例，镜像和容器的关系就像是类和对象的关系。 查看当前所有容器 &amp;gt; docker container ls
 查看当前电脑所有容器，包括终止运行的容器 &amp;gt; docker container ls &amp;ndash;all
 终止运行的容器文件，依然会占据硬盘空间，下面是删除指令 &amp;gt; docker container rm [containerID]
@@ -133,10 +133,10 @@ docker run -it --rm ubuntu:18.</description>
     
     <item>
       <title>Docker安装</title>
-      <link>/2020/docker%E5%AE%89%E8%A3%85/</link>
+      <link>https://metrillin.github.io/2020/docker%E5%AE%89%E8%A3%85/</link>
       <pubDate>Sun, 05 Apr 2020 21:18:19 +0800</pubDate>
       
-      <guid>/2020/docker%E5%AE%89%E8%A3%85/</guid>
+      <guid>https://metrillin.github.io/2020/docker%E5%AE%89%E8%A3%85/</guid>
       <description>docker安装 ## 安装
 1.卸载旧版本 Docker 的旧版本被称为 docker，docker.io 或 docker-engine 。如果已安装，请卸载它们：
 sudo apt-get remove docker docker-engine docker.io containerd runc  2.使用 APT 安装 sudo apt-get update  安装 apt 依赖包，用于通过HTTPS来获取仓库:
