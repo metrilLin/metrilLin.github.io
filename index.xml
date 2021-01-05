@@ -1789,6 +1789,99 @@ Message in Child
     </item>
     
     <item>
+      <title>Qt实用函数</title>
+      <link>https://metrillin.github.io/2019/qt%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Sat, 05 Jan 2019 22:17:06 +0800</pubDate>
+      
+      <guid>https://metrillin.github.io/2019/qt%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0/</guid>
+      <description>
+
+&lt;h1 id=&#34;qt实用函数-长期更新&#34;&gt;Qt实用函数(长期更新)&lt;/h1&gt;
+
+&lt;h2 id=&#34;设置窗体固定大小不可拖动&#34;&gt;设置窗体固定大小不可拖动&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;this-&amp;gt;setFixedSize(this-&amp;gt;width(),this-&amp;gt;height());
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;窗体显示状态自定义&#34;&gt;窗体显示状态自定义&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;    setWindowFlags(Qt::CustomizeWindowHint);
+    setWindowFlags(Qt::WindowCloseButtonHint); //只要关闭按钮
+    setWindowFlags(Qt::WindowFlags type)
+    Qt::FrameWindowHint:没有边框的窗口
+    Qt::WindowStaysOnTopHint:  //总在最上面的窗口
+    Qt::CustomizeWindowHint:  //自定义窗口标题栏,以下标志必须与这个标志一起使用才有效,否则窗口将有默认的标题栏
+    Qt::WindowTitleHint  //显示窗口标题栏
+    Qt::WindowSystemMenuHint  //显示系统菜单
+    Qt::WindowMinimizeButtonHint  //显示最小化按钮
+    Qt::WindowMaximizeButtonHint  //显示最大化按钮
+    Qt::WindowMinMaxButtonsHint  //显示最小化按钮和最大化按钮
+    Qt::WindowCloseButtonHint  //显示关闭按钮
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;乱码解决方案&#34;&gt;乱码解决方案&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;    QApplication a(argc, argv);
+    //获取系统编码，否则移植会出现乱码
+    QTextCodec *codec = QTextCodec::codecForName(&amp;quot;UTF-8&amp;quot;);
+    //设置和对本地文件系统读写时候的默认编码格式
+    QTextCodec::setCodecForLocale(codec);
+    //设置传给tr函数时的默认字符串编码
+    QTextCodec::setCodecForTr(codec);
+    //用在字符常量或者QByteArray构造QString对象时使用的一种编码方式
+    QTextCodec::setCodecForCStrings(codec);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;隐藏任务栏显示&#34;&gt;隐藏任务栏显示&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;setWindowFlags(Qt::Tool | Qt::X11BypassWindowManagerHint)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;关闭按钮实现的功能&#34;&gt;关闭按钮实现的功能&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;    hide(); //进行界面隐藏，但是显示托盘，可通过点击托盘实现界面的重新显示
+    quit(); //退出系统
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;获取系统当前时间并设置显示格式&#34;&gt;获取系统当前时间并设置显示格式&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;QDateTime current_date_time = QDateTime::currentDateTime();
+QString current_date = current_date_time.toString(&amp;quot;yyyy-MM-dd hh:mm:ss ddd&amp;quot;);
+例：2013-05-24 13:09:10 周五
+
+获取当前时间时、分、秒 
+范围：小时(0--23)、分钟(0--59)、秒(0--59)、毫秒(0--999)
+QTime current_time = QTime::currentTime();
+int hour = current_time.hour();
+int minute = current_time.minute();
+int second = current_time.second();
+int msec = current_time.msec();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;比较日期大小&#34;&gt;比较日期大小&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;//获取当前时间及文件缓存时间
+QDateTime currentDateTime = QDateTime::currentDateTime();
+QDateTime dateTime = QDateTime::fromString(strDate, sDateTimeFormat);
+
+//获取文件缓存一个月之后的时间
+QDateTime afterOneMonthDateTime = dateTime.addMonths(1);
+
+//如果缓存时间超过一个月，则删除
+qint64 nSecs = afterOneMonthDateTime.secsTo(currentDateTime);
+if (nSecs &amp;gt; 0)
+{
+    QFile::remove(strFilePath);
+}
+
+
+
+ QDir::toNativeSeparators  可以智能翻译目录，正常目录位于windows下是&amp;quot;\\&amp;quot;，位于linux下是&amp;quot;/&amp;quot;,该静态函数可以返回正确的路径名称
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
       <title></title>
       <link>https://metrillin.github.io/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

@@ -181,5 +181,14 @@ PyQT+PyCharm+Qt designer搭建 打开 Pycharm，Files-&amp;gt;Settings-&amp;gt;E
 虚拟空间地址排布  在 32 位系统下，进程的虚拟地址空间有 4G，其中的 1G 分配给了内核空间，用户应用可以使用剩余的 3G。 在 64 位的 Linux 系统上，进程的虚拟地址空间可以达到 256TB，内核和应用分别占用 128TB。目前看来，这样的地址空间范围足够用了。 图#1中，《深入程序布局内部》中讨论过的内容，是按照 ELF 文件中的程序头信息，加载文件内容所得到的。除此之外，加载器还会为每个应用分配栈区（Stack）、堆区（Heap）和动态链接库加载区。栈和堆分别向相对的方向增长，系统会有相应的保护措施，阻止越界行为发生。  栈 - 专门用来存储局部变量，所有的局部变量都是声明在栈区域当中。 堆 - 允许程序员手动的从堆申请空间来使用。程序员可以自己申请指定字节数的空间。 BSS段 - 用来存储未初始化的全局变量和静态变量，声明一个全局变量，如果我们没有初始化，在程序运行最开始的时候，这个变量没有初始化时是存储在BSS段，初始化之后，全局变量和静态变量就会被放到常量区。 数据段/常量区 - 用来存储已经初始化的全局变量、静态变量，还有常量数据 代码段 - 用来存储程序的代码/指令。  查看进程内存排布 在 Linux 系统中，使用如下命令可查看一个运行中的进程的内存排布。 cat /proc/PID/maps 从以上输出的内容中，可以直观看到进程的段、堆区，动态链接库加载区，栈区的逻辑地址排布，以及每块内存区分配到的权限等。 除此之外，还有两块 vdso 和 vsyscall 内存区。它们是一部分内核数据在用户空间的映射，为了提高应用的性能而创建。</description>
     </item>
     
+    <item>
+      <title>Qt实用函数</title>
+      <link>https://metrillin.github.io/2019/qt%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Sat, 05 Jan 2019 22:17:06 +0800</pubDate>
+      
+      <guid>https://metrillin.github.io/2019/qt%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0/</guid>
+      <description>Qt实用函数(长期更新) 设置窗体固定大小不可拖动 this-&amp;gt;setFixedSize(this-&amp;gt;width(),this-&amp;gt;height());  窗体显示状态自定义 setWindowFlags(Qt::CustomizeWindowHint); setWindowFlags(Qt::WindowCloseButtonHint); //只要关闭按钮 setWindowFlags(Qt::WindowFlags type) Qt::FrameWindowHint:没有边框的窗口 Qt::WindowStaysOnTopHint: //总在最上面的窗口 Qt::CustomizeWindowHint: //自定义窗口标题栏,以下标志必须与这个标志一起使用才有效,否则窗口将有默认的标题栏 Qt::WindowTitleHint //显示窗口标题栏 Qt::WindowSystemMenuHint //显示系统菜单 Qt::WindowMinimizeButtonHint //显示最小化按钮 Qt::WindowMaximizeButtonHint //显示最大化按钮 Qt::WindowMinMaxButtonsHint //显示最小化按钮和最大化按钮 Qt::WindowCloseButtonHint //显示关闭按钮  乱码解决方案 QApplication a(argc, argv); //获取系统编码，否则移植会出现乱码 QTextCodec *codec = QTextCodec::codecForName(&amp;quot;UTF-8&amp;quot;); //设置和对本地文件系统读写时候的默认编码格式 QTextCodec::setCodecForLocale(codec); //设置传给tr函数时的默认字符串编码 QTextCodec::setCodecForTr(codec); //用在字符常量或者QByteArray构造QString对象时使用的一种编码方式 QTextCodec::setCodecForCStrings(codec);  隐藏任务栏显示 setWindowFlags(Qt::Tool | Qt::X11BypassWindowManagerHint)  关闭按钮实现的功能 hide(); //进行界面隐藏，但是显示托盘，可通过点击托盘实现界面的重新显示 quit(); //退出系统  获取系统当前时间并设置显示格式 QDateTime current_date_time = QDateTime::currentDateTime(); QString current_date = current_date_time.toString(&amp;quot;yyyy-MM-dd hh:mm:ss ddd&amp;quot;); 例：2013-05-24 13:09:10 周五 获取当前时间时、分、秒 范围：小时(0--23)、分钟(0--59)、秒(0--59)、毫秒(0--999) QTime current_time = QTime::currentTime(); int hour = current_time.</description>
+    </item>
+    
   </channel>
 </rss>

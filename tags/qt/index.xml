@@ -44,5 +44,14 @@ installpip install PyQt5==5.10.1  5.10.1为对应的版本号，等待Pyqt下载
 PyQT+PyCharm+Qt designer搭建 打开 Pycharm，Files-&amp;gt;Settings-&amp;gt;External Tools，添加两个 tools，Qt Designer、PyUIC： 点击+号添加tools Programs:的地方找到你自己的 designer.exe 所在的位置 Working directory:的地方填上$ProjectFileDir$ 同样的我们添加Pyqt工具 Programs:的地方找到你自己的 python.exe 所在的位置 Arguments:的地方填上-m PyQt5.uic.pyuic$FileName$ -o $FileNameWithoutExtension$.</description>
     </item>
     
+    <item>
+      <title>Qt实用函数</title>
+      <link>https://metrillin.github.io/2019/qt%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Sat, 05 Jan 2019 22:17:06 +0800</pubDate>
+      
+      <guid>https://metrillin.github.io/2019/qt%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0/</guid>
+      <description>Qt实用函数(长期更新) 设置窗体固定大小不可拖动 this-&amp;gt;setFixedSize(this-&amp;gt;width(),this-&amp;gt;height());  窗体显示状态自定义 setWindowFlags(Qt::CustomizeWindowHint); setWindowFlags(Qt::WindowCloseButtonHint); //只要关闭按钮 setWindowFlags(Qt::WindowFlags type) Qt::FrameWindowHint:没有边框的窗口 Qt::WindowStaysOnTopHint: //总在最上面的窗口 Qt::CustomizeWindowHint: //自定义窗口标题栏,以下标志必须与这个标志一起使用才有效,否则窗口将有默认的标题栏 Qt::WindowTitleHint //显示窗口标题栏 Qt::WindowSystemMenuHint //显示系统菜单 Qt::WindowMinimizeButtonHint //显示最小化按钮 Qt::WindowMaximizeButtonHint //显示最大化按钮 Qt::WindowMinMaxButtonsHint //显示最小化按钮和最大化按钮 Qt::WindowCloseButtonHint //显示关闭按钮  乱码解决方案 QApplication a(argc, argv); //获取系统编码，否则移植会出现乱码 QTextCodec *codec = QTextCodec::codecForName(&amp;quot;UTF-8&amp;quot;); //设置和对本地文件系统读写时候的默认编码格式 QTextCodec::setCodecForLocale(codec); //设置传给tr函数时的默认字符串编码 QTextCodec::setCodecForTr(codec); //用在字符常量或者QByteArray构造QString对象时使用的一种编码方式 QTextCodec::setCodecForCStrings(codec);  隐藏任务栏显示 setWindowFlags(Qt::Tool | Qt::X11BypassWindowManagerHint)  关闭按钮实现的功能 hide(); //进行界面隐藏，但是显示托盘，可通过点击托盘实现界面的重新显示 quit(); //退出系统  获取系统当前时间并设置显示格式 QDateTime current_date_time = QDateTime::currentDateTime(); QString current_date = current_date_time.toString(&amp;quot;yyyy-MM-dd hh:mm:ss ddd&amp;quot;); 例：2013-05-24 13:09:10 周五 获取当前时间时、分、秒 范围：小时(0--23)、分钟(0--59)、秒(0--59)、毫秒(0--999) QTime current_time = QTime::currentTime(); int hour = current_time.</description>
+    </item>
+    
   </channel>
 </rss>
