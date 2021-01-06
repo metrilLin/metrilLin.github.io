@@ -6,10 +6,30 @@
     <description>Recent content in Linux on 保持热爱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 15 Oct 2019 22:11:18 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 06 Mar 2020 08:18:29 +0800</lastBuildDate>
     
 	<atom:link href="https://metrillin.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Ubuntu开机自启动GUI界面</title>
+      <link>https://metrillin.github.io/2020/ubuntu%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8gui%E7%95%8C%E9%9D%A2/</link>
+      <pubDate>Fri, 06 Mar 2020 08:18:29 +0800</pubDate>
+      
+      <guid>https://metrillin.github.io/2020/ubuntu%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8gui%E7%95%8C%E9%9D%A2/</guid>
+      <description> ubuntu开机自启动GUI界面 1.不需要GUI的后台程序只需输入 sudo gedit /etc/rc.local  在exit 0 前添加一行
+cd /home/lin/; ./run_guard.sh &amp;amp;  即可正常开启启动程序
+2.开机启动GUI界面程序
+由于GUI界面需要在xserver服务启动之后才能启动，放在rc.local中会调用失败
+XServer启动的时候会调用 /etc/X11/Xsession.d/55gnome-session_gnomerc 该脚本的内容就是检测 $HOME/.gnomerc是否存在，如果存在就调用
+所以:
+ gedit ~/.gnomerc
+ 放入下列脚本即可
+#!/bin/bash cd /home/lin/ ./run_guard.sh &amp;amp;  开机不启动桌面登录程序 实现这个功能，要完成两步：
+1、系统设置-&amp;gt;用户账户-&amp;gt;点击我的账户-&amp;gt;点击右上角的解锁-&amp;gt;打开自动登录-&amp;gt;点击右上角的锁定-&amp;gt;退出系统设置
+2、在/etc/profile文件的开头添加执行程序的命令。如： cd /home/xx/xx(这里是可执行文件的绝对路径) ./hello 或者直接写： /home/xx/xx/hello  程序不休眠 在桌面右上角设置的不挂起，要在桌面加载之后才会生效，当我们无桌面或将桌面禁用就可以用到下列方法  在/etc/profile中添加
+export DISPLAY=:0 xset -dpms xset s 0  </description>
+    </item>
     
     <item>
       <title>Linux内存分布</title>

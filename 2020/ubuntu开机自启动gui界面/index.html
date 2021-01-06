@@ -9,9 +9,9 @@
   
   
   
-  <link rel="prev" href="https://metrillin.github.io/2020/ubuntu%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8gui%E7%95%8C%E9%9D%A2/" />
-  <link rel="next" href="https://metrillin.github.io/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" />
-  <link rel="canonical" href="https://metrillin.github.io/2020/docker%E5%AE%89%E8%A3%85/" />
+  <link rel="prev" href="https://metrillin.github.io/2019/pyqt%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8Eqt%E5%BC%82%E5%90%8C%E5%88%86%E6%9E%90/" />
+  <link rel="next" href="https://metrillin.github.io/2020/docker%E5%AE%89%E8%A3%85/" />
+  <link rel="canonical" href="https://metrillin.github.io/2020/ubuntu%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8gui%E7%95%8C%E9%9D%A2/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -22,10 +22,10 @@
   <title>
        
        
-           Docker安装 | 保持热爱
+           Ubuntu开机自启动GUI界面 | 保持热爱
        
   </title>
-  <meta name="title" content="Docker安装 | 保持热爱">
+  <meta name="title" content="Ubuntu开机自启动GUI界面 | 保持热爱">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -44,13 +44,20 @@
          "@id": "https://metrillin.github.io/"
     },
     "articleSection" : "posts",
-    "name" : "Docker安装",
-    "headline" : "Docker安装",
-    "description" : "docker安装 ## 安装
-1.卸载旧版本 Docker 的旧版本被称为 docker，docker.io 或 docker-engine 。如果已安装，请卸载它们：
-sudo apt-get remove docker docker-engine docker.io containerd runc  2.使用 APT 安装 sudo apt-get update  安装 apt 依赖包，用于通过HTTPS来获取仓库:
-sudo apt-get install \ apt-transport-https \ ca-certificates \ curl \ gnupg-agent \ software-properties-common  为了确认所下载软件包的合法性，需要添加软件源的 GPG 密钥 添加 Docker 的官方 GPG 密钥：
-$ curl \-fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt\-key add \-  9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88 通过搜索指纹的后8个字符，验证您现在是否拥有带有指纹的密钥。",
+    "name" : "Ubuntu开机自启动GUI界面",
+    "headline" : "Ubuntu开机自启动GUI界面",
+    "description" : " ubuntu开机自启动GUI界面 1.不需要GUI的后台程序只需输入 sudo gedit /etc/rc.local  在exit 0 前添加一行
+cd /home/lin/; ./run_guard.sh &amp;  即可正常开启启动程序
+2.开机启动GUI界面程序
+由于GUI界面需要在xserver服务启动之后才能启动，放在rc.local中会调用失败
+XServer启动的时候会调用 /etc/X11/Xsession.d/55gnome-session_gnomerc 该脚本的内容就是检测 $HOME/.gnomerc是否存在，如果存在就调用
+所以:
+ gedit ~/.gnomerc
+ 放入下列脚本即可
+#!/bin/bash cd /home/lin/ ./run_guard.sh &amp;  开机不启动桌面登录程序 实现这个功能，要完成两步：
+1、系统设置-&gt;用户账户-&gt;点击我的账户-&gt;点击右上角的解锁-&gt;打开自动登录-&gt;点击右上角的锁定-&gt;退出系统设置
+2、在/etc/profile文件的开头添加执行程序的命令。如： cd /home/xx/xx(这里是可执行文件的绝对路径) ./hello 或者直接写： /home/xx/xx/hello  程序不休眠 在桌面右上角设置的不挂起，要在桌面加载之后才会生效，当我们无桌面或将桌面禁用就可以用到下列方法  在/etc/profile中添加
+export DISPLAY=:0 xset -dpms xset s 0  ",
     "inLanguage" : "en-us",
     "author" : "mentir.",
     "creator" : "mentir.",
@@ -58,11 +65,11 @@ $ curl \-fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt\-key add \
     "accountablePerson" : "mentir.",
     "copyrightHolder" : "mentir.",
     "copyrightYear" : "2020",
-    "datePublished": "2020-04-05 21:18:19 &#43;0800 PST",
-    "dateModified" : "2020-04-05 21:18:19 &#43;0800 PST",
-    "url" : "https://metrillin.github.io/2020/docker%E5%AE%89%E8%A3%85/",
-    "wordCount" : "145",
-    "keywords" : [ "Docker", "保持热爱"]
+    "datePublished": "2020-03-06 08:18:29 &#43;0800 PST",
+    "dateModified" : "2020-03-06 08:18:29 &#43;0800 PST",
+    "url" : "https://metrillin.github.io/2020/ubuntu%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8gui%E7%95%8C%E9%9D%A2/",
+    "wordCount" : "47",
+    "keywords" : [ "Linux", "保持热爱"]
 }
 </script>
 
@@ -120,16 +127,16 @@ $ curl \-fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt\-key add \
       		
 <article class="post-warp" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Docker安装</h1>
+        <h1 class="post-title" itemprop="name headline">Ubuntu开机自启动GUI界面</h1>
         <div class="post-meta">
                 Written by <a itemprop="name" href="https://metrillin.github.io/" rel="author">mentir.</a> with ♥ 
                 <span class="post-time">
-                on <time datetime=2020-04-05 itemprop="datePublished">April 5, 2020</time>
+                on <time datetime=2020-03-06 itemprop="datePublished">March 6, 2020</time>
                 </span>
                 in
                 <i class="iconfont icon-folder"></i>
                 <span class="post-category">
-                        <a href="https://metrillin.github.io/categories/docker/"> Docker </a>
+                        <a href="https://metrillin.github.io/categories/linux/"> Linux </a>
                         
                 </span>
         </div>
@@ -137,8 +144,6 @@ $ curl \-fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt\-key add \
     <div class="post-content">
         
 
-        
-            
         
 
         
@@ -154,83 +159,66 @@ $ curl \-fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt\-key add \
 
           
 
-<h1 id="docker安装">docker安装</h1>
+<h2 id="ubuntu开机自启动gui界面">ubuntu开机自启动GUI界面</h2>
 
-<p>## 安装</p>
+<h3 id="1-不需要gui的后台程序只需输入">1.不需要GUI的后台程序只需输入</h3>
 
-<h3 id="1-卸载旧版本">1.卸载旧版本</h3>
-
-<p>Docker 的旧版本被称为 docker，docker.io 或 docker-engine 。如果已安装，请卸载它们：</p>
-
-<pre><code class="language-cpp">sudo apt-get remove docker docker-engine docker.io containerd runc
+<pre><code class="language-cpp">sudo gedit /etc/rc.local
 </code></pre>
 
-<h2 id="2-使用-apt-安装">2.使用 APT 安装</h2>
+<p>在exit 0 前添加一行</p>
 
-<pre><code class="language-cpp">sudo apt-get update
+<pre><code class="language-cpp">cd /home/lin/; ./run_guard.sh &amp;
 </code></pre>
 
-<p>安装 apt 依赖包，用于通过HTTPS来获取仓库:</p>
+<p>即可正常开启启动程序</p>
 
-<pre><code class="language-cpp">sudo apt-get install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg-agent \
-    software-properties-common
+<p>2.开机启动GUI界面程序</p>
+
+<p>由于GUI界面需要在xserver服务启动之后才能启动，放在rc.local中会调用失败<br />
+XServer启动的时候会调用 /etc/X11/Xsession.d/55gnome-session_gnomerc 该脚本的内容就是检测 $HOME/.gnomerc是否存在，如果存在就调用<br />
+所以:</p>
+
+<blockquote>
+<p>gedit ~/.gnomerc</p>
+</blockquote>
+
+<p>放入下列脚本即可</p>
+
+<pre><code class="language-cpp">#!/bin/bash
+
+cd /home/lin/
+
+./run_guard.sh &amp;
 </code></pre>
 
-<p>为了确认所下载软件包的合法性，需要添加软件源的 GPG 密钥
-添加 Docker 的官方 GPG 密钥：</p>
+<h2 id="开机不启动桌面登录程序">开机不启动桌面登录程序</h2>
 
-<pre><code class="language-cpp*-">$ curl \-fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt\-key add \-
+<p>实现这个功能，要完成两步：</p>
+
+<p>1、系统设置-&gt;用户账户-&gt;点击我的账户-&gt;点击右上角的解锁-&gt;打开自动登录-&gt;点击右上角的锁定-&gt;退出系统设置</p>
+
+<pre><code class="language-cpp">
+2、在/etc/profile文件的开头添加执行程序的命令。如：
+
+cd /home/xx/xx(这里是可执行文件的绝对路径)
+
+./hello
+
+或者直接写：
+
+/home/xx/xx/hello
 </code></pre>
 
-<p>9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88 通过搜索指纹的后8个字符，验证您现在是否拥有带有指纹的密钥。</p>
+<h2 id="程序不休眠">程序不休眠</h2>
 
-<pre><code class="language-cpp">$ sudo apt-key fingerprint 0EBFCD88
-   
-pub   rsa4096 2017-02-22 [SCEA]
-      9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
-uid           [ unknown] Docker Release (CE deb) &lt;docker@docker.com&gt;
-sub   rsa4096 2017-02-22 [S]
+<p>在桌面右上角设置的不挂起，要在桌面加载之后才会生效，当我们无桌面或将桌面禁用就可以用到下列方法 <br/>
+在/etc/profile中添加</p>
+
+<pre><code class="language-cpp">export DISPLAY=:0
+xset -dpms
+xset s 0
 </code></pre>
-
-<h2 id="安装-docker-engine-community">安装 Docker Engine-Community</h2>
-
-<p>安装最新版本的 Docker Engine-Community 和 containerd</p>
-
-<pre><code class="language-cpp">sudo apt-get install docker-ce docker-ce-cli containerd.io
-</code></pre>
-
-<h2 id="修改image-仓库的镜像网址">修改image 仓库的镜像网址</h2>
-
-<p>国内访问 Docker 的官方仓库很慢，还经常断线，所以要把仓库网址改成国内的镜像站。
-打开/etc/default/docker文件（需要sudo权限)</p>
-
-<pre><code class="language-cpp">sudo gedit /etc/default/docker
-</code></pre>
-
-<p>在文件的底部加上一行。</p>
-
-<pre><code class="language-cpp">DOCKER_OPTS=&quot;--registry-mirror=https://registry.docker-cn.com&quot;
-</code></pre>
-
-<p>然后，重启 Docker 服务。</p>
-
-<pre><code class="language-cpp">$ sudo service docker restart
-</code></pre>
-
-<p>现在就会自动从镜像仓库下载 image 文件了。</p>
-
-<h2 id="测试-docker-是否安装成功">测试 Docker 是否安装成功</h2>
-
-<p>测试 Docker 是否安装成功，输入以下指令，打印出以下信息则安装成功:</p>
-
-<pre><code class="language-cpp">sudo docker run hello-world
-</code></pre>
-
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://gitee.com/linMentri/mapdepot/raw/master/1609852747_20200414151848751_30290.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
     </div>
 
@@ -245,7 +233,7 @@ sub   rsa4096 2017-02-22 [S]
              
             <p class="copyright-item">
                     <span>Link:</span>
-                    <a href=https://metrillin.github.io/2020/docker%E5%AE%89%E8%A3%85/>https://metrillin.github.io/2020/docker%E5%AE%89%E8%A3%85/</span>
+                    <a href=https://metrillin.github.io/2020/ubuntu%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8gui%E7%95%8C%E9%9D%A2/>https://metrillin.github.io/2020/ubuntu%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8gui%E7%95%8C%E9%9D%A2/</span>
             </p>
             
              
@@ -261,8 +249,8 @@ sub   rsa4096 2017-02-22 [S]
             <section>
             <i class="iconfont icon-tag"></i>Tag(s): 
             
-            <span class="tag"><a href="https://metrillin.github.io/tags/docker/">
-                    #Docker</a></span>
+            <span class="tag"><a href="https://metrillin.github.io/tags/linux/">
+                    #Linux</a></span>
             
             </section>
         
@@ -274,10 +262,10 @@ sub   rsa4096 2017-02-22 [S]
 
     <div class="post-nav">
         
-        <a href="https://metrillin.github.io/2020/ubuntu%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8gui%E7%95%8C%E9%9D%A2/" class="prev" rel="prev" title="Ubuntu开机自启动GUI界面"><i class="iconfont icon-left"></i>&nbsp;Ubuntu开机自启动GUI界面</a>
+        <a href="https://metrillin.github.io/2019/pyqt%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8Eqt%E5%BC%82%E5%90%8C%E5%88%86%E6%9E%90/" class="prev" rel="prev" title="PYQT环境搭建与QT异同分析"><i class="iconfont icon-left"></i>&nbsp;PYQT环境搭建与QT异同分析</a>
          
         
-        <a href="https://metrillin.github.io/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="next" rel="next" title="Docker常用命令">Docker常用命令&nbsp;<i class="iconfont icon-right"></i></a>
+        <a href="https://metrillin.github.io/2020/docker%E5%AE%89%E8%A3%85/" class="next" rel="next" title="Docker安装">Docker安装&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 
@@ -319,9 +307,8 @@ sub   rsa4096 2017-02-22 [S]
 
 
     
-     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
-      
-     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
     
   
 
