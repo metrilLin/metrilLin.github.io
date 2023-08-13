@@ -1,57 +1,31 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Qt on 保持热爱</title>
-    <link>https://metrillin.github.io/tags/qt/</link>
-    <description>Recent content in Qt on 保持热爱</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Mon, 07 Dec 2020 18:12:25 +0800</lastBuildDate>
-    
-	<atom:link href="https://metrillin.github.io/tags/qt/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Ｑｔ操作mysql</title>
-      <link>https://metrillin.github.io/2020/qt%E6%93%8D%E4%BD%9Cmysql/</link>
-      <pubDate>Mon, 07 Dec 2020 18:12:25 +0800</pubDate>
-      
-      <guid>https://metrillin.github.io/2020/qt%E6%93%8D%E4%BD%9Cmysql/</guid>
-      <description>[TOC]
-1. 基本操作 1.1 添加模块 Qt数据库模块是独立模块，需要像core，gui一样在.pro文件中添加该模块
-QT+=sql  1.2 基本操作 获取可用连接 首先查看qt下支持的连接名
-qDebug() &amp;lt;&amp;lt; QSqlDatabase::drivers();  输出如下 (&amp;quot;QSQLITE&amp;quot;, &amp;quot;QMYSQL&amp;quot;, &amp;quot;QMYSQL3&amp;quot;, &amp;quot;QPSQL&amp;quot;, &amp;quot;QPSQL7&amp;quot;)
-建立连接 使用上一步获取到的连接名作为addDatabase的第一个参数
-QSqlDatabase db = QSqlDatabase::addDatabase(&amp;quot;QMYSQL&amp;quot;);  这样我们就获取到mysql的句柄了 接下来是mysql的基本操作
-db.setHostName(&amp;quot;localhost&amp;quot;); // 假定数据库在本机 db.setDatabaseName(&amp;quot;student&amp;quot;); // 打开数据库名 db.setUserName(&amp;quot;root&amp;quot;); // 数据库用户名 db.setPassword(&amp;quot;123456&amp;quot;); // 数据库密码  设置完之后调用open()打开mysql数据库,完整代码如下
-QSqlDatabase db = QSqlDatabase::addDatabase(&amp;quot;QMYSQL&amp;quot;); db.setHostName(&amp;quot;localhost&amp;quot;); // 假定数据库在本机 db.setDatabaseName(&amp;quot;server&amp;quot;); // 打开数据库名 db.setUserName(&amp;quot;root&amp;quot;); // 数据库用户名 db.setPassword(&amp;quot;123456&amp;quot;); // 数据库密码 if (!db.open()) { qDebug() &amp;lt;&amp;lt; &amp;quot;Failed to connect to root mysql!</description>
-    </item>
-    
-    <item>
-      <title>PYQT环境搭建与QT异同分析</title>
-      <link>https://metrillin.github.io/2019/pyqt%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8Eqt%E5%BC%82%E5%90%8C%E5%88%86%E6%9E%90/</link>
-      <pubDate>Sat, 19 Oct 2019 22:43:08 +0800</pubDate>
-      
-      <guid>https://metrillin.github.io/2019/pyqt%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8Eqt%E5%BC%82%E5%90%8C%E5%88%86%E6%9E%90/</guid>
-      <description>PYQT环境搭建与QT异同分析 简介 Qt是C++的跨平台框架，Pyqt是一个跨平台的工具包。我们可以直接使用Qt designer绘制出QT的UI界面，使用Pyqt将ui文件转换成Python语法。此外，由于Pyqt使用python语法，本质上是一个解释器，即不需要交叉编译。
-PYQT环境搭建 pyqt使用环境需要以下几个软件支持
-Python主程序 Pycharm Qt5&amp;lt;主要使用QT5中的designer&amp;gt; PyQt库  Python主程序下载安装 python官网下载地址 https://www.python.org/downloads/  windows下选择executable安装包进行安装 下载完对应版本后，双击可执行文件对Python进行安装，注意勾选 Add Python 3.7 to PATH （否则需要自己添加系统变量） 默认全部 勾选，点击Next 注意：Python所在的路径建议不要有中文路径。
-PyCharm安装 下面链接为Pycharm安装包以及破解包，具体安装及破解可以点击链接下载。 链接: https://pan.baidu.com/s/1rPwaMzfUKbisYaAAwwzihg 提取码: mqut
-QT5下载 下面链接提供QT全部版本。建议选择QT5以上，目前本人使用版本为Qt5.9.2 链接: https://download.qt.io/archive/qt/ 下载后安装即可，编译器及组件可根据需要选择下载。
-PyQt下载 在安装好Python之后，打开命令行，输入以下命令（如果无效，请将Python安装路径加到环境变量中）
-pip install PyQt5  如果需要指定版本请输入
-installpip install PyQt5==5.10.1  5.10.1为对应的版本号，等待Pyqt下载完成后，我们打开PYcharm进行环境配置。
-PyQT+PyCharm+Qt designer搭建 打开 Pycharm，Files-&amp;gt;Settings-&amp;gt;External Tools，添加两个 tools，Qt Designer、PyUIC： 点击+号添加tools Programs:的地方找到你自己的 designer.exe 所在的位置 Working directory:的地方填上$ProjectFileDir$ 同样的我们添加Pyqt工具 Programs:的地方找到你自己的 python.exe 所在的位置 Arguments:的地方填上-m PyQt5.uic.pyuic$FileName$ -o $FileNameWithoutExtension$.</description>
-    </item>
-    
-    <item>
-      <title>Qt实用函数</title>
-      <link>https://metrillin.github.io/2019/qt%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0/</link>
-      <pubDate>Sat, 05 Jan 2019 22:17:06 +0800</pubDate>
-      
-      <guid>https://metrillin.github.io/2019/qt%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0/</guid>
-      <description>Qt实用函数(长期更新) 设置窗体固定大小不可拖动 this-&amp;gt;setFixedSize(this-&amp;gt;width(),this-&amp;gt;height());  窗体显示状态自定义 setWindowFlags(Qt::CustomizeWindowHint); setWindowFlags(Qt::WindowCloseButtonHint); //只要关闭按钮 setWindowFlags(Qt::WindowFlags type) Qt::FrameWindowHint:没有边框的窗口 Qt::WindowStaysOnTopHint: //总在最上面的窗口 Qt::CustomizeWindowHint: //自定义窗口标题栏,以下标志必须与这个标志一起使用才有效,否则窗口将有默认的标题栏 Qt::WindowTitleHint //显示窗口标题栏 Qt::WindowSystemMenuHint //显示系统菜单 Qt::WindowMinimizeButtonHint //显示最小化按钮 Qt::WindowMaximizeButtonHint //显示最大化按钮 Qt::WindowMinMaxButtonsHint //显示最小化按钮和最大化按钮 Qt::WindowCloseButtonHint //显示关闭按钮  乱码解决方案 QApplication a(argc, argv); //获取系统编码，否则移植会出现乱码 QTextCodec *codec = QTextCodec::codecForName(&amp;quot;UTF-8&amp;quot;); //设置和对本地文件系统读写时候的默认编码格式 QTextCodec::setCodecForLocale(codec); //设置传给tr函数时的默认字符串编码 QTextCodec::setCodecForTr(codec); //用在字符常量或者QByteArray构造QString对象时使用的一种编码方式 QTextCodec::setCodecForCStrings(codec);  隐藏任务栏显示 setWindowFlags(Qt::Tool | Qt::X11BypassWindowManagerHint)  关闭按钮实现的功能 hide(); //进行界面隐藏，但是显示托盘，可通过点击托盘实现界面的重新显示 quit(); //退出系统  获取系统当前时间并设置显示格式 QDateTime current_date_time = QDateTime::currentDateTime(); QString current_date = current_date_time.toString(&amp;quot;yyyy-MM-dd hh:mm:ss ddd&amp;quot;); 例：2013-05-24 13:09:10 周五 获取当前时间时、分、秒 范围：小时(0--23)、分钟(0--59)、秒(0--59)、毫秒(0--999) QTime current_time = QTime::currentTime(); int hour = current_time.</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Qt - 标签 - mentirBlog</title>
+        <link>https://example.com/tags/qt/</link>
+        <description>Qt - 标签 - mentirBlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 07 Dec 2020 18:12:25 &#43;0800</lastBuildDate><atom:link href="https://example.com/tags/qt/" rel="self" type="application/rss+xml" /><item>
+    <title>Ｑｔ操作mysql</title>
+    <link>https://example.com/qt%E6%93%8D%E4%BD%9Cmysql/</link>
+    <pubDate>Mon, 07 Dec 2020 18:12:25 &#43;0800</pubDate>
+    <author>mentir.</author>
+    <guid>https://example.com/qt%E6%93%8D%E4%BD%9Cmysql/</guid>
+    <description><![CDATA[[TOC] 1. 基本操作 1.1 添加模块 Qt数据库模块是独立模块，需要像core，gui一样在.pro文件中添加该模块 1 QT+=sql 1.2 基本操作 获取可用连接 首先查看qt下]]></description>
+</item>
+<item>
+    <title>PYQT环境搭建与QT异同分析</title>
+    <link>https://example.com/pyqt%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8Eqt%E5%BC%82%E5%90%8C%E5%88%86%E6%9E%90/</link>
+    <pubDate>Sat, 19 Oct 2019 22:43:08 &#43;0800</pubDate>
+    <author>mentir.</author>
+    <guid>https://example.com/pyqt%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8Eqt%E5%BC%82%E5%90%8C%E5%88%86%E6%9E%90/</guid>
+    <description><![CDATA[PYQT环境搭建与QT异同分析 简介 Qt是C++的跨平台框架，Pyqt是一个跨平台的工具包。我们可以直接使用Qt designer绘制出QT的U]]></description>
+</item>
+<item>
+    <title>Qt实用函数</title>
+    <link>https://example.com/qt%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0/</link>
+    <pubDate>Sat, 05 Jan 2019 22:17:06 &#43;0800</pubDate>
+    <author>mentir.</author>
+    <guid>https://example.com/qt%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0/</guid>
+    <description><![CDATA[Qt实用函数(长期更新) 设置窗体固定大小不可拖动 1 this-&gt;setFixedSize(this-&gt;width(),this-&gt;height()); 窗体显示状态自定义 1 2 3 4 5 6 7 8 9 10 11 12 setWindowFlags(Qt::CustomizeWindowHint); setWindowFlags(Qt::WindowCloseButtonHint); //只要关闭按钮 setWindowFlags(Qt::WindowFlags type) Qt::FrameWi]]></description>
+</item>
+</channel>
 </rss>

@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>PYQT环境搭建与QT异同分析 - mentirBlog</title><meta name="Description" content="Hugo mentirBlog"><meta property="og:title" content="PYQT环境搭建与QT异同分析" />
+<meta property="og:description" content="PYQT环境搭建与QT异同分析 简介 Qt是C&#43;&#43;的跨平台框架，Pyqt是一个跨平台的工具包。我们可以直接使用Qt designer绘制出QT的U" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/pyqt%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8Eqt%E5%BC%82%E5%90%8C%E5%88%86%E6%9E%90/" /><meta property="og:image" content="https://example.com/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-10-19T22:43:08+08:00" />
+<meta property="article:modified_time" content="2019-10-19T22:43:08+08:00" /><meta property="og:site_name" content="mentirBlog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://example.com/logo.png"/>
+
+<meta name="twitter:title" content="PYQT环境搭建与QT异同分析"/>
+<meta name="twitter:description" content="PYQT环境搭建与QT异同分析 简介 Qt是C&#43;&#43;的跨平台框架，Pyqt是一个跨平台的工具包。我们可以直接使用Qt designer绘制出QT的U"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/pyqt%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8Eqt%E5%BC%82%E5%90%8C%E5%88%86%E6%9E%90/" /><link rel="prev" href="https://example.com/linux%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/" /><link rel="next" href="https://example.com/linux%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "PYQT环境搭建与QT异同分析",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/pyqt%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8Eqt%E5%BC%82%E5%90%8C%E5%88%86%E6%9E%90\/"
+        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Qt","wordcount":  2935 ,
+        "url": "https:\/\/example.com\/pyqt%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8Eqt%E5%BC%82%E5%90%8C%E5%88%86%E6%9E%90\/","datePublished": "2019-10-19T22:43:08+08:00","dateModified": "2019-10-19T22:43:08+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/example.com\/images\/avatar.jpg",
+                    "width":  1024 ,
+                    "height":  1024 
+                }},"author": {
+                "@type": "Person",
+                "name": "mentir."
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="mentirBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i></span>LoveIt</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/metrilLin" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="mentirBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i></span>LoveIt</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/metrilLin" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">PYQT环境搭建与QT异同分析</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>mentir.</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/qt/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Qt</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2019-10-19">2019-10-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 2935 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#简介">简介</a></li>
+    <li><a href="#pyqt环境搭建">PYQT环境搭建</a>
+      <ul>
+        <li><a href="#python主程序下载安装">Python主程序下载安装</a></li>
+      </ul>
+    </li>
+    <li><a href="#pycharm安装">PyCharm安装</a></li>
+    <li><a href="#qt5下载">QT5下载</a></li>
+    <li><a href="#pyqt下载">PyQt下载</a></li>
+    <li><a href="#pyqtpycharmqt-designer搭建">PyQT+PyCharm+Qt designer搭建</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#qwidget">QWidget</a></li>
+    <li><a href="#信号槽">信号槽</a></li>
+    <li><a href="#控件重写">控件重写</a></li>
+    <li><a href="#注意事项">注意事项</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="pyqt环境搭建与qt异同分析">PYQT环境搭建与QT异同分析</h1>
+<h2 id="简介">简介</h2>
+<p>Qt是C++的跨平台框架，Pyqt是一个跨平台的工具包。我们可以直接使用Qt designer绘制出QT的UI界面，使用Pyqt将ui文件转换成Python语法。此外，由于Pyqt使用python语法，本质上是一个解释器，即不需要交叉编译。</p>
+<h2 id="pyqt环境搭建">PYQT环境搭建</h2>
+<p>pyqt使用环境需要以下几个软件支持</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Python主程序
+</span></span><span class="line"><span class="cl">Pycharm
+</span></span><span class="line"><span class="cl">Qt5&lt;主要使用QT5中的designer&gt;
+</span></span><span class="line"><span class="cl">PyQt库
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="python主程序下载安装">Python主程序下载安装</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">python官网下载地址 https://www.python.org/downloads/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>windows下选择executable安装包进行安装</p>
+<img src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/1609857803_20210105222628796_31645.png" style="zoom:150%;" />
+<p>下载完对应版本后，双击可执行文件对Python进行安装，注意勾选 Add Python 3.7 to PATH （否则需要自己添加系统变量）</p>
+<img src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/1609857803_20210105222706118_22771.png" style="zoom:150%;" />
+<p>默认全部	勾选，点击Next</p>
+<img src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/1609857804_20210105222720689_7921.png" style="zoom:150%;" />
+注意：Python所在的路径建议不要有中文路径。
+<h2 id="pycharm安装">PyCharm安装</h2>
+<p>下面链接为Pycharm安装包以及破解包，具体安装及破解可以点击链接下载。
+链接: <a href="https://pan.baidu.com/s/1rPwaMzfUKbisYaAAwwzihg" target="_blank" rel="noopener noreffer ">https://pan.baidu.com/s/1rPwaMzfUKbisYaAAwwzihg</a> 提取码: mqut</p>
+<h2 id="qt5下载">QT5下载</h2>
+<p>下面链接提供QT全部版本。建议选择QT5以上，目前本人使用版本为Qt5.9.2
+链接: <a href="https://download.qt.io/archive/qt/" target="_blank" rel="noopener noreffer ">https://download.qt.io/archive/qt/</a></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/1609857805_20210105222828077_25766.png"
+        data-srcset="https://raw.githubusercontent.com/metrilLin/mapdepot/main/1609857805_20210105222828077_25766.png, https://raw.githubusercontent.com/metrilLin/mapdepot/main/1609857805_20210105222828077_25766.png 1.5x, https://raw.githubusercontent.com/metrilLin/mapdepot/main/1609857805_20210105222828077_25766.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/metrilLin/mapdepot/main/1609857805_20210105222828077_25766.png"
+        title="https://raw.githubusercontent.com/metrilLin/mapdepot/main/1609857805_20210105222828077_25766.png" /></p>
+<p>下载后安装即可，编译器及组件可根据需要选择下载。</p>
+<h2 id="pyqt下载">PyQt下载</h2>
+<p>在安装好Python之后，打开命令行，输入以下命令（如果无效，请将Python安装路径加到环境变量中）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pip install PyQt5
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果需要指定版本请输入</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">installpip install PyQt5==5.10.1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>5.10.1为对应的版本号，等待Pyqt下载完成后，我们打开PYcharm进行环境配置。</p>
+<h2 id="pyqtpycharmqt-designer搭建">PyQT+PyCharm+Qt designer搭建</h2>
+<p>打开 Pycharm，Files-&gt;Settings-&gt;External Tools，添加两个 tools，Qt Designer、PyUIC：</p>
+<img src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/1609857805_20210105223207453_30573.png" style="zoom:150%;" />
+点击+号添加tools
+<img src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/1609857806_20210105223225039_21140.png" style="zoom:150%;" />
+Programs:的地方找到你自己的 designer.exe 所在的位置
+Working directory:的地方填上`$ProjectFileDir$` 
+同样的我们添加Pyqt工具
+<img src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/1609857806_20210105223331153_2326.png" style="zoom:150%;" />
+<p>Programs:的地方找到你自己的 python.exe 所在的位置
+Arguments:的地方填上-m PyQt5.uic.pyuic<code> $FileName$ -o $FileNameWithoutExtension$.py</code>
+Working directory:的地方填上<code>$FileDir$</code>
+至此，Pyqt与Python的环境就搭建完成了</p>
+<h1 id="示例">示例</h1>
+<p>搭建完程序，我们就开始写出我们的第一个Pyqt程序。
+点击file&mdash;&gt;New project添加新的项目</p>
+<img src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/1609857806_20210105223432402_18013.png" style="zoom:150%;" />
+点击tools -- External Tools -- Qt Designer 来打开设计师界面
+<img src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/1609857807_20210105223447675_530.png" style="zoom:150%;" />
+随便先选择一个Widget窗体
+<img src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/1609857807_20210105223527653_29317.png" style="zoom:150%;" />
+点击保存，存放到项目路径下，接着右击该文件，点击PyUIC进行翻译
+<img src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/1609857807_20210105223542820_31716.png" style="zoom:150%;" />
+可以看到生成一个同名的.py程序。
+<img src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/1609857808_20210105223611972_18280.png" style="zoom:150%;" />
+我们新建一个mian.py主程序来调用此界面程序。
+在main.py中添加以下代码
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># -*- coding: utf-8 -*-</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">untitled</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">PyQt5</span> <span class="kn">import</span> <span class="n">QtWidgets</span><span class="p">,</span><span class="n">QtCore</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">app</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">widget</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ui</span> <span class="o">=</span> <span class="n">untitled</span><span class="o">.</span><span class="n">Ui_Form</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ui</span><span class="o">.</span><span class="n">setupUi</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">widget</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">exec_</span><span class="p">())</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最后右击main.py 点击Run即可看到界面显示出来。</p>
+<img src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/1609857808_20210105223711649_9536.png" style="zoom:150%;" />
+界面如下。我们的第一个Pyqt程序就好了。.
+<img src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/1609857808_20210105223729517_8638.png" style="zoom:150%;" />
+<h1 id="与qt的语法差异">与QT的语法差异</h1>
+<h2 id="qwidget">QWidget</h2>
+<p>下面使用Pyqt和Qt实现相同功能的程序，分析两者之间的差距。
+Pyqt实现:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># -*- coding: utf-8 -*-</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#这里我们提供必要的引用。基本控件位于pyqt5.qtwidgets模块中。</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">PyQt5.QtWidgets</span> <span class="kn">import</span> <span class="n">QApplication</span><span class="p">,</span> <span class="n">QWidget</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#每一pyqt5应用程序必须创建一个应用程序对象。sys.argv参数是一个列表，从命令行输入参数。</span>
+</span></span><span class="line"><span class="cl">    <span class="n">app</span> <span class="o">=</span> <span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#QWidget部件是pyqt5所有用户界面对象的基类。他为QWidget提供默认构造函数。默认构造函数没有父类。</span>
+</span></span><span class="line"><span class="cl">    <span class="n">w</span> <span class="o">=</span> <span class="n">QWidget</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#resize()方法调整窗口的大小。这离是250px宽150px高</span>
+</span></span><span class="line"><span class="cl">    <span class="n">w</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#move()方法移动窗口在屏幕上的位置到x = 300，y = 300坐标。</span>
+</span></span><span class="line"><span class="cl">    <span class="n">w</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#设置窗口的标题</span>
+</span></span><span class="line"><span class="cl">    <span class="n">w</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s1">&#39;Simple&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#显示在屏幕上</span>
+</span></span><span class="line"><span class="cl">    <span class="n">w</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#系统exit()方法确保应用程序干净的退出</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#的exec_()方法有下划线。因为执行是一个Python关键词。因此，exec_()代替</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">exec_</span><span class="p">())</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>QT实现:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;QApplication&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QApplication</span> <span class="n">a</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QWidget</span> <span class="n">w</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">w</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span><span class="mi">150</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">w</span><span class="p">.</span><span class="n">move</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span><span class="mi">300</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">w</span><span class="p">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s">&#34;Simple&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">w</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">exec</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到，Pyqt和Qt除了C++和Python语法之间的区别之外。库之间的方法命名，调用方式极为相似。</p>
+<h2 id="信号槽">信号槽</h2>
+<p>Qt引以为傲的信号和槽，也完全保留在Pyqt组件上。不过写法略有不同。
+下面的例子为按钮点击时触发槽函数的连接语句
+Pyqt按钮信号槽示例:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="bp">self</span><span class="o">.</span><span class="n">pushButton</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CameraStop</span><span class="p">)</span><span class="c1">#CameraStop为槽函数</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">CameraStop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;暂停截图&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Qt按钮信号槽示例:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">connect</span><span class="p">(</span><span class="n">ui</span><span class="o">-&gt;</span><span class="n">pushButton</span><span class="p">,</span><span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">(</span><span class="kt">bool</span><span class="p">)),</span><span class="n">ui</span><span class="o">-&gt;</span><span class="n">label</span><span class="p">,</span><span class="n">SLOT</span><span class="p">(</span><span class="n">CameraStop</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">CameraStop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="err">暂停截图</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">timer</span><span class="o">-&gt;</span><span class="n">stop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过以上示例，pyqt信号的格式为<code>Sender.signal.connect(receiver.slot)</code>，通过调用pushButton的clicked中的connect方法来绑定槽函数。Qt则是通过外部静态函数<code>QObject::connect(sender, SIGNAL(what), receiver, SLOT(doWhat()))</code>。来将clicked点击信号和CameraStop接收信号绑定在一起。</p>
+<h2 id="控件重写">控件重写</h2>
+<p>下面重写一个QT的QLabal，实现绘制多矩形框与输出坐标的功能。
+Pyqt实现：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MyLabel</span><span class="p">(</span><span class="n">QLabel</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">    <span class="n">isDraw</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">    <span class="n">isSuccess</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tempRect</span> <span class="o">=</span><span class="n">QRect</span><span class="p">()</span> <span class="c1">#保存一个矩形坐标数据</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rectVector</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#重写鼠标单击事件</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">mousePressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">event</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isDraw</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">tempRect</span><span class="o">.</span><span class="n">setX</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">x</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">tempRect</span><span class="o">.</span><span class="n">setY</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">y</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#重写鼠标释放事件</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">mouseReleaseEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">event</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isDraw</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">isSuccess</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">rectVector</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tempRect</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rectVector</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">tempRect</span><span class="o">.</span><span class="n">setCoords</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">#重写鼠标移动事件</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">mouseMoveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">event</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isDraw</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">flag</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">tempRect</span><span class="o">.</span><span class="n">setHeight</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">y</span><span class="p">()</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">tempRect</span><span class="o">.</span><span class="n">y</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">tempRect</span><span class="o">.</span><span class="n">setWidth</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">x</span><span class="p">()</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">tempRect</span><span class="o">.</span><span class="n">x</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#重写绘图事件</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="c1">#调用父类绘图</span>
+</span></span><span class="line"><span class="cl">        <span class="n">painter</span> <span class="o">=</span> <span class="n">QPainter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">QPen</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">red</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">Qt</span><span class="o">.</span><span class="n">SolidLine</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">Rect</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rectVector</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">painter</span><span class="o">.</span><span class="n">drawRect</span><span class="p">(</span><span class="n">Rect</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="n">Rect</span><span class="o">.</span><span class="n">x</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isDraw</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">             <span class="n">painter</span><span class="o">.</span><span class="n">drawRect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tempRect</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rectVector</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">rollback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rectVector</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">rectVector</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">RectClean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">rectVector</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Qt实现</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">//头文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span><span class="cpf">&lt;QtWidgets&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;QObject&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;QWidget&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;QVector&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">class</span> <span class="nc">QmyLabel</span> <span class="o">:</span><span class="k">public</span> <span class="n">QLabel</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Q_OBJECT</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QmyLabel</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//重写事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">void</span> <span class="nf">mousePressEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">ev</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">mouseReleaseEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">ev</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">mouseMoveEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">ev</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="n">QPaintEvent</span> <span class="o">*</span><span class="n">ev</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">RectsClear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QVector</span><span class="o">&lt;</span><span class="n">QRect</span><span class="o">&gt;</span> <span class="n">getVector</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">isDraw</span><span class="p">;</span><span class="c1">//是否能够绘制
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">public</span> <span class="nl">slots</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="n">rollback</span><span class="p">();</span><span class="c1">//撤销
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">flag</span><span class="p">;</span><span class="c1">//判断是否在绘制
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">bool</span> <span class="n">isSuccess</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QRect</span> <span class="n">tempRect</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QVector</span><span class="o">&lt;</span><span class="n">QRect</span><span class="o">&gt;</span> <span class="n">rectVector</span><span class="p">;</span><span class="c1">//保存全部点的坐标
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//.cpp文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&#34;qmylabel.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="n">QmyLabel</span><span class="o">::</span><span class="n">QmyLabel</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QLabel</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">flag</span><span class="o">=</span><span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">isDraw</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">isSuccess</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//tempRect.setRect(0,0,0,0);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">QmyLabel</span><span class="o">::</span><span class="n">mousePressEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">ev</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//鼠标点击事件,获取左上角位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">isDraw</span> <span class="o">==</span> <span class="nb">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">flag</span><span class="o">=</span><span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//this-&gt;tempRect.setTopLeft(QPoint(ev-&gt;x(),ev-&gt;y()));
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">this</span><span class="o">-&gt;</span><span class="n">tempRect</span><span class="p">.</span><span class="n">setX</span><span class="p">(</span><span class="n">ev</span><span class="o">-&gt;</span><span class="n">x</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">tempRect</span><span class="p">.</span><span class="n">setY</span><span class="p">(</span><span class="n">ev</span><span class="o">-&gt;</span><span class="n">y</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">qDebug</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="s">&#34;mousePressEvent...&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">QmyLabel</span><span class="o">::</span><span class="n">mouseReleaseEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">ev</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">isDraw</span> <span class="o">==</span> <span class="nb">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//鼠标释放事件,将tempRect数据存放进数组中.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">this</span><span class="o">-&gt;</span><span class="n">flag</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">isSuccess</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">rectVector</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">tempRect</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tempRect</span><span class="p">.</span><span class="n">setCoords</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">qDebug</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="s">&#34;mouseReleaseEvent...&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">QmyLabel</span><span class="o">::</span><span class="n">mouseMoveEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">ev</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">flag</span> <span class="o">&amp;&amp;</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">isDraw</span> <span class="o">==</span> <span class="nb">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">tempRect</span><span class="p">.</span><span class="n">setHeight</span><span class="p">(</span><span class="n">ev</span><span class="o">-&gt;</span><span class="n">y</span><span class="p">()</span><span class="o">-</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">tempRect</span><span class="p">.</span><span class="n">y</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">tempRect</span><span class="p">.</span><span class="n">setWidth</span><span class="p">(</span><span class="n">ev</span><span class="o">-&gt;</span><span class="n">x</span><span class="p">()</span><span class="o">-</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">tempRect</span><span class="p">.</span><span class="n">x</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">QmyLabel</span><span class="o">::</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">QPaintEvent</span> <span class="o">*</span><span class="n">ev</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QLabel</span><span class="o">::</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">ev</span><span class="p">);</span> <span class="c1">//绘制背景的图片
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">QPainter</span> <span class="n">paint</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">paint</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">paint</span><span class="p">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">QPen</span><span class="p">(</span><span class="n">Qt</span><span class="o">::</span><span class="n">red</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">Qt</span><span class="o">::</span><span class="n">SolidLine</span><span class="p">,</span> <span class="n">Qt</span><span class="o">::</span><span class="n">RoundCap</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">rectVector</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">paint</span><span class="p">.</span><span class="n">drawRect</span><span class="p">(</span><span class="n">rectVector</span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">isDraw</span> <span class="o">==</span> <span class="nb">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">paint</span><span class="p">.</span><span class="n">drawRect</span><span class="p">(</span><span class="n">tempRect</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">paint</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">QmyLabel</span><span class="o">::</span><span class="n">RectsClear</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">rectVector</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">QVector</span><span class="o">&lt;</span><span class="n">QRect</span><span class="o">&gt;</span> <span class="n">QmyLabel</span><span class="o">::</span><span class="n">getVector</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">rectVector</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">QmyLabel</span><span class="o">::</span><span class="n">rollback</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">rectVector</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span><span class="c1">//有值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">rectVector</span><span class="p">.</span><span class="n">removeLast</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">update</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Pyqt和Qt重写控件的方式基本相同，但是需要注意，Python在list中添加一个对象，如rectVector.append(对象)，当我们修改对象的某个属性，再次将其添加进list。这时候之前添加进list的对象属性也会改变，但是在QT中不会发生此类事情。推测，Python中的链表添加数据时使用的不是拷贝，而是引用。所以这里需要使用深拷贝<code>copy.deepcopy()</code></p>
+<h2 id="注意事项">注意事项</h2>
+<p>PyQt不支持使用QVector,QList等Qt容器，可以使用Python中自带的容器list,dict等进行替换。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2019-10-19</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/qt/">Qt</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/linux%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/" class="prev" rel="prev" title="Linux内存分布"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Linux内存分布</a>
+            <a href="/linux%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/" class="next" rel="next" title="linux内存分布">linux内存分布<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.96.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">mentir.</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

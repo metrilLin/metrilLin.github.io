@@ -1,214 +1,87 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Posts on 保持热爱</title>
-    <link>https://metrillin.github.io/posts/</link>
-    <description>Recent content in Posts on 保持热爱</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Fri, 18 Dec 2020 14:35:37 +0800</lastBuildDate>
-    
-	<atom:link href="https://metrillin.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Const详解与constexpr</title>
-      <link>https://metrillin.github.io/2020/const%E8%AF%A6%E8%A7%A3%E4%B8%8Econstexpr/</link>
-      <pubDate>Fri, 18 Dec 2020 14:35:37 +0800</pubDate>
-      
-      <guid>https://metrillin.github.io/2020/const%E8%AF%A6%E8%A7%A3%E4%B8%8Econstexpr/</guid>
-      <description>const详解 简介 C++中的Const作为从C中继承下来的关键字，名叫常量限定符，用来限定特定变量，以通知编译器该变量是不可修改的。习惯性的使用const，可以避免在函数中对某些不应修改的变量造成可能的改动。
-const 基本修饰 C语言中的const仅能维持编译期的值不变性，但是运行时值依然是可变的：
-int main(int argc, char *argv) { const int a = 0; // a = 10; // (编译期的const保持)编译错误，因为试图修改一个常量。 // (运行时const属性失效) int *pa = (int *)&amp;amp;a; *pa = 20; // 正确，此时a的值被修改为20，失去常量属性。 return 0; }  由于a = 10编译时会报错，所以编译时屏蔽，运行结果： 可以看到 C中的const只能在编译过程中保持数据不变，还是会被指针修改 为了维持运行时的const语义，c++引入了常量表来记录const对象的名称和值，并将之后所有对const对象的访问修改为访问常量表中的值，以此保证const对象始终如一的常量属性。同时为了保持向下兼容C，C++采取另外一种常量对象的内存分配方式，即： 代码中的const常量并不会立刻分配内存，只有当需要该对象的地址时，才为其分配内存，但从不使用该内存。 同样的代码，让我们使用C++编译器编译 接下来分析编译过程
-int main(int argc, char *argv) { const int a = 0; // a成为常量，&amp;lt;a, 0&amp;gt;被保存进入了常量区中，但是并未在栈上为a分配内存。 a = 10; // 编译错误，因为试图修改一个常量。 int *pa = (int *)&amp;amp;a; // 此时，需要常量a的地址，因此编译器被迫在栈上为a分配一块内存。 *pa = 20; // 此时，编译器被迫为a分配的内存被写为20，但是编译器不会使用这块内存。 printf(&amp;quot;a = %d\n&amp;quot;, a); // 但是，每次对a的访问都会去访问常量表，因此a仍然为0，保持了常量属性。 return 0; }  然而，并非所有的常量值都能在编译期被确定。当只有在运行时才能确定常量的值时，该常量将不会进入常量区，仍然保持C语言的运行时不安全的常量属性：</description>
-    </item>
-    
-    <item>
-      <title>Ｑｔ操作mysql</title>
-      <link>https://metrillin.github.io/2020/qt%E6%93%8D%E4%BD%9Cmysql/</link>
-      <pubDate>Mon, 07 Dec 2020 18:12:25 +0800</pubDate>
-      
-      <guid>https://metrillin.github.io/2020/qt%E6%93%8D%E4%BD%9Cmysql/</guid>
-      <description>[TOC]
-1. 基本操作 1.1 添加模块 Qt数据库模块是独立模块，需要像core，gui一样在.pro文件中添加该模块
-QT+=sql  1.2 基本操作 获取可用连接 首先查看qt下支持的连接名
-qDebug() &amp;lt;&amp;lt; QSqlDatabase::drivers();  输出如下 (&amp;quot;QSQLITE&amp;quot;, &amp;quot;QMYSQL&amp;quot;, &amp;quot;QMYSQL3&amp;quot;, &amp;quot;QPSQL&amp;quot;, &amp;quot;QPSQL7&amp;quot;)
-建立连接 使用上一步获取到的连接名作为addDatabase的第一个参数
-QSqlDatabase db = QSqlDatabase::addDatabase(&amp;quot;QMYSQL&amp;quot;);  这样我们就获取到mysql的句柄了 接下来是mysql的基本操作
-db.setHostName(&amp;quot;localhost&amp;quot;); // 假定数据库在本机 db.setDatabaseName(&amp;quot;student&amp;quot;); // 打开数据库名 db.setUserName(&amp;quot;root&amp;quot;); // 数据库用户名 db.setPassword(&amp;quot;123456&amp;quot;); // 数据库密码  设置完之后调用open()打开mysql数据库,完整代码如下
-QSqlDatabase db = QSqlDatabase::addDatabase(&amp;quot;QMYSQL&amp;quot;); db.setHostName(&amp;quot;localhost&amp;quot;); // 假定数据库在本机 db.setDatabaseName(&amp;quot;server&amp;quot;); // 打开数据库名 db.setUserName(&amp;quot;root&amp;quot;); // 数据库用户名 db.setPassword(&amp;quot;123456&amp;quot;); // 数据库密码 if (!db.open()) { qDebug() &amp;lt;&amp;lt; &amp;quot;Failed to connect to root mysql!</description>
-    </item>
-    
-    <item>
-      <title>LibCurl编译</title>
-      <link>https://metrillin.github.io/2020/libcurl%E7%BC%96%E8%AF%91/</link>
-      <pubDate>Sat, 05 Dec 2020 21:30:59 +0800</pubDate>
-      
-      <guid>https://metrillin.github.io/2020/libcurl%E7%BC%96%E8%AF%91/</guid>
-      <description>libCurl编译 1.首先下载libCurl的源码，这里使用的是Github上的版本
-git clone https://github.com/curl/curl.git  或者
-git clone https://github.com/curl/curl  2.生成configure
-./buildconf  3.查看本地可开启的功能
-./configure --enable-pthreads  会显示默认环境下安装后能使用的功能，若是满足需求就直接make和sudo make install
- 若要开启SSL support和zlib support:(Centos) yum install openssl-libs openssl-devel 若要支持https需安装libssh2:(Centos) yum install libssh2-devel 若要支持PSL 验证 Cookie 和证书的 Domain 信息，则安装libpsl:(Centos) yum psl libpsl-devel 若要支持HTTP2 ,则安装nghttp2:(Centos) yum install libnghttp2-devel nghttp2 若要支持IDN,则安装libidn:(Centos) yum install libidn2 libidn2-devel 若要支持metalink，则安装 libmetalink:(Centos) yum install libmetalink libmetalink-devel 若要支持RTMP实时流传输，则到官网下载安装,可以参考文章 linux下编译支持librtmp、libx264、libfaac的ffmpeg Ubuntu的可对应上面的centos库自行百度下载   4.编译libcurl 由于本人需要openssl 与SSH2的功能（从上图可以看到SSH为未链接状态，我们可以下载libssh2进行编译） 编译OpenssH（可选）
-wget http://www.</description>
-    </item>
-    
-    <item>
-      <title>编译android对应版本的openssl</title>
-      <link>https://metrillin.github.io/2020/%E7%BC%96%E8%AF%91android%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84openssl/</link>
-      <pubDate>Thu, 05 Nov 2020 20:29:23 +0800</pubDate>
-      
-      <guid>https://metrillin.github.io/2020/%E7%BC%96%E8%AF%91android%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84openssl/</guid>
-      <description>编译android对应版本的openssl 版本 自行下载需要的NDK与openssl
-NDK: android-ndk-r15c openssl：openssl-1.0.2  下载交叉编译文件 #拉取setenv-android.sh，我们需要这个脚本来给我们配置环境 wget https://wiki.openssl.org/images/7/70/Setenv-android.sh  配置脚本 armv7a版本配置 _ANDROID_NDK=&amp;quot;android-ndk-r9&amp;quot; # 修改为： _ANDROID_NDK=&amp;quot;android-ndk-r15c&amp;quot; # 因为我们使用的是R14B这个版本的NDK  _ANDROID_EABI=&amp;quot;arm-linux-androideabi-4.8&amp;quot; 修改为GCC 4.9 _ANDROID_EABI=&amp;quot;arm-linux-androideabi-4.9&amp;quot;  arm64V8A版本配置 _ANDROID_NDK=&amp;quot;android-ndk-r9&amp;quot; # 修改为： _ANDROID_NDK=&amp;quot;android-ndk-r15c&amp;quot; # 因为我们使用的是r15c这个版本的NDK  _ANDROID_EABI=&amp;quot;arm-linux-androideabi-4.8&amp;quot; 修改为GCC 4.9 _ANDROID_EABI=&amp;quot;aarch64-linux-android-4.9&amp;quot; _ANDROID_ARCH=arch-arm 修改为 _ANDROID_ARCH=arch-arm64  编译 添加环境变量（仅在当前终端就可以了
-export ANDROID_NDK_ROOT=/home/ubuntu/android-ndk-r15c source ./Setenv-android.sh  FIPS_SIG的Error无所谓，本次不会使用到这个组件</description>
-    </item>
-    
-    <item>
-      <title>Opencv视频流处理方法</title>
-      <link>https://metrillin.github.io/2020/opencv%E8%A7%86%E9%A2%91%E6%B5%81%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/</link>
-      <pubDate>Thu, 15 Oct 2020 18:27:07 +0800</pubDate>
-      
-      <guid>https://metrillin.github.io/2020/opencv%E8%A7%86%E9%A2%91%E6%B5%81%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/</guid>
-      <description>opencv视频流处理方法 OpenCV提供了VideoCapture类和VideoWriter类来支持各种格式的视频流，支持的格式类型会因系统的不同而有所变化，但基本上都是支持avi格式的，且对于视频文件和摄像头画面的读写所用到的接口基本上都相同，因此，我们把它们放在一起来讲了。
-1. 获取VideoCapture类实例
-不管是读取视频文件还是捕获摄像头画面，都使用到了VideoCapture类，但不同的是传入的形参不一样，如果我们传给VideoCapture类的是一个视频文件路径那么将是读取来自视频文件的画面，而如果我们传给VideoCapture类的是摄像头编号那么将是读取来自摄像头的画面，其使用示例如下：
-# 获取VideoCapture类实例，读取视频文件 fcap = cv2.VideoCapture(&#39;demo.mp4&#39;) # 读取摄像头画面 ccap = cv2.VideoCapture(0)  对于摄像头编号，可以使用如下命令获取：
-ls -al /dev/ | grep video  对于输出信息以video开头的其数字后缀即为可能的摄像头编号，如果一台电脑有多个摄像头设备，那么将会出现从0开始的多个摄像头编号。
-2. 判断获取VideoCapture实例是否成功
-如果传入无效的视频文件或摄像头编号，那么VideoCapture类将会在后续的read()接口返回（False，None），为了避免此类事件发生，可以通过VideoCapture类的isOpened()接口进行判断，该接口返回一个boolean值，正常获取实例返回True，否则返回False，其使用示例如下：
-# 判断是否正确获取VideoCapture类实例 while fcap.isOpened(): # next step operation  3. 获取视频流信息
-一般视频流主要的帧信息包含画面宽高还有帧率，对于视频文件，则会多出整个视频流多少帧，因此，我们一般主要关注这四个视频流信息即可，而我们用到的则是VideoCapture类的get接口，其使用示例如下：
-# 获取视频帧的宽 w = fcap.get(cv2.CAP_PROP_FRAME_WIDTH) # 获取视频帧的高 h = fcap.get(cv2.CAP_PROP_FRAME_HEIGHT) # 获取视频帧的帧率 fps = fcap.get(cv2.CAP_PROP_FPS)  获取到的帧率对于摄像头设备来说，如果所使用的终端不支持查询，那么将会返回0值，且该值也不是非常精确的。
-# 获取视频流的总帧数 fcount = fcap.get(cv2.CAP_PROP_FRAME_COUNT)  注意这个是对视频文件才有意义，对于摄像头是没意义的，且以上获取到的返回信息均是浮点型的，注意转换为整型。
-4. 获取帧画面
-这个就相对简单，直接使用VideoCapture类的read接口即可，该接口会返回两个参数，第一个参数是读取成功与否标志位，成功为True否则为False，第二个参数则为具体的帧数据，其是一个numpy.ndarray的数组，其使用示例如下：
-# 获取帧画面 success, frame = fcap.</description>
-    </item>
-    
-    <item>
-      <title>VLC编译</title>
-      <link>https://metrillin.github.io/2020/vlc%E7%BC%96%E8%AF%91/</link>
-      <pubDate>Sat, 05 Sep 2020 21:24:17 +0800</pubDate>
-      
-      <guid>https://metrillin.github.io/2020/vlc%E7%BC%96%E8%AF%91/</guid>
-      <description>VLC编译 git clone git://github.com/vlc-qt/vlc-qt.git sudo apt install libvlc-dev sudo apt-get install snapd sudo apt-get install snapcraft sudo snap install vlc export QTDIR=/Qt安装路径/5.12.3/gcc_64 export LD_LIBRARY_PATH=$QTDIR/lib export PATH=$PATH:$QTDIR/bin sudo cmake .. -DCMAKE_BUILD_TYPE=Debug sudo make -j8 sudo make install  core libvlc error: No plugins found! Check your VLC installation. VLC-Qt Error: libvlc failed to load! sudo apt-get install libvlc-dev sudo apt-get install vlc  CMake Error at config/Dependencies.cmake:28 (FIND_PACKAGE): By not providing &amp;quot;FindQt5Core.</description>
-    </item>
-    
-    <item>
-      <title>Docker实例</title>
-      <link>https://metrillin.github.io/2020/docker%E5%AE%9E%E4%BE%8B/</link>
-      <pubDate>Tue, 05 May 2020 21:21:43 +0800</pubDate>
-      
-      <guid>https://metrillin.github.io/2020/docker%E5%AE%9E%E4%BE%8B/</guid>
-      <description>[TOC]
-1. docker实例 下面使用ubuntu:18.04作为例子
-1.1. 镜像使用 1.1.1. 获取镜像 docker pull ubuntu:18.04  等待下载完成后,查看宿主机镜像
-docker images  我们可以看刚刚下载下来的镜像 1.1.2. 运行镜像 docker run -it ubuntu:18.04 bash  此时我们即启动了该镜像 此处需要说明，每一次使用镜像运行，都会生成一个容器,退出的容器并不会立即删除，除非手动 docker rm,如果不需要排障和保留结果可以使用以下命令
-docker run -it --rm ubuntu:18.04 bash   &amp;ndash;rm 参数使docker不会保留该容器，会在容器退出后将其删除
-1.1.3. 操作容器 当使用docker run -it ubuntu:18.04 bash会在本地生成一个容器，容器和镜像的关系相当于对象和类，查看本地容器
-docker ps -a  启动一个已经停止的容器
-docker start b8ed1b0ee812 //containerID/name  捕获一个正在运行的容器，使其转到前台bash
-docker attach b8ed1b0ee812 //containerID/name  attach捕获后推出容器，此容器会停止，如果想推出后继续在后台运行使用exec命令
-docker exec -it b8ed1b0ee812 /bin/bash  1.</description>
-    </item>
-    
-    <item>
-      <title>Docker常用命令</title>
-      <link>https://metrillin.github.io/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
-      <pubDate>Mon, 06 Apr 2020 21:19:44 +0800</pubDate>
-      
-      <guid>https://metrillin.github.io/2020/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
-      <description>docker常用命令 示例 1.helloworld的调用 从仓库将image抓取到本地
-docker image pull library/hello-world  docker image pull是抓取image文件的命令。ibrary/hello-world是镜像文件在仓库的位置，其中library是image文件所在的组，hello-world是 image 文件的名字。
-获得管理员权限（对宿主机的访问）
-docker run -it --privileged --rm ubuntu:18.04 bash  查看本地镜像文件:
-docker image ls  运行镜像，会生成一个容器实例，镜像和容器的关系就像是类和对象的关系。 查看当前所有容器 &amp;gt; docker container ls
-查看当前电脑所有容器，包括终止运行的容器 &amp;gt; docker container ls &amp;ndash;all
-终止运行的容器文件，依然会占据硬盘空间，下面是删除指令 &amp;gt; docker container rm [containerID]
-除过以上我们使用的Docker命令外，Docker还有一些其它常用的命令
-拉取docker镜像
-docker pull image_name  设置docker开机自启动
-systemctl enable docker  从镜像中构建容器
-docker run -it ubuntu:18.04 bash  从镜像中构建容器，退出容器后不保留容器
-docker run -it --rm ubuntu:18.</description>
-    </item>
-    
-    <item>
-      <title>Docker安装</title>
-      <link>https://metrillin.github.io/2020/docker%E5%AE%89%E8%A3%85/</link>
-      <pubDate>Sun, 05 Apr 2020 21:18:19 +0800</pubDate>
-      
-      <guid>https://metrillin.github.io/2020/docker%E5%AE%89%E8%A3%85/</guid>
-      <description>docker安装 ## 安装
-1.卸载旧版本 Docker 的旧版本被称为 docker，docker.io 或 docker-engine 。如果已安装，请卸载它们：
-sudo apt-get remove docker docker-engine docker.io containerd runc  2.使用 APT 安装 sudo apt-get update  安装 apt 依赖包，用于通过HTTPS来获取仓库:
-sudo apt-get install \ apt-transport-https \ ca-certificates \ curl \ gnupg-agent \ software-properties-common  为了确认所下载软件包的合法性，需要添加软件源的 GPG 密钥 添加 Docker 的官方 GPG 密钥：
-$ curl \-fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt\-key add \-  9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88 通过搜索指纹的后8个字符，验证您现在是否拥有带有指纹的密钥。</description>
-    </item>
-    
-    <item>
-      <title>Ubuntu开机自启动GUI界面</title>
-      <link>https://metrillin.github.io/2020/ubuntu%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8gui%E7%95%8C%E9%9D%A2/</link>
-      <pubDate>Fri, 06 Mar 2020 08:18:29 +0800</pubDate>
-      
-      <guid>https://metrillin.github.io/2020/ubuntu%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8gui%E7%95%8C%E9%9D%A2/</guid>
-      <description> ubuntu开机自启动GUI界面 1.不需要GUI的后台程序只需输入 sudo gedit /etc/rc.local  在exit 0 前添加一行
-cd /home/lin/; ./run_guard.sh &amp;amp;  即可正常开启启动程序
-2.开机启动GUI界面程序
-由于GUI界面需要在xserver服务启动之后才能启动，放在rc.local中会调用失败
-XServer启动的时候会调用 /etc/X11/Xsession.d/55gnome-session_gnomerc 该脚本的内容就是检测 $HOME/.gnomerc是否存在，如果存在就调用
-所以:
- gedit ~/.gnomerc
- 放入下列脚本即可
-#!/bin/bash cd /home/lin/ ./run_guard.sh &amp;amp;  开机不启动桌面登录程序 实现这个功能，要完成两步：
-1、系统设置-&amp;gt;用户账户-&amp;gt;点击我的账户-&amp;gt;点击右上角的解锁-&amp;gt;打开自动登录-&amp;gt;点击右上角的锁定-&amp;gt;退出系统设置
-2、在/etc/profile文件的开头添加执行程序的命令。如： cd /home/xx/xx(这里是可执行文件的绝对路径) ./hello 或者直接写： /home/xx/xx/hello  程序不休眠 在桌面右上角设置的不挂起，要在桌面加载之后才会生效，当我们无桌面或将桌面禁用就可以用到下列方法  在/etc/profile中添加
-export DISPLAY=:0 xset -dpms xset s 0  </description>
-    </item>
-    
-    <item>
-      <title>PYQT环境搭建与QT异同分析</title>
-      <link>https://metrillin.github.io/2019/pyqt%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8Eqt%E5%BC%82%E5%90%8C%E5%88%86%E6%9E%90/</link>
-      <pubDate>Sat, 19 Oct 2019 22:43:08 +0800</pubDate>
-      
-      <guid>https://metrillin.github.io/2019/pyqt%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8Eqt%E5%BC%82%E5%90%8C%E5%88%86%E6%9E%90/</guid>
-      <description>PYQT环境搭建与QT异同分析 简介 Qt是C++的跨平台框架，Pyqt是一个跨平台的工具包。我们可以直接使用Qt designer绘制出QT的UI界面，使用Pyqt将ui文件转换成Python语法。此外，由于Pyqt使用python语法，本质上是一个解释器，即不需要交叉编译。
-PYQT环境搭建 pyqt使用环境需要以下几个软件支持
-Python主程序 Pycharm Qt5&amp;lt;主要使用QT5中的designer&amp;gt; PyQt库  Python主程序下载安装 python官网下载地址 https://www.python.org/downloads/  windows下选择executable安装包进行安装 下载完对应版本后，双击可执行文件对Python进行安装，注意勾选 Add Python 3.7 to PATH （否则需要自己添加系统变量） 默认全部 勾选，点击Next 注意：Python所在的路径建议不要有中文路径。
-PyCharm安装 下面链接为Pycharm安装包以及破解包，具体安装及破解可以点击链接下载。 链接: https://pan.baidu.com/s/1rPwaMzfUKbisYaAAwwzihg 提取码: mqut
-QT5下载 下面链接提供QT全部版本。建议选择QT5以上，目前本人使用版本为Qt5.9.2 链接: https://download.qt.io/archive/qt/ 下载后安装即可，编译器及组件可根据需要选择下载。
-PyQt下载 在安装好Python之后，打开命令行，输入以下命令（如果无效，请将Python安装路径加到环境变量中）
-pip install PyQt5  如果需要指定版本请输入
-installpip install PyQt5==5.10.1  5.10.1为对应的版本号，等待Pyqt下载完成后，我们打开PYcharm进行环境配置。
-PyQT+PyCharm+Qt designer搭建 打开 Pycharm，Files-&amp;gt;Settings-&amp;gt;External Tools，添加两个 tools，Qt Designer、PyUIC： 点击+号添加tools Programs:的地方找到你自己的 designer.exe 所在的位置 Working directory:的地方填上$ProjectFileDir$ 同样的我们添加Pyqt工具 Programs:的地方找到你自己的 python.exe 所在的位置 Arguments:的地方填上-m PyQt5.uic.pyuic$FileName$ -o $FileNameWithoutExtension$.</description>
-    </item>
-    
-    <item>
-      <title>Linux内存分布</title>
-      <link>https://metrillin.github.io/2019/linux%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/</link>
-      <pubDate>Tue, 15 Oct 2019 22:11:18 +0800</pubDate>
-      
-      <guid>https://metrillin.github.io/2019/linux%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/</guid>
-      <description>linux内存分布 X86 平台 Linux 进程内存布局 什么是虚拟空间  虚拟空间可以认为是操作系统给每个进程准备的沙盒，就像电影《黑客帝国》中 Matrix 给每个人准备的充满营养液的容器一样。
- 实际上，每个进程只存活在自己的虚拟世界里，却感觉自己独占了所有的系统资源（内存）。
- 当一个进程要使用某块内存时，它会将自己世界里的一个内存地址告诉操作系统，剩下的事情就由操作系统接管了。
- 操作系统中的内存管理策略将决定映射哪块真实的物理内存，供应用使用。操作系统会竭尽全力满足所有进程合法的内存访问请求。
- 一旦发现应用试图访问非法内存，它将会把进程杀死，防止它做“坏事”影响到系统或其他进程。
-  这样做，一方面为了安全，防止进程操作其他进程或者系统内核的数据；另一方面为了保证系统可同时运行多个进程，且单个进程使用的内存空间可以超过实际的物理内存容量。 该做法的另一结果则是降低了每个进程内存管理的复杂度，进程只需关心如何使用自己线性排列的虚拟地址，而不需关心物理内存的实际容量，以及如何使用真实的物理内存。
-进程内存布局 在多任务操作系统中的每一个进程都运行在一个属于它自己的内存沙盘中。这个沙盘就是虚拟地址空间（virtual address space），在32位模式下它总是一个4GB的内存地址块。这些虚拟地址通过页表（page table）映射到物理内存，页表由操作系统维护并被处理器引用。每一个进程拥有一套属于它自己的页表，但是还有一个隐情。只要虚拟地址被使能，那么它就会作用于这台机器上运行的所有软件，包括内核本身。因此一部分虚拟地址必须保留给内核使用： 这并不意味着内核使用了那么多的物理内存，仅表示它可支配这么大的地址空间，可根据内核需要，将其映射到物理内存。内核空间在页表中拥有较高的特权级（ring 2 或以下），因此只要用户态的程序试图访问这些页，就会导致一个页错误（page fault）。在 Linux 中，内核空间是持续存在的，并且在所有进程中都映射到同样的物理内存。内核代码和数据总是可寻址的，随时准备处理中断和系统调用。与此相反，用户模式地址空间的映射随进程切换的发生而不断变化： 蓝色区域表示映射到物理内存的虚拟地址，而白色区域表示未映射的部分。在上面的例子中，Firefox 使用了相当多的虚拟地址空间，因为它是传说中的吃内存大户。
-虚拟空间地址排布  在 32 位系统下，进程的虚拟地址空间有 4G，其中的 1G 分配给了内核空间，用户应用可以使用剩余的 3G。 在 64 位的 Linux 系统上，进程的虚拟地址空间可以达到 256TB，内核和应用分别占用 128TB。目前看来，这样的地址空间范围足够用了。 图#1中，《深入程序布局内部》中讨论过的内容，是按照 ELF 文件中的程序头信息，加载文件内容所得到的。除此之外，加载器还会为每个应用分配栈区（Stack）、堆区（Heap）和动态链接库加载区。栈和堆分别向相对的方向增长，系统会有相应的保护措施，阻止越界行为发生。  栈 - 专门用来存储局部变量，所有的局部变量都是声明在栈区域当中。 堆 - 允许程序员手动的从堆申请空间来使用。程序员可以自己申请指定字节数的空间。 BSS段 - 用来存储未初始化的全局变量和静态变量，声明一个全局变量，如果我们没有初始化，在程序运行最开始的时候，这个变量没有初始化时是存储在BSS段，初始化之后，全局变量和静态变量就会被放到常量区。 数据段/常量区 - 用来存储已经初始化的全局变量、静态变量，还有常量数据 代码段 - 用来存储程序的代码/指令。  查看进程内存排布 在 Linux 系统中，使用如下命令可查看一个运行中的进程的内存排布。 cat /proc/PID/maps 从以上输出的内容中，可以直观看到进程的段、堆区，动态链接库加载区，栈区的逻辑地址排布，以及每块内存区分配到的权限等。 除此之外，还有两块 vdso 和 vsyscall 内存区。它们是一部分内核数据在用户空间的映射，为了提高应用的性能而创建。</description>
-    </item>
-    
-    <item>
-      <title>Qt实用函数</title>
-      <link>https://metrillin.github.io/2019/qt%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0/</link>
-      <pubDate>Sat, 05 Jan 2019 22:17:06 +0800</pubDate>
-      
-      <guid>https://metrillin.github.io/2019/qt%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0/</guid>
-      <description>Qt实用函数(长期更新) 设置窗体固定大小不可拖动 this-&amp;gt;setFixedSize(this-&amp;gt;width(),this-&amp;gt;height());  窗体显示状态自定义 setWindowFlags(Qt::CustomizeWindowHint); setWindowFlags(Qt::WindowCloseButtonHint); //只要关闭按钮 setWindowFlags(Qt::WindowFlags type) Qt::FrameWindowHint:没有边框的窗口 Qt::WindowStaysOnTopHint: //总在最上面的窗口 Qt::CustomizeWindowHint: //自定义窗口标题栏,以下标志必须与这个标志一起使用才有效,否则窗口将有默认的标题栏 Qt::WindowTitleHint //显示窗口标题栏 Qt::WindowSystemMenuHint //显示系统菜单 Qt::WindowMinimizeButtonHint //显示最小化按钮 Qt::WindowMaximizeButtonHint //显示最大化按钮 Qt::WindowMinMaxButtonsHint //显示最小化按钮和最大化按钮 Qt::WindowCloseButtonHint //显示关闭按钮  乱码解决方案 QApplication a(argc, argv); //获取系统编码，否则移植会出现乱码 QTextCodec *codec = QTextCodec::codecForName(&amp;quot;UTF-8&amp;quot;); //设置和对本地文件系统读写时候的默认编码格式 QTextCodec::setCodecForLocale(codec); //设置传给tr函数时的默认字符串编码 QTextCodec::setCodecForTr(codec); //用在字符常量或者QByteArray构造QString对象时使用的一种编码方式 QTextCodec::setCodecForCStrings(codec);  隐藏任务栏显示 setWindowFlags(Qt::Tool | Qt::X11BypassWindowManagerHint)  关闭按钮实现的功能 hide(); //进行界面隐藏，但是显示托盘，可通过点击托盘实现界面的重新显示 quit(); //退出系统  获取系统当前时间并设置显示格式 QDateTime current_date_time = QDateTime::currentDateTime(); QString current_date = current_date_time.toString(&amp;quot;yyyy-MM-dd hh:mm:ss ddd&amp;quot;); 例：2013-05-24 13:09:10 周五 获取当前时间时、分、秒 范围：小时(0--23)、分钟(0--59)、秒(0--59)、毫秒(0--999) QTime current_time = QTime::currentTime(); int hour = current_time.</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>所有文章 - mentirBlog</title>
+        <link>https://example.com/posts/</link>
+        <description>所有文章 | mentirBlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 01 Apr 2023 20:33:37 &#43;0800</lastBuildDate><atom:link href="https://example.com/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>国密ssl抓包分析</title>
+    <link>https://example.com/%E5%9B%BD%E5%AF%86tls%E6%8F%A1%E6%89%8B%E6%8A%93%E5%8C%85%E8%A7%A3%E6%9E%90/</link>
+    <pubDate>Sat, 01 Apr 2023 20:33:37 &#43;0800</pubDate>
+    <author>mentir.</author>
+    <guid>https://example.com/%E5%9B%BD%E5%AF%86tls%E6%8F%A1%E6%89%8B%E6%8A%93%E5%8C%85%E8%A7%A3%E6%9E%90/</guid>
+    <description><![CDATA[国密ssl抓包分析 国密SSL VPN握手抓包分析 握手流程如下 1 2 3 4 5 6 7 8 1. tcp三次握手 2. 客户端主动向服务端发送 client hello 3. 服务端向客户端返回 server]]></description>
+</item>
+<item>
+    <title>基于KMDF的磁盘写保护</title>
+    <link>https://example.com/%E5%9F%BA%E4%BA%8Ekmdf%E5%AE%9E%E7%8E%B0%E7%A3%81%E7%9B%98%E5%86%99%E4%BF%9D%E6%8A%A4/</link>
+    <pubDate>Sun, 10 Jul 2022 18:35:37 &#43;0800</pubDate>
+    <author>mentir.</author>
+    <guid>https://example.com/%E5%9F%BA%E4%BA%8Ekmdf%E5%AE%9E%E7%8E%B0%E7%A3%81%E7%9B%98%E5%86%99%E4%BF%9D%E6%8A%A4/</guid>
+    <description><![CDATA[基于KMDF的磁盘写保护 前言 Windows上有几种不同类型的过滤器驱动程序，从文件系统过滤器到Ndis封包过滤器以及特定的PnP设备过滤器等]]></description>
+</item>
+<item>
+    <title>Sysmon的配置与使用</title>
+    <link>https://example.com/sysmon%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/</link>
+    <pubDate>Sun, 12 Jun 2022 19:20:37 &#43;0800</pubDate>
+    <author>mentir.</author>
+    <guid>https://example.com/sysmon%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/</guid>
+    <description><![CDATA[windows Sysmon Sysmon可以通过系统服务和驱动程序，实时记录进程创建，文件访问以及网络信息的记录，并把相关的信息写入并展示在windows的日志事件]]></description>
+</item>
+<item>
+    <title>C&#43;&#43;中的RTTI技术</title>
+    <link>https://example.com/c-rtti%E6%8A%80%E6%9C%AF/</link>
+    <pubDate>Sun, 09 Jan 2022 21:32:17 &#43;0800</pubDate>
+    <author>mentir.</author>
+    <guid>https://example.com/c-rtti%E6%8A%80%E6%9C%AF/</guid>
+    <description><![CDATA[C++中的RTTI技术 前言 RTTI的全称是“Runtime Type Identification”，意思是运行时类型识别。C++引入这个机制是为了让]]></description>
+</item>
+<item>
+    <title>chromium添加Widevine</title>
+    <link>https://example.com/widevine-cdm/</link>
+    <pubDate>Thu, 15 Jul 2021 15:35:37 &#43;0800</pubDate>
+    <author>mentir.</author>
+    <guid>https://example.com/widevine-cdm/</guid>
+    <description><![CDATA[Widevine Cdm 前言 Widevine是google推出的一种DRM，支持从google指定的服务器上，下载经google加密的版权文件，如视频、应用等。]]></description>
+</item>
+<item>
+    <title>单独编译chromium的Gtest</title>
+    <link>https://example.com/%E5%8D%95%E5%85%83%E8%B0%83%E8%AF%95demo%E7%BC%96%E8%AF%91/</link>
+    <pubDate>Thu, 15 Apr 2021 21:35:37 &#43;0800</pubDate>
+    <author>mentir.</author>
+    <guid>https://example.com/%E5%8D%95%E5%85%83%E8%B0%83%E8%AF%95demo%E7%BC%96%E8%AF%91/</guid>
+    <description><![CDATA[chrome单元测试 单独编译chromium的Gtest 使用 编译单元测试模块 chromium 中以 *unittest 命名的文件为可以使用goole test进行单元编译，适用]]></description>
+</item>
+<item>
+    <title>C&#43;&#43;中的断言(assert与static_assert)</title>
+    <link>https://example.com/c-11%E9%9D%99%E6%80%81%E6%96%AD%E8%A8%80static_assert/</link>
+    <pubDate>Mon, 15 Mar 2021 21:35:37 &#43;0800</pubDate>
+    <author>mentir.</author>
+    <guid>https://example.com/c-11%E9%9D%99%E6%80%81%E6%96%AD%E8%A8%80static_assert/</guid>
+    <description><![CDATA[C++中的断言(assert与static_assert) assert assert被C/C++用来判断某些条件是否成立，比如判断某些参数是否合法,指针]]></description>
+</item>
+<item>
+    <title>windows驱动签名</title>
+    <link>https://example.com/%E9%A9%B1%E5%8A%A8%E7%AD%BE%E5%90%8D%E8%B8%A9%E5%9D%91/</link>
+    <pubDate>Sat, 20 Feb 2021 15:35:37 &#43;0800</pubDate>
+    <author>mentir.</author>
+    <guid>https://example.com/%E9%A9%B1%E5%8A%A8%E7%AD%BE%E5%90%8D%E8%B8%A9%E5%9D%91/</guid>
+    <description><![CDATA[windows上的新版驱动签名 前言 最近公司在进行网卡驱动的研发，而Windows驱动要想跑起来就必须得进行驱动签名。这中间过程坎坷，我们也在]]></description>
+</item>
+<item>
+    <title>decltype类型推导</title>
+    <link>https://example.com/decltype%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC/</link>
+    <pubDate>Thu, 18 Feb 2021 14:35:37 &#43;0800</pubDate>
+    <author>mentir.</author>
+    <guid>https://example.com/decltype%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC/</guid>
+    <description><![CDATA[decltype类型推导 decltype 关键字是为了解决 auto 关键字只能对变量进行类型推导的缺陷而出现的。它的用法和 typeof 很相似： 1 decltype(表达式) 有时]]></description>
+</item>
+<item>
+    <title>Const详解与constexpr</title>
+    <link>https://example.com/const%E8%AF%A6%E8%A7%A3%E4%B8%8Econstexpr/</link>
+    <pubDate>Fri, 18 Dec 2020 14:35:37 &#43;0800</pubDate>
+    <author>mentir.</author>
+    <guid>https://example.com/const%E8%AF%A6%E8%A7%A3%E4%B8%8Econstexpr/</guid>
+    <description><![CDATA[const详解 简介 C++中的Const作为从C中继承下来的关键字，名叫常量限定符，用来限定特定变量，以通知编译器该变量是不可修改的。习惯性的]]></description>
+</item>
+</channel>
 </rss>

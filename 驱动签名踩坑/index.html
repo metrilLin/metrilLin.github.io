@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>windows驱动签名 - mentirBlog</title><meta name="Description" content="Hugo mentirBlog"><meta property="og:title" content="windows驱动签名" />
+<meta property="og:description" content="windows上的新版驱动签名 前言 最近公司在进行网卡驱动的研发，而Windows驱动要想跑起来就必须得进行驱动签名。这中间过程坎坷，我们也在" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/%E9%A9%B1%E5%8A%A8%E7%AD%BE%E5%90%8D%E8%B8%A9%E5%9D%91/" /><meta property="og:image" content="https://example.com/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-02-20T15:35:37+08:00" />
+<meta property="article:modified_time" content="2021-02-20T15:35:37+08:00" /><meta property="og:site_name" content="mentirBlog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://example.com/logo.png"/>
+
+<meta name="twitter:title" content="windows驱动签名"/>
+<meta name="twitter:description" content="windows上的新版驱动签名 前言 最近公司在进行网卡驱动的研发，而Windows驱动要想跑起来就必须得进行驱动签名。这中间过程坎坷，我们也在"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/%E9%A9%B1%E5%8A%A8%E7%AD%BE%E5%90%8D%E8%B8%A9%E5%9D%91/" /><link rel="prev" href="https://example.com/decltype%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC/" /><link rel="next" href="https://example.com/c-11%E9%9D%99%E6%80%81%E6%96%AD%E8%A8%80static_assert/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "windows驱动签名",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/%E9%A9%B1%E5%8A%A8%E7%AD%BE%E5%90%8D%E8%B8%A9%E5%9D%91\/"
+        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "驱动","wordcount":  4001 ,
+        "url": "https:\/\/example.com\/%E9%A9%B1%E5%8A%A8%E7%AD%BE%E5%90%8D%E8%B8%A9%E5%9D%91\/","datePublished": "2021-02-20T15:35:37+08:00","dateModified": "2021-02-20T15:35:37+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/example.com\/images\/avatar.jpg",
+                    "width":  1024 ,
+                    "height":  1024 
+                }},"author": {
+                "@type": "Person",
+                "name": "mentir."
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="mentirBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i></span>LoveIt</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/metrilLin" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="mentirBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i></span>LoveIt</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/metrilLin" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">windows驱动签名</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>mentir.</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E9%A9%B1%E5%8A%A8/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>驱动</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-02-20">2021-02-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 4001 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 8 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是代码签名">什么是代码签名</a></li>
+    <li><a href="#代码签名证书分类">代码签名证书分类</a></li>
+    <li><a href="#windows驱动程序">Windows驱动程序</a></li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#前置条件">前置条件</a></li>
+      </ul>
+    </li>
+    <li><a href="#一使用证明签名attestation-signing">一、使用证明签名(attestation-signing)</a>
+      <ul>
+        <li><a href="#创建cab文件进行提交">创建CAB文件进行提交</a></li>
+      </ul>
+    </li>
+    <li><a href="#二使用hlk签名认证">二、使用HLK签名认证</a>
+      <ul>
+        <li><a href="#搭建hlk测试环境">搭建HLK测试环境</a></li>
+        <li><a href="#hck-环境搭建">HCK 环境搭建</a></li>
+      </ul>
+    </li>
+    <li><a href="#经验教训">经验教训</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="windows上的新版驱动签名">windows上的新版驱动签名</h1>
+<h1 id="前言">前言</h1>
+<p>最近公司在进行网卡驱动的研发，而Windows驱动要想跑起来就必须得进行驱动签名。这中间过程坎坷，我们也在驱动签名上也踩过不少坑，特此记录，希望能帮到有需要的友商。</p>
+<h1 id="代码签名基础">代码签名基础</h1>
+<p>在开始讲驱动签名之前，我们先简单的科普一下什么是代码签名。</p>
+<h2 id="什么是代码签名">什么是代码签名</h2>
+<p><strong>代码签名</strong>（Code signing）是利用<strong>代码签名证书</strong>对可执行文件或脚本进行数字签名，以确认软件作者及保证软件在签名后未被修改或损坏的措施，此措施使用加密散列来验证真实性和完整性。简单来说就是进行代码签名后，可以增加程序的可信度。</p>
+<h2 id="代码签名证书分类">代码签名证书分类</h2>
+<p>代码签名证书主要分为两类：</p>
+<p><strong>标准代码签名证书</strong></p>
+<p>标准代码签名(OV)只需要验证申请企业的基本信息、税务信息，验证成功后通过邮件等形式通常针对32/64位应用程序进行签名，以防止各类杀毒软件的误报。仅需较短的处理时间及较低的成本，但无法用于 LSA 和 UEFI 文件签名、无法用于内核模式驱动程序。</p>
+<p><strong>EV扩展型代码签名证书</strong></p>
+<p>EV扩展型代码签名证书除了验证企业的基本信息、税务信息外，还会对企业的经营地址、申请人身份进行审查，区别于标准代码签名的重要特点是支持<strong>Windows 10内核驱动文件签名</strong>和<strong>消除SmartScreen</strong>筛选器安全提醒，此外EV代码签名针对内核模式的驱动文件需要进行微软的交叉签名。</p>
+<p><strong>这里需要注意，驱动文件要用EV证书进行签名才可以用。</strong></p>
+<h2 id="windows驱动程序">Windows驱动程序</h2>
+<p>了解了代码签名之后，再来了解一点关于Windows驱动程序的基础知识：</p>
+<ol>
+<li>
+<p>Windows驱动程序是一种 <strong>位于内核地址空间</strong> 并且 <strong>工作于内核模式</strong> 的一种特殊的程序类型( .sys 文件 )；</p>
+</li>
+<li>
+<p>驱动程序是操作系统信任的一个 <strong>内核扩展模块</strong> ；</p>
+</li>
+<li>
+<p>由于驱动程序是工作在内核，极其容易导致系统崩溃蓝屏，所以开发流程相对于普通应用程序会复杂一些；</p>
+</li>
+<li>
+<p>驱动程序类似于DLL程序，它是一个回调函数(子程序)的集合体，这些函数由OS在适当的时候调用；</p>
+</li>
+<li>
+<p>驱动程序也可以通过 <strong>Windows 内核 API</strong> 获得OS的一些服务。</p>
+</li>
+</ol>
+<h1 id="驱动签名踩坑过程">驱动签名踩坑过程</h1>
+<p>微软提供的驱动签名有两种方式：</p>
+<ul>
+<li>
+<p>使用证明签名，仅适用于win10</p>
+</li>
+<li>
+<p>使用HLK进行认证，适用于win7+win10</p>
+</li>
+</ul>
+<h3 id="前置条件">前置条件</h3>
+<p>开始之前进行驱动签名的准备工作，首先需要购买EV证书(我司在ssl.com进行购买)，然后登录到<a href="https://partner.microsoft.com/zh-cn/dashboard/account/managecertificates" target="_blank" rel="noopener noreffer ">managecertificates</a>，以开发者身份将提前准备好的EV证书提交到微软开发者进行认证。</p>
+<p>具体步骤如下：</p>
+<p>在微软开发者账户设置中选择管理证书</p>
+<ol>
+<li>添加证书</li>
+<li>下载SignableFile.bin</li>
+<li>对SignableFile.bin进行签名，比如是在ssl.com买的EV证书，可以使用yubikey+signtool 本地签名，也可以使用 eSigner进行远程上签名</li>
+<li>重新上传签完名的SignableFile.bin到微软上，没问题的话证书管理中会有新增的EV证书
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220120191301748_1329568177.png"
+        data-srcset="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220120191301748_1329568177.png, https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220120191301748_1329568177.png 1.5x, https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220120191301748_1329568177.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220120191301748_1329568177.png"
+        title="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220120191301748_1329568177.png" /></li>
+</ol>
+<p>提交完即可根据自身需求，自由选择签名方式。</p>
+<h2 id="一使用证明签名attestation-signing">一、使用证明签名(attestation-signing)</h2>
+<p>PS： 证明签名(attestation-signing) 在Win 7上没法使用，已经尝试的签名组合：</p>
+<pre><code>- Ev sha1+ Ev sha256(交叉签名) + 微软签名
+- Ev sha1+ 微软签名
+- Ev sha256 + 微软签名
+</code></pre>
+<p>根据微软文档 <a href="https://docs.microsoft.com/zh-cn/windows-hardware/drivers/dashboard/get-drivers-signed-by-microsoft-for-multiple-windows-versions" target="_blank" rel="noopener noreffer ">get-drivers-signed-by-microsoft-for-multiple-windows-versions，</a>需提交Hardware Lab Kit (HLK) 微软硬件测试结果到微软测试上。也就是说如果想在Win7上使用，请用HLK，此处已踩坑。</p>
+<h3 id="创建cab文件进行提交">创建CAB文件进行提交</h3>
+<p>此处不包含驱动开发部分，假设已经编译出驱动release，此时需要的打包文件有：</p>
+<ul>
+<li>
+<p>相关驱动文件</p>
+<ul>
+<li>nacndislwf.cat</li>
+<li>NacNdisLwf.inf</li>
+<li>NacNdisLwf.sys</li>
+</ul>
+</li>
+<li>
+<p>需使用MakeCab对驱动程序进行打包，相关makeCab程序及signtool请下载WindowsSDK包</p>
+</li>
+<li>
+<p>创建DDF文件(相当于打CAB包的配置文件) ，下面是一个打包NacNdisLwf驱动的示例：</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="p">;</span><span class="o">***</span> <span class="nx">nacndislwf</span><span class="p">.</span><span class="nx">ddf</span> <span class="nx">example</span>
+</span></span><span class="line"><span class="cl"><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nx">OPTION</span> <span class="nx">EXPLICIT</span>     <span class="p">;</span> <span class="nx">Generate</span> <span class="nx">errors</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nx">Set</span> <span class="nx">CabinetFileCountThreshold</span><span class="p">=</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nx">Set</span> <span class="nx">FolderFileCountThreshold</span><span class="p">=</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nx">Set</span> <span class="nx">FolderSizeThreshold</span><span class="p">=</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nx">Set</span> <span class="nx">MaxCabinetSize</span><span class="p">=</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nx">Set</span> <span class="nx">MaxDiskFileCount</span><span class="p">=</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nx">Set</span> <span class="nx">MaxDiskSize</span><span class="p">=</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nx">Set</span> <span class="nx">CompressionType</span><span class="p">=</span><span class="nx">MSZIP</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nx">Set</span> <span class="nx">Cabinet</span><span class="p">=</span><span class="nx">on</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nx">Set</span> <span class="nx">Compress</span><span class="p">=</span><span class="nx">on</span>
+</span></span><span class="line"><span class="cl"><span class="p">;</span><span class="nx">Specify</span> <span class="nx">file</span> <span class="nx">name</span> <span class="k">for</span> <span class="nx">new</span> <span class="nx">cab</span> <span class="nx">file</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nx">Set</span> <span class="nx">CabinetNameTemplate</span><span class="p">=</span><span class="nx">NacNdisLwf</span><span class="p">.</span><span class="nx">cab</span>
+</span></span><span class="line"><span class="cl"><span class="p">;</span> <span class="nx">Specify</span> <span class="nx">the</span> <span class="nx">subdirectory</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">files</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="p">;</span> <span class="nx">Your</span> <span class="nx">cab</span> <span class="nx">file</span> <span class="nx">should</span> <span class="nx">not</span> <span class="nx">have</span> <span class="nx">files</span> <span class="nx">at</span> <span class="nx">the</span> <span class="nx">root</span> <span class="nx">level</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">;</span> <span class="nx">and</span> <span class="nx">each</span> <span class="nx">driver</span> <span class="kn">package</span> <span class="nx">must</span> <span class="nx">be</span> <span class="nx">in</span> <span class="nx">a</span> <span class="nx">separate</span> <span class="nx">subfolder</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nx">Set</span> <span class="nx">DestinationDir</span><span class="p">=</span><span class="nx">NacNdisLwf</span>
+</span></span><span class="line"><span class="cl"><span class="p">;</span><span class="nx">Specify</span> <span class="nx">files</span> <span class="nx">to</span> <span class="nx">be</span> <span class="nx">included</span> <span class="nx">in</span> <span class="nx">cab</span> <span class="nx">file</span>
+</span></span><span class="line"><span class="cl"><span class="nx">C</span><span class="p">:</span><span class="err">\</span><span class="nx">tmp</span><span class="err">\</span><span class="nx">Driver</span><span class="err">\</span><span class="nx">none</span><span class="err">\</span><span class="nx">NacNdisLwf</span><span class="p">.</span><span class="nx">Inf</span>
+</span></span><span class="line"><span class="cl"><span class="nx">C</span><span class="p">:</span><span class="err">\</span><span class="nx">tmp</span><span class="err">\</span><span class="nx">Driver</span><span class="err">\</span><span class="nx">none</span><span class="err">\</span><span class="nx">NacNdisLwf</span><span class="p">.</span><span class="nx">Sys</span>
+</span></span><span class="line"><span class="cl"><span class="nx">C</span><span class="p">:</span><span class="err">\</span><span class="nx">tmp</span><span class="err">\</span><span class="nx">Driver</span><span class="err">\</span><span class="nx">none</span><span class="err">\</span><span class="nx">nacndislwf</span><span class="p">.</span><span class="nx">cat</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>打包前可以先对.cat .sys进行签名，这样签名下来可以有两个证书：一个我们的EV证书、一个微软的证明签名</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">signtool sign  /as /fd sha256 /sha1 a32e4ea1143e9748389b2f3eb85e496d481ffbeb  /tr http://ts.ssl.com &#34;C:\tmp\Driver\double\NacNdisLwf.sys&#34;
+</span></span><span class="line"><span class="cl">signtool sign  /as /fd sha256 /sha1 a32e4ea1143e9748389b2f3eb85e496d481ffbeb  /tr http://ts.ssl.com &#34;C:\tmp\Driver\double\nacndislwf.cat&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>调用MakeCab进行打包 (路径需要自己指定)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">MakeCab /f &#34;C:\tmp\Driver\DDF\NacNdisLwfWin10.ddf&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>提交微软的全部文件必须进行EV/sha256签名</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">signtool sign /fd sha256 /sha1 a32e4ea1143e9748389b2f3eb85e496d481ffbeb /tr http://ts.ssl.com &#34;C:\tmp\Driver\DDF\disk1\NacNdisLwf.cab&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>提交微软测试
+<a href="https://partner.microsoft.com/zh-cn/dashboard/hardware/Search" target="_blank" rel="noopener noreffer ">dashboard/hardware/Search</a>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220120191417134_1485003804.png"
+        data-srcset="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220120191417134_1485003804.png, https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220120191417134_1485003804.png 1.5x, https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220120191417134_1485003804.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220120191417134_1485003804.png"
+        title="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220120191417134_1485003804.png" />选择Submit new hardware 提交签名过后的CAB文件，等待微软验证，相关错误会反馈回来；若签名无问题，即可下载已签名完成的文件</li>
+<li>查看结果，可见已经有了微软给的驱动签名
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220107144727043_3394.png"
+        data-srcset="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220107144727043_3394.png, https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220107144727043_3394.png 1.5x, https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220107144727043_3394.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220107144727043_3394.png"
+        title="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220107144727043_3394.png" /></li>
+</ul>
+<p>具体步骤，请参考官方文档微软签名：<a href="https://docs.microsoft.com/zh-cn/windows-hardware/drivers/dashboard/attestation-signing-a-kernel-driver-for-public-release" target="_blank" rel="noopener noreffer ">attestation-signing-a-kernel-driver-for-public-release</a></p>
+<h2 id="二使用hlk签名认证">二、使用HLK签名认证</h2>
+<h3 id="搭建hlk测试环境">搭建HLK测试环境</h3>
+<p>PS：具体请参考微软文档： <a href="https://docs.microsoft.com/en-us/windows-hardware/test/hlk/" target="_blank" rel="noopener noreffer ">windows-hardware</a></p>
+<p>大致逻辑是，需要搭建HLK server与HLK client，将需要测试的驱动程序部署在HLK client上，在HLK server进行控制，HLKserver会对Client执行各种自动化操作，并在server上生成测试结果。</p>
+<ul>
+<li>在测试服务器上安装 Controller 和 Studio
+去微软下载对应系统版本的安装包 <a href="https://docs.microsoft.com/en-us/windows-hardware/test/hlk/" target="_blank" rel="noopener noreffer ">windows-hardware/test/hlk/</a> ，包名为HLKSetUp.exe，先下载所需要的库及相关资料，下载后进行统一安装</li>
+<li>在Client上安装HLK客户端
+确保与server处于同一个局域网域下，ControllerName为server端的设备名<strong>注意此处不要使用Ip，已踩过坑</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">\\&lt;ControllerName&gt;\HLKInstall\Client\Setup.cmd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>另外还有个坑：Client系统语言请使用英语，不然会出现各种奇奇怪怪的报错</strong></p>
+<ul>
+<li>
+<p>创建机器池
+客户端安装完成后会打开HLK Studio，点击Configuration可以看到刚刚安装客户端的设备机器
+需新建一个机器池，并将这个设备从默认的机器池中拖出去，然后右键更改状态为ready</p>
+</li>
+<li>
+<p>之后便可以新建项目，选择测试目标Client上已经安装的驱动进行测试了，这块没啥坑，直接看微软文档即可</p>
+</li>
+<li>
+<p>选择Client上的驱动 (先在Client上安装自己的驱动，studio这边刷新之后就会显示)
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220114143408917_24048.png"
+        data-srcset="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220114143408917_24048.png, https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220114143408917_24048.png 1.5x, https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220114143408917_24048.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220114143408917_24048.png"
+        title="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220114143408917_24048.png" /></p>
+</li>
+<li>
+<p>在Tests上勾选需要运行的自动测试，点击Run selected进行自动测试</p>
+</li>
+<li>
+<p>查看测试结果，遇到失败可以查看原因解决
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220120191515575_403988394.png"
+        data-srcset="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220120191515575_403988394.png, https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220120191515575_403988394.png 1.5x, https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220120191515575_403988394.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220120191515575_403988394.png"
+        title="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220120191515575_403988394.png" /></p>
+</li>
+<li>
+<p>创建提交包：驱动通过验证后需创建提交包进行提交</p>
+</li>
+<li>
+<p>点击add Driver Folder 选择提交的驱动相关文件</p>
+<ul>
+<li>nacndislwf.cat</li>
+<li>NacNdisLwf.inf</li>
+<li>NacNdisLwf.sys</li>
+</ul>
+</li>
+<li>
+<p>点击CreatPackage 进行创建包</p>
+</li>
+<li>
+<p>签名
+微软是推荐使用Use the certificate store里面的证书，但我们在插入yubikey打算使用usb密钥的证书对他进行签名时，发现可以选择在yubikey中的证书。但签名时会失败，报错为<strong>Unable to use the selected certificate to sign the package</strong> ，进入到Event viewer中查看详情为：<strong>Unable to use the selected certificate to sign the package</strong>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220107151215594_7856.png"
+        data-srcset="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220107151215594_7856.png, https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220107151215594_7856.png 1.5x, https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220107151215594_7856.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220107151215594_7856.png"
+        title="https://raw.githubusercontent.com/metrilLin/mapdepot/main/20220107151215594_7856.png" /></p>
+<ul>
+<li>
+<p>研究了很久，在创建HLKX时只能在这里选择签名，因为HLK不支持signtools</p>
+</li>
+<li>
+<p>解决方案1：使用C#的CSP对HLkx进行签名 ，&lt;失败：CSP无法识别sha384 签名&gt;</p>
+</li>
+<li>
+<p>解决方案2 ：问SSL.com客服询问解决方法，客服联系相关技术人员回复邮件，结果迟迟未回复</p>
+</li>
+<li>
+<p>在相关社区找到资料，看起来是HLK studio只支持sha256签名，不支持新的sha384签名</p>
+<p>指路：<a href="https://community.osr.com/discussion/292981/for-a-windows-10-submission-the-input-package-and-the-included-files-must-be-signed-with-sha256-sig#latest" target="_blank" rel="noopener noreffer ">for-a-windows-10-submission-the-input-package-and-the-included-files-must-be-signed-with-sha256-sig#latest</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p>通过SSL.com签发的OV证书进行签名
+由于之前SSl.com的OV代码证书没有人在使用，所以需要重新创建CSR提交到SSL上重新生成证书(SSL.com的验证流程很慢，正常要3-5天)</p>
+<ul>
+<li>
+<p>获取SSL.com带私钥的OV证书</p>
+<ul>
+<li>查看OV证书是不是带sha256 RSA类型</li>
+</ul>
+</li>
+<li>
+<p>与EV证书采用相同的操作(下载SignableFile.bin本地使用SignTool签名后，上传到微软开发者验证)</p>
+</li>
+<li>
+<p>在Use the certificate store中选择导入本机OV证书</p>
+</li>
+<li>
+<p>签名成功</p>
+</li>
+<li>
+<p>提交微软认证</p>
+<p>签名问题小结：签名会失败的原因由于EV证书的签名算法为Sha384ECDSA，HLK Studio不支持认证该算法，只能使用SHA256RSA来解决；只使用HLK认证的签名依然会失败，这是由于Win10以下的驱动使用HCK认证(与HLK一样 HLK是其升级版本)，可以在创建HLK提交后在Package页面选择merge package将HCK数据包合并到HLK中才可以认证Win7。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="hck-环境搭建">HCK 环境搭建</h3>
+<p>可参考文档： <a href="https://docs.microsoft.com/en-us/windows/win32/w8cookbook/windows-hardware-certification-kit" target="_blank" rel="noopener noreffer ">windows-hardware-certification-kit</a>
+大致安装流程与HLK认证基本相同，这里分享一下过程中踩过的坑：</p>
+<ul>
+<li>HCKserver版本可以使用server2012及server2008，建议使用2008英文版
+- 原因：server2012默认开启domin contrller会导致安装失败，且这个domin contrller不是很好关闭</li>
+<li>需要关闭IE ESC配置
+- 不关闭IE ESC 安装，.net 4.5会失败(点击service manager关闭IE ESC)</li>
+<li>server与client请都使用英文版，避免不必要的问题</li>
+</ul>
+<p>安装后，操作流程与HLK一致，最后package需注意：</p>
+<ul>
+<li>不需要签名，直接生成不签名的HCKX文件</li>
+<li>生成后发送hckx文件到HLK server上进行merge package操作</li>
+</ul>
+<h2 id="经验教训">经验教训</h2>
+<ul>
+<li>建议使用微软的VHLK虚拟机，在本地装hyper-v直接使用虚拟机运行server可以省很多事情</li>
+<li>HLK Client版本请选择对应VHLK虚拟机的版本， <a href="https://docs.microsoft.com/en-us/windows-hardware/test/hlk/" target="_blank" rel="noopener noreffer ">windows-hardware/test/hlk/</a> 上有对应版本的相关说明</li>
+<li>当HLKserver环境内没有相关证书时，可以先生成无签名的hlkx，在外部有证书的机器上下载HLK studio(此时不需要下载contrler)，使用HLK studio打开hlkx重新创建包，并且选择签名重新生成带有签名的hlkx</li>
+<li>使用英文版！使用英文版！使用英文版！重要的事情说三遍</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2021-02-20</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E9%A9%B1%E5%8A%A8/">驱动</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/decltype%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC/" class="prev" rel="prev" title="decltype类型推导"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>decltype类型推导</a>
+            <a href="/c-11%E9%9D%99%E6%80%81%E6%96%AD%E8%A8%80static_assert/" class="next" rel="next" title="C&#43;&#43;中的断言(assert与static_assert)">C++中的断言(assert与static_assert)<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.96.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">mentir.</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,24 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>音视频 on 保持热爱</title>
-    <link>https://metrillin.github.io/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/</link>
-    <description>Recent content in 音视频 on 保持热爱</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 05 Sep 2020 21:24:17 +0800</lastBuildDate>
-    
-	<atom:link href="https://metrillin.github.io/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>VLC编译</title>
-      <link>https://metrillin.github.io/2020/vlc%E7%BC%96%E8%AF%91/</link>
-      <pubDate>Sat, 05 Sep 2020 21:24:17 +0800</pubDate>
-      
-      <guid>https://metrillin.github.io/2020/vlc%E7%BC%96%E8%AF%91/</guid>
-      <description>VLC编译 git clone git://github.com/vlc-qt/vlc-qt.git sudo apt install libvlc-dev sudo apt-get install snapd sudo apt-get install snapcraft sudo snap install vlc export QTDIR=/Qt安装路径/5.12.3/gcc_64 export LD_LIBRARY_PATH=$QTDIR/lib export PATH=$PATH:$QTDIR/bin sudo cmake .. -DCMAKE_BUILD_TYPE=Debug sudo make -j8 sudo make install  core libvlc error: No plugins found! Check your VLC installation. VLC-Qt Error: libvlc failed to load! sudo apt-get install libvlc-dev sudo apt-get install vlc  CMake Error at config/Dependencies.cmake:28 (FIND_PACKAGE): By not providing &amp;quot;FindQt5Core.</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>音视频 - 标签 - mentirBlog</title>
+        <link>https://example.com/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/</link>
+        <description>音视频 - 标签 - mentirBlog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 05 Sep 2020 21:24:17 &#43;0800</lastBuildDate><atom:link href="https://example.com/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" rel="self" type="application/rss+xml" /><item>
+    <title>VLC编译</title>
+    <link>https://example.com/vlc%E7%BC%96%E8%AF%91/</link>
+    <pubDate>Sat, 05 Sep 2020 21:24:17 &#43;0800</pubDate>
+    <author>mentir.</author>
+    <guid>https://example.com/vlc%E7%BC%96%E8%AF%91/</guid>
+    <description><![CDATA[VLC编译 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 git clone git://github.com/vlc-qt/vlc-qt.git sudo apt install libvlc-dev sudo apt-get install snapd sudo apt-get install snapcraft sudo snap install vlc export QTDIR=/Qt安装路径/5.12.3/gcc_64 export]]></description>
+</item>
+</channel>
 </rss>

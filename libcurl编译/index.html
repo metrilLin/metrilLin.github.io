@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>LibCurl编译 - mentirBlog</title><meta name="Description" content="Hugo mentirBlog"><meta property="og:title" content="LibCurl编译" />
+<meta property="og:description" content="libCurl编译 1.首先下载libCurl的源码，这里使用的是Github上的版本 1 git clone https://github.com/curl/curl.git 或者 1 git clone https://github.com/curl/curl 2.生成configure 1 ./buildconf 3.查" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/libcurl%E7%BC%96%E8%AF%91/" /><meta property="og:image" content="https://example.com/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-12-05T21:30:59+08:00" />
+<meta property="article:modified_time" content="2020-12-05T21:30:59+08:00" /><meta property="og:site_name" content="mentirBlog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://example.com/logo.png"/>
+
+<meta name="twitter:title" content="LibCurl编译"/>
+<meta name="twitter:description" content="libCurl编译 1.首先下载libCurl的源码，这里使用的是Github上的版本 1 git clone https://github.com/curl/curl.git 或者 1 git clone https://github.com/curl/curl 2.生成configure 1 ./buildconf 3.查"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/libcurl%E7%BC%96%E8%AF%91/" /><link rel="prev" href="https://example.com/%E7%BC%96%E8%AF%91android%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84openssl/" /><link rel="next" href="https://example.com/qt%E6%93%8D%E4%BD%9Cmysql/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "LibCurl编译",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/libcurl%E7%BC%96%E8%AF%91\/"
+        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Http","wordcount":  698 ,
+        "url": "https:\/\/example.com\/libcurl%E7%BC%96%E8%AF%91\/","datePublished": "2020-12-05T21:30:59+08:00","dateModified": "2020-12-05T21:30:59+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/example.com\/images\/avatar.jpg",
+                    "width":  1024 ,
+                    "height":  1024 
+                }},"author": {
+                "@type": "Person",
+                "name": "mentir."
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="mentirBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i></span>LoveIt</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/metrilLin" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="mentirBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i></span>LoveIt</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/metrilLin" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">LibCurl编译</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>mentir.</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/http/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Http</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2020-12-05">2020-12-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 698 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><h1 id="libcurl编译">libCurl编译</h1>
+<p>1.首先下载libCurl的源码，这里使用的是Github上的版本</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git clone https://github.com/curl/curl.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或者</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git clone https://github.com/curl/curl
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>2.生成configure</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"> ./buildconf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>3.查看本地可开启的功能</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">./configure --enable-pthreads
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>会显示默认环境下安装后能使用的功能，若是满足需求就直接make和sudo make install</p>
+<ul>
+<li>若要开启SSL support和zlib support:(Centos) yum install openssl-libs openssl-devel</li>
+<li>若要支持https需安装libssh2:(Centos) yum install libssh2-devel</li>
+<li>若要支持PSL 验证 Cookie 和证书的 Domain 信息，则安装libpsl:(Centos) yum psl libpsl-devel</li>
+<li>若要支持HTTP2 ,则安装nghttp2:(Centos) yum install libnghttp2-devel nghttp2</li>
+<li>若要支持IDN,则安装libidn:(Centos) yum install libidn2 libidn2-devel</li>
+<li>若要支持metalink，则安装 libmetalink:(Centos) yum install libmetalink libmetalink-devel</li>
+<li>若要支持RTMP实时流传输，则到官网下载安装,可以参考文章 <a href="https://blog.csdn.net/dc_show/article/details/47130639" target="_blank" rel="noopener noreffer ">linux下编译支持librtmp、libx264、libfaac的ffmpeg</a>
+<strong>Ubuntu的可对应上面的centos库自行百度下载</strong>
+<img src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/1609853471_20201221102836019_8153.png" style="zoom:150%;" /></li>
+</ul>
+<p>4.编译libcurl
+由于本人需要openssl 与SSH2的功能（从上图可以看到SSH为未链接状态，我们可以下载libssh2进行编译）
+<strong>编译OpenssH（可选）</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> wget http://www.libssh2.org/download/libssh2-1.4.3.tar.gz
+</span></span><span class="line"><span class="cl"> tar -zxvf libssh2-1.4.3.tar.gz
+</span></span><span class="line"><span class="cl"> <span class="nb">cd</span> libssh2-1.4.3/
+</span></span><span class="line"><span class="cl">//由于我/usr/local的openssl版本太高了，编译会报错，所以使用低版本的openssl
+</span></span><span class="line"><span class="cl"> ./configure --prefix<span class="o">=</span>/usr/local/libssh2 --with-openssl <span class="nv">CPPFLAGS</span><span class="o">=</span><span class="s2">&#34;-I/usr/local/openssl/include&#34;</span> <span class="nv">LDFLAGS</span><span class="o">=</span><span class="s2">&#34;-L/usr/local/openssl/lib&#34;</span>
+</span></span><span class="line"><span class="cl">make
+</span></span><span class="line"><span class="cl">make insatll
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将openssh与openssl链接到libcurl中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="err">进入</span><span class="n">libcurl文件夹</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="o">/</span><span class="n">configure</span> <span class="o">--</span><span class="n">prefix</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">lin</span><span class="o">/</span><span class="n">libcurl</span><span class="o">/</span><span class="n">outputFile</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">debug</span> <span class="o">--</span><span class="n">with</span><span class="o">-</span><span class="n">openssl</span> <span class="n">CPPFLAGS</span><span class="o">=</span><span class="s">&#34;-I/home/lin/openssl/include&#34;</span> <span class="n">LDFLAGS</span><span class="o">=</span><span class="s">&#34;-L/home/lin/openssl/lib&#34;</span> <span class="o">--</span><span class="n">with</span><span class="o">-</span><span class="n">libssh2</span> <span class="n">CPPFLAGS</span><span class="o">=</span><span class="s">&#34;-I/usr/local/libssh2/include&#34;</span> <span class="n">LDFLAGS</span><span class="o">=</span><span class="s">&#34;-L//usr/local/libssh2/lib&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到openssh的功能已经支持。
+<img src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/1609853471_20201221114118426_23030.png" style="zoom:150%;" />
+需要其他的功能也是同理，这里就不展开讲了。</p>
+<p>5.编译与安装
+接下来就是make与makeinstall了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">make</span> <span class="o">-</span><span class="n">j4</span> 
+</span></span><span class="line"><span class="cl"><span class="n">make</span> <span class="n">install</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>查看设置输出的outputFile文件夹，已经编译成功
+<img src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/1609853472_20201221134804756_1652.png" style="zoom:150%;" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-12-05</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/http/">Http</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E7%BC%96%E8%AF%91android%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84openssl/" class="prev" rel="prev" title="编译android对应版本的openssl"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>编译android对应版本的openssl</a>
+            <a href="/qt%E6%93%8D%E4%BD%9Cmysql/" class="next" rel="next" title="Ｑｔ操作mysql">Ｑｔ操作mysql<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.96.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">mentir.</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

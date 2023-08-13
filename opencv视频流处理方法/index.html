@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Opencv视频流处理方法 - mentirBlog</title><meta name="Description" content="Hugo mentirBlog"><meta property="og:title" content="Opencv视频流处理方法" />
+<meta property="og:description" content="opencv视频流处理方法 OpenCV提供了VideoCapture类和VideoWriter类来支持各种格式的视频流，支持的格式类型会因系" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/opencv%E8%A7%86%E9%A2%91%E6%B5%81%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/" /><meta property="og:image" content="https://example.com/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-10-15T18:27:07+08:00" />
+<meta property="article:modified_time" content="2020-10-15T18:27:07+08:00" /><meta property="og:site_name" content="mentirBlog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://example.com/logo.png"/>
+
+<meta name="twitter:title" content="Opencv视频流处理方法"/>
+<meta name="twitter:description" content="opencv视频流处理方法 OpenCV提供了VideoCapture类和VideoWriter类来支持各种格式的视频流，支持的格式类型会因系"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/opencv%E8%A7%86%E9%A2%91%E6%B5%81%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/" /><link rel="prev" href="https://example.com/vlc%E7%BC%96%E8%AF%91/" /><link rel="next" href="https://example.com/%E7%BC%96%E8%AF%91android%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84openssl/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Opencv视频流处理方法",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/opencv%E8%A7%86%E9%A2%91%E6%B5%81%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95\/"
+        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Docker","wordcount":  3263 ,
+        "url": "https:\/\/example.com\/opencv%E8%A7%86%E9%A2%91%E6%B5%81%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95\/","datePublished": "2020-10-15T18:27:07+08:00","dateModified": "2020-10-15T18:27:07+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/example.com\/images\/avatar.jpg",
+                    "width":  1024 ,
+                    "height":  1024 
+                }},"author": {
+                "@type": "Person",
+                "name": "mentir."
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="mentirBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i></span>LoveIt</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/metrilLin" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="mentirBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i></span>LoveIt</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/metrilLin" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Opencv视频流处理方法</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>mentir.</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/docker/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Docker</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2020-10-15">2020-10-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 3263 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><h1 id="opencv视频流处理方法">opencv视频流处理方法</h1>
+<p>OpenCV提供了VideoCapture类和VideoWriter类来支持各种格式的视频流，支持的格式类型会因系统的不同而有所变化，但基本上都是支持avi格式的，且对于视频文件和摄像头画面的读写所用到的接口基本上都相同，因此，我们把它们放在一起来讲了。</p>
+<p><strong>1. 获取VideoCapture类实例</strong></p>
+<p>不管是读取视频文件还是捕获摄像头画面，都使用到了VideoCapture类，但不同的是传入的形参不一样，如果我们传给VideoCapture类的是一个视频文件路径那么将是读取来自视频文件的画面，而如果我们传给VideoCapture类的是摄像头编号那么将是读取来自摄像头的画面，其使用示例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">    <span class="cp"># 获取VideoCapture类实例，读取视频文件
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">fcap</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="err">&#39;</span><span class="n">demo</span><span class="p">.</span><span class="n">mp4</span><span class="err">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="cp"># 读取摄像头画面
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">ccap</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对于摄像头编号，可以使用如下命令获取：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">    <span class="n">ls</span> <span class="o">-</span><span class="n">al</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">video</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对于输出信息以video开头的其数字后缀即为可能的摄像头编号，如果一台电脑有多个摄像头设备，那么将会出现从0开始的多个摄像头编号。</p>
+<p><strong>2. 判断获取VideoCapture实例是否成功</strong></p>
+<p>如果传入无效的视频文件或摄像头编号，那么VideoCapture类将会在后续的read()接口返回（False，None），为了避免此类事件发生，可以通过VideoCapture类的isOpened()接口进行判断，该接口返回一个boolean值，正常获取实例返回True，否则返回False，其使用示例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">    <span class="cp"># 判断是否正确获取VideoCapture类实例
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="k">while</span> <span class="n">fcap</span><span class="p">.</span><span class="n">isOpened</span><span class="p">()</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="cp"># next step operation
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>3. 获取视频流信息</strong></p>
+<p>一般视频流主要的帧信息包含画面宽高还有帧率，对于视频文件，则会多出整个视频流多少帧，因此，我们一般主要关注这四个视频流信息即可，而我们用到的则是VideoCapture类的get接口，其使用示例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">    <span class="cp"># 获取视频帧的宽
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">w</span> <span class="o">=</span> <span class="n">fcap</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="p">.</span><span class="n">CAP_PROP_FRAME_WIDTH</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="cp"># 获取视频帧的高
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">h</span> <span class="o">=</span> <span class="n">fcap</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="p">.</span><span class="n">CAP_PROP_FRAME_HEIGHT</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="cp"># 获取视频帧的帧率
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">fps</span> <span class="o">=</span> <span class="n">fcap</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="p">.</span><span class="n">CAP_PROP_FPS</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>获取到的帧率对于摄像头设备来说，如果所使用的终端不支持查询，那么将会返回0值，且该值也不是非常精确的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cp"># 获取视频流的总帧数
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">fcount</span> <span class="o">=</span> <span class="n">fcap</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="p">.</span><span class="n">CAP_PROP_FRAME_COUNT</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意这个是对视频文件才有意义，对于摄像头是没意义的，且以上获取到的返回信息均是浮点型的，注意转换为整型。</p>
+<p><strong>4. 获取帧画面</strong></p>
+<p>这个就相对简单，直接使用VideoCapture类的read接口即可，该接口会返回两个参数，第一个参数是读取成功与否标志位，成功为True否则为False，第二个参数则为具体的帧数据，其是一个numpy.ndarray的数组，其使用示例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">    <span class="cp"># 获取帧画面
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">success</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">fcap</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>但在读取过程中，有可能会存在失败的情况出现，一般我们是在第二次读取时放入一个while循环来保障整个读取顺利进行，如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">    <span class="cp"># 判断读取视频流是否成功
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="k">while</span> <span class="nl">success</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">success</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">fcap</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="cp"># do something in here
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>5. 针对一组或多头摄像头特殊处理</strong></p>
+<p>当需要同步一组摄像头或一个多头（multihead）摄像头（例如立体摄像头或Kinect）时，read()方法就不太适用了，这时，一般使用grab()和retrieve()方法代替它。对于一组摄像头，其使用示例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cp"># 一组摄像头的特殊处理
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">success0</span> <span class="o">=</span> <span class="n">fcap0</span><span class="p">.</span><span class="n">grab</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">success1</span> <span class="o">=</span> <span class="n">fcap1</span><span class="p">.</span><span class="n">grab</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">success0</span> <span class="n">and</span> <span class="nl">success1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">frame0</span> <span class="o">=</span> <span class="n">fcap0</span><span class="p">.</span><span class="n">retrieve</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">frame1</span> <span class="o">=</span> <span class="n">fcap1</span><span class="p">.</span><span class="n">retrieve</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>6. 跳到视频流某一帧</strong></p>
+<p>对于视频文件，有时候我们需要直接跳到某一个感兴趣的帧并从该帧开始读取数据，那么可以使用VideoCapture类的set接口，其使用示例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cp"># 跳到某一感兴趣帧并从此帧开始读取,如从第360帧开始读取
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">fcap</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">cv2</span><span class="p">.</span><span class="n">CAP_PROP_POS_FRAMES</span><span class="p">,</span> <span class="mi">360</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">success</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">fcap</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>7. 设置摄像头分辨率</strong></p>
+<p>opencv读取到的摄像头画面大小一般为默认的640x480，但这并不一定满足我们的日常使用要求，比如摄像头支持超高清画面，那么我们就希望能捕获到超高清1920x1080的画面，好在VideoCapture类的set接口为我们提供了相应的功能，其使用示例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">    <span class="cp"># 设置摄像头分辨率的高
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">fcap</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">cv2</span><span class="p">.</span><span class="n">CAP_PROP_FRAME_HEIGHT</span><span class="p">,</span> <span class="mi">1080</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="cp"># 设置摄像头分辨率的宽
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">fcap</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">cv2</span><span class="p">.</span><span class="n">CAP_PROP_FRAME_WIDTH</span><span class="p">,</span> <span class="mi">1920</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>8. 获取VideoWriter类实例</strong></p>
+<p>不管是对视频文件的再存储还是对摄像头画面的保存，都是用到了VideoWriter类，且传入的形参意义是一致的，都需要我们传入保存的文件名包含视频格式、指定视频编解码器、保存视频的帧率以及保存视频的分辨率，一般来说，保存视频的帧率最好与读入的画面的帧率一致，但需要我们进行估计或使用计时器才会比较准确，而分辨率则可以更改，只是要求写入的帧其大小要与分辨率保持一致，其使用示例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">writer</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="n">VideoWriter</span><span class="p">(</span><span class="err">&#39;</span><span class="n">output</span><span class="p">.</span><span class="n">avi</span><span class="err">&#39;</span><span class="p">,</span> <span class="n">cv2</span><span class="p">.</span><span class="n">VideoWriter_fourcc</span><span class="p">(</span><span class="sc">&#39;X&#39;</span><span class="p">,</span> <span class="sc">&#39;V&#39;</span><span class="p">,</span> <span class="sc">&#39;I&#39;</span><span class="p">,</span> <span class="sc">&#39;D&#39;</span><span class="p">),</span> <span class="mi">30</span><span class="p">,</span> <span class="p">(</span><span class="mi">1080</span><span class="p">,</span> <span class="mi">1920</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>值得注意的是，我们必须要为VideoWriter类的构造函数传入所需的参数，且若指定的文件名已存在则会被直接覆盖。</p>
+<p><strong>9. VideoWriter类支持的视频编解码器</strong></p>
+<p>在构造VideoWriter类实例时，我们必须要指定视频编解码器，那么VideoWriter类都支持哪些视频编解码器呢？我们通过cv2.VideoWriter_fourcc来指定具体使用的编解码器：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">    <span class="sc">&#39;I&#39;</span><span class="p">,</span><span class="sc">&#39;4&#39;</span><span class="p">,</span><span class="sc">&#39;2&#39;</span><span class="p">,</span><span class="sc">&#39;0&#39;</span><span class="err">：该选项是一个未压缩的</span><span class="n">YUV颜色编码</span><span class="err">，兼容性好，但产生文件较大，文件扩展名为</span><span class="p">.</span><span class="n">avi</span>
+</span></span><span class="line"><span class="cl">    <span class="sc">&#39;P&#39;</span><span class="p">,</span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="sc">&#39;M&#39;</span><span class="p">,</span><span class="sc">&#39;I&#39;</span><span class="err">：该选项是</span><span class="n">MPEG</span><span class="o">-</span><span class="mi">1</span><span class="err">编码类型，文件扩展名为</span><span class="p">.</span><span class="n">avi</span>
+</span></span><span class="line"><span class="cl">    <span class="sc">&#39;X&#39;</span><span class="p">,</span><span class="sc">&#39;V&#39;</span><span class="p">,</span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="sc">&#39;D&#39;</span><span class="err">：该选项是</span><span class="n">MPEG</span><span class="o">-</span><span class="mi">4</span><span class="err">编码类型，得到的视频大小处于平均值，文件扩展名为</span><span class="p">.</span><span class="n">avi</span>
+</span></span><span class="line"><span class="cl">    <span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="sc">&#39;H&#39;</span><span class="p">,</span><span class="sc">&#39;E&#39;</span><span class="p">,</span><span class="sc">&#39;O&#39;</span><span class="err">：该选项是</span><span class="n">Ogg</span> <span class="n">Vorbis</span><span class="err">，文件扩展名为</span><span class="p">.</span><span class="n">ogv</span>
+</span></span><span class="line"><span class="cl">    <span class="sc">&#39;F&#39;</span><span class="p">,</span><span class="sc">&#39;L&#39;</span><span class="p">,</span><span class="sc">&#39;V&#39;</span><span class="p">,</span><span class="sc">&#39;1&#39;</span><span class="err">：该选项是一个</span><span class="n">flash视频</span><span class="err">，文件扩展名为</span><span class="p">.</span><span class="n">flv</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>一般常用的是cv2.VideoWriter_fourcc(&lsquo;X&rsquo;,&lsquo;V&rsquo;,&lsquo;T&rsquo;,&lsquo;D&rsquo;)，mp4编码文件相对小一些，或cv2.VideoWriter_fourcc(&lsquo;I&rsquo;,&lsquo;4&rsquo;,&lsquo;2&rsquo;,&lsquo;0&rsquo;)，文件相对大一些，但为了缩小文件空间我们可能还需要用到ffmpeg工具进一步压缩文件。</p>
+<p><strong>10. 保存帧数据</strong></p>
+<p>这个也很简单，直接使用VideoWriter类的write接口即可，该接口一次可以保存一帧数据到制定文件中，其使用示例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">    <span class="cp"># 保存帧数据
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">writer</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>11. 释放资源</strong></p>
+<p>不管是VideoCapture类还是VideoWriter类，当我们使用完了它们之后，都应该将它们释放掉，避免资源一直被占用，而这两个类都有提供了release()接口给我们，我们只需直接调用即可释放资源，使用示例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">    <span class="cp"># 释放VideoCapture资源
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">fcap</span><span class="p">.</span><span class="n">release</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="cp"># 释放VideoWriter资源
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">writer</span><span class="p">.</span><span class="n">release</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>12. 一个完整的示例代码</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">    <span class="cp"># -*- coding: utf-8 -*-
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="cp"># /usr/bin/env/python3
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    
+</span></span><span class="line"><span class="cl">    <span class="err">&#39;&#39;&#39;</span><span class="n">use</span> <span class="n">opencv3</span> <span class="n">to</span> <span class="n">capture</span> <span class="n">video</span> <span class="n">frame</span><span class="p">,</span> <span class="n">show</span> <span class="n">and</span> <span class="n">save</span> <span class="n">its</span> <span class="n">stream</span><span class="p">.</span><span class="err">&#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">import</span> <span class="n">cv2</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">def</span> <span class="n">stream_processing</span><span class="p">()</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="cp"># 获取VideoCapture类实例，读取视频文件
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>        <span class="n">fcap</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="err">&#39;</span><span class="n">demo</span><span class="p">.</span><span class="n">mp4</span><span class="err">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">        <span class="cp"># 设置摄像头分辨率的高
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>        <span class="n">fcap</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">cv2</span><span class="p">.</span><span class="n">CAP_PROP_FRAME_HEIGHT</span><span class="p">,</span> <span class="mi">1080</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="cp"># 设置摄像头分辨率的宽
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>        <span class="n">fcap</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">cv2</span><span class="p">.</span><span class="n">CAP_PROP_FRAME_WIDTH</span><span class="p">,</span> <span class="mi">1920</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="cp"># 跳到某一感兴趣帧并从此帧开始读取,如从第360帧开始读取
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>        <span class="n">fcap</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">cv2</span><span class="p">.</span><span class="n">CAP_PROP_POS_FRAMES</span><span class="p">,</span> <span class="mi">360</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">        <span class="cp"># 获取视频帧的宽
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>        <span class="n">w</span> <span class="o">=</span> <span class="n">fcap</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="p">.</span><span class="n">CAP_PROP_FRAME_WIDTH</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="cp"># 获取视频帧的高
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>        <span class="n">h</span> <span class="o">=</span> <span class="n">fcap</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="p">.</span><span class="n">CAP_PROP_FRAME_HEIGHT</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="cp"># 获取视频帧的帧率
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>        <span class="n">fps</span> <span class="o">=</span> <span class="n">fcap</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="p">.</span><span class="n">CAP_PROP_FPS</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="cp"># 获取视频流的总帧数
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>        <span class="n">fcount</span> <span class="o">=</span> <span class="n">fcap</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="p">.</span><span class="n">CAP_PROP_FRAME_COUNT</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="cp"># 获取VideoWriter类实例
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>        <span class="n">writer</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="n">VideoWriter</span><span class="p">(</span><span class="err">&#39;</span><span class="n">output</span><span class="p">.</span><span class="n">avi</span><span class="err">&#39;</span><span class="p">,</span> <span class="n">cv2</span><span class="p">.</span><span class="n">VideoWriter_fourcc</span><span class="p">(</span><span class="sc">&#39;X&#39;</span><span class="p">,</span> <span class="sc">&#39;V&#39;</span><span class="p">,</span> <span class="sc">&#39;I&#39;</span><span class="p">,</span> <span class="sc">&#39;D&#39;</span><span class="p">),</span> <span class="kt">int</span><span class="p">(</span><span class="n">fps</span><span class="p">),</span> <span class="p">(</span><span class="kt">int</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="kt">int</span><span class="p">(</span><span class="n">h</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">        <span class="cp"># 判断是否正确获取VideoCapture类实例
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>        <span class="k">while</span> <span class="n">fcap</span><span class="p">.</span><span class="n">isOpened</span><span class="p">()</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">            <span class="cp"># 获取帧画面
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>            <span class="n">success</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">fcap</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="nl">success</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">cv2</span><span class="p">.</span><span class="n">imshow</span><span class="p">(</span><span class="s">&#34;demo&#34;</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span>  <span class="err">##</span> <span class="err">显示画面</span>
+</span></span><span class="line"><span class="cl">                <span class="cp"># 获取帧画面
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>                <span class="n">success</span><span class="p">,</span><span class="n">frame</span> <span class="o">=</span> <span class="n">fcap</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">                <span class="cp"># 保存帧数据
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>                <span class="n">writer</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">cv2</span><span class="p">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">)</span> <span class="o">==</span> <span class="n">ord</span><span class="p">(</span><span class="sc">&#39;q&#39;</span><span class="p">)</span><span class="o">:</span>  <span class="err">##</span> <span class="err">等待</span><span class="mi">20</span><span class="n">ms并判断是按</span><span class="err">“</span><span class="n">q</span><span class="err">”退出，相当于帧率是</span><span class="mi">50</span><span class="n">hz</span><span class="err">，注意</span><span class="n">waitKey只能传入整数</span><span class="err">，</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">break</span>
+</span></span><span class="line"><span class="cl">            <span class="cp"># 释放VideoCapture资源
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>            <span class="n">fcap</span><span class="p">.</span><span class="n">release</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="cp"># 释放VideoWriter资源
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>        <span class="n">writer</span><span class="p">.</span><span class="n">release</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cv2</span><span class="p">.</span><span class="n">destroyAllWindows</span><span class="p">()</span>  <span class="err">##</span> <span class="err">销毁所有</span><span class="n">opencv显示窗口</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#34;__main__&#34;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">stream_processing</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-10-15</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/docker/">Docker</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/vlc%E7%BC%96%E8%AF%91/" class="prev" rel="prev" title="VLC编译"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>VLC编译</a>
+            <a href="/%E7%BC%96%E8%AF%91android%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84openssl/" class="next" rel="next" title="编译android对应版本的openssl">编译android对应版本的openssl<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.96.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">mentir.</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

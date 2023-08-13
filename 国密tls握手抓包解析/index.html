@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>国密ssl抓包分析 - mentirBlog</title><meta name="Description" content="Hugo mentirBlog"><meta property="og:title" content="国密ssl抓包分析" />
+<meta property="og:description" content="国密ssl抓包分析 国密SSL VPN握手抓包分析 握手流程如下 1 2 3 4 5 6 7 8 1. tcp三次握手 2. 客户端主动向服务端发送 client hello 3. 服务端向客户端返回 server" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/%E5%9B%BD%E5%AF%86tls%E6%8F%A1%E6%89%8B%E6%8A%93%E5%8C%85%E8%A7%A3%E6%9E%90/" /><meta property="og:image" content="https://example.com/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-04-01T20:33:37+08:00" />
+<meta property="article:modified_time" content="2023-04-01T20:33:37+08:00" /><meta property="og:site_name" content="mentirBlog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://example.com/logo.png"/>
+
+<meta name="twitter:title" content="国密ssl抓包分析"/>
+<meta name="twitter:description" content="国密ssl抓包分析 国密SSL VPN握手抓包分析 握手流程如下 1 2 3 4 5 6 7 8 1. tcp三次握手 2. 客户端主动向服务端发送 client hello 3. 服务端向客户端返回 server"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://example.com/%E5%9B%BD%E5%AF%86tls%E6%8F%A1%E6%89%8B%E6%8A%93%E5%8C%85%E8%A7%A3%E6%9E%90/" /><link rel="prev" href="https://example.com/%E5%9F%BA%E4%BA%8Ekmdf%E5%AE%9E%E7%8E%B0%E7%A3%81%E7%9B%98%E5%86%99%E4%BF%9D%E6%8A%A4/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "国密ssl抓包分析",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/%E5%9B%BD%E5%AF%86tls%E6%8F%A1%E6%89%8B%E6%8A%93%E5%8C%85%E8%A7%A3%E6%9E%90\/"
+        },"image": ["https:\/\/example.com\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "国密","wordcount":  1649 ,
+        "url": "https:\/\/example.com\/%E5%9B%BD%E5%AF%86tls%E6%8F%A1%E6%89%8B%E6%8A%93%E5%8C%85%E8%A7%A3%E6%9E%90\/","datePublished": "2023-04-01T20:33:37+08:00","dateModified": "2023-04-01T20:33:37+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/example.com\/images\/avatar.jpg",
+                    "width":  1024 ,
+                    "height":  1024 
+                }},"author": {
+                "@type": "Person",
+                "name": "mentir."
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="mentirBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i></span>LoveIt</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/metrilLin" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="mentirBlog"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i></span>LoveIt</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/metrilLin" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">国密ssl抓包分析</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>mentir.</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%9B%BD%E5%AF%86/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>国密</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-04-01">2023-04-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1649 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#国密ssl-vpn握手抓包分析">国密SSL VPN握手抓包分析</a>
+      <ul>
+        <li><a href="#client-hello">client hello</a>
+          <ul>
+            <li><a href="#protocolversion">ProtocolVersion</a></li>
+            <li><a href="#ciphersuite">CipherSuite</a></li>
+          </ul>
+        </li>
+        <li><a href="#server-hello">server hello</a></li>
+        <li><a href="#certificate">Certificate</a></li>
+        <li><a href="#server-key-exchage--server-hello-done">server key exchage &amp;&amp; server hello done</a></li>
+        <li><a href="#clientkeyexchange">ClientKeyExchange</a></li>
+        <li><a href="#changecipherspec">ChangeCipherSpec</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="国密ssl抓包分析">国密ssl抓包分析</h1>
+<h2 id="国密ssl-vpn握手抓包分析">国密SSL VPN握手抓包分析</h2>
+<p>握手流程如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">1. tcp三次握手
+</span></span><span class="line"><span class="cl">2. 客户端主动向服务端发送 client hello
+</span></span><span class="line"><span class="cl">3. 服务端向客户端返回 server hello
+</span></span><span class="line"><span class="cl">4. 服务端返回证书，server key exchange ，请求客户端证书，server hello done
+</span></span><span class="line"><span class="cl">5. 客户端上传自己的证书给服务端，client key exchange，传输协商后的密钥
+</span></span><span class="line"><span class="cl">6. 服务端验证客户端的证书，client key exchange，传输协商后的密钥
+</span></span><span class="line"><span class="cl">7. 服务端发送 change cipher spec、encrypted handshake
+</span></span><span class="line"><span class="cl">8. 握手协商完成，进行应用层面交互，通过前面的协商密钥来加密
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="client-hello">client hello</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133146266.png"
+        data-srcset="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133146266.png, https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133146266.png 1.5x, https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133146266.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133146266.png"
+        title="image-20230813133146266" /></p>
+<h4 id="protocolversion">ProtocolVersion</h4>
+<p>客户端向服务端发送client hello 用于向server提供客户端的密码套件版本，tls协议版本，会话标识 ，extension（有无externsion不影响tls的成功与否，只代表向server表示自己支持该能力），tls协议定义有四个版本号，为0x0301，0x0302,0x0303,0x0304,分别对应tls1.0 1.1 1.2 1.3 国密tls可能是担心与未来的TLS版本号冲突，所以使用了0x0101,这个给实现带来了很多的麻烦， 大部分网络库都是使用 <code>&gt;= &lt;=</code> 进行版本判断，会认为0x0101是一个无效的版本，需要将这块的判断进行逐一修改。</p>
+<h4 id="ciphersuite">CipherSuite</h4>
+<p>tls中使用的加密算法主要有非对称加密、摘要算法，对称加密。在ECC_SM4_SM3套件中，非对称加密算法为SM2（Sm2算法为一条全新的ECC椭圆曲线），对称加密算法为SM4，摘要算法为SM3。</p>
+<p>根据《GMT 0024-2014 SSL VPN 技术规范》中，国密新增的密码套件如下
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133214804.png"
+        data-srcset="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133214804.png, https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133214804.png 1.5x, https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133214804.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133214804.png"
+        title="image-20230813133214804" /></p>
+<h3 id="server-hello">server hello</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133251882.png"
+        data-srcset="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133251882.png, https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133251882.png 1.5x, https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133251882.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133251882.png"
+        title="image-20230813133251882" /></p>
+<p>server hello与tls1.2基本一致，都是向客户端发送协议版本号，随机数以及返回server选定的加密套件。如果客户端client hello数据包中没有国密相关套件，那么只支持国密tls的网站将会直接发送alert close (测试站:https://ebssec.boc.cn)</p>
+<h3 id="certificate">Certificate</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133307019.png"
+        data-srcset="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133307019.png, https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133307019.png 1.5x, https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133307019.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133307019.png"
+        title="image-20230813133307019" /></p>
+<p>根据国密标准定义，服务器必须使用双证书模式，通常情况下，服务端只需要一张证书</p>
+<ul>
+<li>签名时，服务器使用自己的私钥加密信息的摘要（签名），客户端使用服务器的公钥（包含在证书中）进行解密，对比该摘要是否正确，若正确，则客户端就确定了服务器的身份，即验签成功。</li>
+<li>加密时，服务器和客户端协商出会话密钥（一般为对称密钥），会话密钥的产生根据密钥协商算法的不同，过程有所不同，但都会用到证书的公钥和私钥，也就是说证书也用在加密场景中。</li>
+</ul>
+<p>而双证书则包括签名证书和加密证书两张证书，签名证书在签名时使用，仅仅用来验证身份，公钥以及私钥均由服务器自己产生，CA机构不负责其保管任务。</p>
+<p>加密证书则是在密钥协商时使用，其私钥和公钥由CA机构产生，并且由CA存根</p>
+<p>此外协议这没有规定清楚，证书的顺序应该是签名证书 + 证书链 + 加密证书，还是签名证书 + 加密证书 + 证书链，实现的时候需要注意此处的兼容性</p>
+<h3 id="server-key-exchage--server-hello-done">server key exchage &amp;&amp; server hello done</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133326714.png"
+        data-srcset="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133326714.png, https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133326714.png 1.5x, https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133326714.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133326714.png"
+        title="image-20230813133326714" /></p>
+<p>tls 1.2在server key exchange会返回给客户端相关的D-H算法参数，国密下这个数据包会返回用于客户端计算产生48字节的Pre-Master Secret（预主密钥）</p>
+<p>但是国密ECC_SM4_SM3的这个server key exchange更像rsa，会话密钥由客户端来决定，客户端生成Pre-Master Secret，用SM2公钥加密后传送给服务器，对于客户端来说这个消息不处理也没关系，暂时不清楚这个ecc的ASN.1 Cert在这个套件里到底有啥用，等后续知道了补充</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813151201522.png"
+        data-srcset="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813151201522.png, https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813151201522.png 1.5x, https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813151201522.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813151201522.png"
+        title="image-20230813151201522" /></p>
+<p>server hello done表示服务端给客户端握手所需要的全部数据已经发送完成了，等待后续客户端返回</p>
+<h3 id="clientkeyexchange">ClientKeyExchange</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133344638.png"
+        data-srcset="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133344638.png, https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133344638.png 1.5x, https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133344638.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133344638.png"
+        title="image-20230813133344638" /></p>
+<p>服务端发送SM2公钥（在加密证书中）,客户端生成Pre-Master Secret，用SM2公钥加密后传送给服务器。这块数据紧跟在ClientKeyExchange length后</p>
+<h3 id="changecipherspec">ChangeCipherSpec</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133359925.png"
+        data-srcset="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133359925.png, https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133359925.png 1.5x, https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133359925.png 2x"
+        data-sizes="auto"
+        alt="https://raw.githubusercontent.com/metrilLin/mapdepot/main/image-20230813133359925.png"
+        title="image-20230813133359925" /></p>
+<p>客户端发送Change Cipher Spec消息告诉服务端，接下来的数据使用协商好的会话密钥来通信，也就是发送一个Encrypted Handshake Message消息，服务端接收之后，也会返回一个</p>
+<p>ChangeCipherSpec保证双方的加解密正常。</p>
+<p>握手主流程基本结束，后续就是两边的业务数据的收发。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-04-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E5%9B%BD%E5%AF%86/">国密</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E5%9F%BA%E4%BA%8Ekmdf%E5%AE%9E%E7%8E%B0%E7%A3%81%E7%9B%98%E5%86%99%E4%BF%9D%E6%8A%A4/" class="prev" rel="prev" title="基于KMDF的磁盘写保护"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>基于KMDF的磁盘写保护</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.96.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">mentir.</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
