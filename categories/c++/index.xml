@@ -1,38 +1,38 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>C&#43;&#43; - 分类 - mentirBlog</title>
-        <link>https://example.com/categories/c&#43;&#43;/</link>
+        <link>https://metrillin.github.io/categories/c&#43;&#43;/</link>
         <description>C&#43;&#43; - 分类 - mentirBlog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 09 Jan 2022 21:32:17 &#43;0800</lastBuildDate><atom:link href="https://example.com/categories/c&#43;&#43;/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 09 Jan 2022 21:32:17 &#43;0800</lastBuildDate><atom:link href="https://metrillin.github.io/categories/c&#43;&#43;/" rel="self" type="application/rss+xml" /><item>
     <title>C&#43;&#43;中的RTTI技术</title>
-    <link>https://example.com/c-rtti%E6%8A%80%E6%9C%AF/</link>
+    <link>https://metrillin.github.io/c-rtti%E6%8A%80%E6%9C%AF/</link>
     <pubDate>Sun, 09 Jan 2022 21:32:17 &#43;0800</pubDate>
     <author>mentir.</author>
-    <guid>https://example.com/c-rtti%E6%8A%80%E6%9C%AF/</guid>
+    <guid>https://metrillin.github.io/c-rtti%E6%8A%80%E6%9C%AF/</guid>
     <description><![CDATA[C++中的RTTI技术 前言 RTTI的全称是“Runtime Type Identification”，意思是运行时类型识别。C++引入这个机制是为了让]]></description>
 </item>
 <item>
     <title>C&#43;&#43;中的断言(assert与static_assert)</title>
-    <link>https://example.com/c-11%E9%9D%99%E6%80%81%E6%96%AD%E8%A8%80static_assert/</link>
+    <link>https://metrillin.github.io/c-11%E9%9D%99%E6%80%81%E6%96%AD%E8%A8%80static_assert/</link>
     <pubDate>Mon, 15 Mar 2021 21:35:37 &#43;0800</pubDate>
     <author>mentir.</author>
-    <guid>https://example.com/c-11%E9%9D%99%E6%80%81%E6%96%AD%E8%A8%80static_assert/</guid>
+    <guid>https://metrillin.github.io/c-11%E9%9D%99%E6%80%81%E6%96%AD%E8%A8%80static_assert/</guid>
     <description><![CDATA[C++中的断言(assert与static_assert) assert assert被C/C++用来判断某些条件是否成立，比如判断某些参数是否合法,指针]]></description>
 </item>
 <item>
     <title>decltype类型推导</title>
-    <link>https://example.com/decltype%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC/</link>
+    <link>https://metrillin.github.io/decltype%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC/</link>
     <pubDate>Thu, 18 Feb 2021 14:35:37 &#43;0800</pubDate>
     <author>mentir.</author>
-    <guid>https://example.com/decltype%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC/</guid>
+    <guid>https://metrillin.github.io/decltype%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC/</guid>
     <description><![CDATA[decltype类型推导 decltype 关键字是为了解决 auto 关键字只能对变量进行类型推导的缺陷而出现的。它的用法和 typeof 很相似： 1 decltype(表达式) 有时]]></description>
 </item>
 <item>
     <title>Const详解与constexpr</title>
-    <link>https://example.com/const%E8%AF%A6%E8%A7%A3%E4%B8%8Econstexpr/</link>
+    <link>https://metrillin.github.io/const%E8%AF%A6%E8%A7%A3%E4%B8%8Econstexpr/</link>
     <pubDate>Fri, 18 Dec 2020 14:35:37 &#43;0800</pubDate>
     <author>mentir.</author>
-    <guid>https://example.com/const%E8%AF%A6%E8%A7%A3%E4%B8%8Econstexpr/</guid>
+    <guid>https://metrillin.github.io/const%E8%AF%A6%E8%A7%A3%E4%B8%8Econstexpr/</guid>
     <description><![CDATA[const详解 简介 C++中的Const作为从C中继承下来的关键字，名叫常量限定符，用来限定特定变量，以通知编译器该变量是不可修改的。习惯性的]]></description>
 </item>
 </channel>

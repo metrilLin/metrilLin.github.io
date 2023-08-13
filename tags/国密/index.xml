@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>国密 - 标签 - mentirBlog</title>
-        <link>https://example.com/tags/%E5%9B%BD%E5%AF%86/</link>
+        <link>https://metrillin.github.io/tags/%E5%9B%BD%E5%AF%86/</link>
         <description>国密 - 标签 - mentirBlog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 01 Apr 2023 20:33:37 &#43;0800</lastBuildDate><atom:link href="https://example.com/tags/%E5%9B%BD%E5%AF%86/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 01 Apr 2023 20:33:37 &#43;0800</lastBuildDate><atom:link href="https://metrillin.github.io/tags/%E5%9B%BD%E5%AF%86/" rel="self" type="application/rss+xml" /><item>
     <title>国密ssl抓包分析</title>
-    <link>https://example.com/%E5%9B%BD%E5%AF%86tls%E6%8F%A1%E6%89%8B%E6%8A%93%E5%8C%85%E8%A7%A3%E6%9E%90/</link>
+    <link>https://metrillin.github.io/%E5%9B%BD%E5%AF%86tls%E6%8F%A1%E6%89%8B%E6%8A%93%E5%8C%85%E8%A7%A3%E6%9E%90/</link>
     <pubDate>Sat, 01 Apr 2023 20:33:37 &#43;0800</pubDate>
     <author>mentir.</author>
-    <guid>https://example.com/%E5%9B%BD%E5%AF%86tls%E6%8F%A1%E6%89%8B%E6%8A%93%E5%8C%85%E8%A7%A3%E6%9E%90/</guid>
+    <guid>https://metrillin.github.io/%E5%9B%BD%E5%AF%86tls%E6%8F%A1%E6%89%8B%E6%8A%93%E5%8C%85%E8%A7%A3%E6%9E%90/</guid>
     <description><![CDATA[国密ssl抓包分析 国密SSL VPN握手抓包分析 握手流程如下 1 2 3 4 5 6 7 8 1. tcp三次握手 2. 客户端主动向服务端发送 client hello 3. 服务端向客户端返回 server]]></description>
 </item>
 </channel>

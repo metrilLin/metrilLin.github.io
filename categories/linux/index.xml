@@ -1,30 +1,30 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Linux - 分类 - mentirBlog</title>
-        <link>https://example.com/categories/linux/</link>
+        <link>https://metrillin.github.io/categories/linux/</link>
         <description>Linux - 分类 - mentirBlog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 06 Mar 2020 08:18:29 &#43;0800</lastBuildDate><atom:link href="https://example.com/categories/linux/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 06 Mar 2020 08:18:29 &#43;0800</lastBuildDate><atom:link href="https://metrillin.github.io/categories/linux/" rel="self" type="application/rss+xml" /><item>
     <title>Ubuntu开机自启动GUI界面</title>
-    <link>https://example.com/ubuntu%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8gui%E7%95%8C%E9%9D%A2/</link>
+    <link>https://metrillin.github.io/ubuntu%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8gui%E7%95%8C%E9%9D%A2/</link>
     <pubDate>Fri, 06 Mar 2020 08:18:29 &#43;0800</pubDate>
     <author>mentir.</author>
-    <guid>https://example.com/ubuntu%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8gui%E7%95%8C%E9%9D%A2/</guid>
+    <guid>https://metrillin.github.io/ubuntu%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8gui%E7%95%8C%E9%9D%A2/</guid>
     <description><![CDATA[ubuntu开机自启动GUI界面 1.不需要GUI的后台程序只需输入 1 sudo gedit /etc/rc.local 在exit 0 前添加一行 1 cd /home/lin/; ./run_guard.sh &amp; 即可正常开启启动程序 2.开机启动G]]></description>
 </item>
 <item>
     <title>linux内存分布</title>
-    <link>https://example.com/linux%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/</link>
+    <link>https://metrillin.github.io/linux%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/</link>
     <pubDate>Wed, 05 Feb 2020 21:30:59 &#43;0800</pubDate>
     <author>mentir.</author>
-    <guid>https://example.com/linux%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/</guid>
+    <guid>https://metrillin.github.io/linux%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/</guid>
     <description><![CDATA[linux内存分布 X86 平台 Linux 进程内存布局 什么是虚拟空间 虚拟空间可以认为是操作系统给每个进程准备的沙盒，就像电影《黑客帝国》中 Matrix 给每个人准备的充]]></description>
 </item>
 <item>
     <title>Linux内存分布</title>
-    <link>https://example.com/linux%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/</link>
+    <link>https://metrillin.github.io/linux%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/</link>
     <pubDate>Tue, 15 Oct 2019 22:11:18 &#43;0800</pubDate>
     <author>mentir.</author>
-    <guid>https://example.com/linux%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/</guid>
+    <guid>https://metrillin.github.io/linux%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/</guid>
     <description><![CDATA[linux内存分布 X86 平台 Linux 进程内存布局 什么是虚拟空间 虚拟空间可以认为是操作系统给每个进程准备的沙盒，就像电影《黑客帝国》中 Matrix 给每个人准备的充]]></description>
 </item>
 </channel>

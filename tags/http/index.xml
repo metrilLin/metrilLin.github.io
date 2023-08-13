@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Http - 标签 - mentirBlog</title>
-        <link>https://example.com/tags/http/</link>
+        <link>https://metrillin.github.io/tags/http/</link>
         <description>Http - 标签 - mentirBlog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 05 Dec 2020 21:30:59 &#43;0800</lastBuildDate><atom:link href="https://example.com/tags/http/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 05 Dec 2020 21:30:59 &#43;0800</lastBuildDate><atom:link href="https://metrillin.github.io/tags/http/" rel="self" type="application/rss+xml" /><item>
     <title>LibCurl编译</title>
-    <link>https://example.com/libcurl%E7%BC%96%E8%AF%91/</link>
+    <link>https://metrillin.github.io/libcurl%E7%BC%96%E8%AF%91/</link>
     <pubDate>Sat, 05 Dec 2020 21:30:59 &#43;0800</pubDate>
     <author>mentir.</author>
-    <guid>https://example.com/libcurl%E7%BC%96%E8%AF%91/</guid>
+    <guid>https://metrillin.github.io/libcurl%E7%BC%96%E8%AF%91/</guid>
     <description><![CDATA[libCurl编译 1.首先下载libCurl的源码，这里使用的是Github上的版本 1 git clone https://github.com/curl/curl.git 或者 1 git clone https://github.com/curl/curl 2.生成configure 1 ./buildconf 3.查]]></description>
 </item>
 </channel>

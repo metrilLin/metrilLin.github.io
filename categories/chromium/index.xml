@@ -1,22 +1,22 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>chromium - 分类 - mentirBlog</title>
-        <link>https://example.com/categories/chromium/</link>
+        <link>https://metrillin.github.io/categories/chromium/</link>
         <description>chromium - 分类 - mentirBlog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 15 Jul 2021 15:35:37 &#43;0800</lastBuildDate><atom:link href="https://example.com/categories/chromium/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 15 Jul 2021 15:35:37 &#43;0800</lastBuildDate><atom:link href="https://metrillin.github.io/categories/chromium/" rel="self" type="application/rss+xml" /><item>
     <title>chromium添加Widevine</title>
-    <link>https://example.com/widevine-cdm/</link>
+    <link>https://metrillin.github.io/widevine-cdm/</link>
     <pubDate>Thu, 15 Jul 2021 15:35:37 &#43;0800</pubDate>
     <author>mentir.</author>
-    <guid>https://example.com/widevine-cdm/</guid>
+    <guid>https://metrillin.github.io/widevine-cdm/</guid>
     <description><![CDATA[Widevine Cdm 前言 Widevine是google推出的一种DRM，支持从google指定的服务器上，下载经google加密的版权文件，如视频、应用等。]]></description>
 </item>
 <item>
     <title>单独编译chromium的Gtest</title>
-    <link>https://example.com/%E5%8D%95%E5%85%83%E8%B0%83%E8%AF%95demo%E7%BC%96%E8%AF%91/</link>
+    <link>https://metrillin.github.io/%E5%8D%95%E5%85%83%E8%B0%83%E8%AF%95demo%E7%BC%96%E8%AF%91/</link>
     <pubDate>Thu, 15 Apr 2021 21:35:37 &#43;0800</pubDate>
     <author>mentir.</author>
-    <guid>https://example.com/%E5%8D%95%E5%85%83%E8%B0%83%E8%AF%95demo%E7%BC%96%E8%AF%91/</guid>
+    <guid>https://metrillin.github.io/%E5%8D%95%E5%85%83%E8%B0%83%E8%AF%95demo%E7%BC%96%E8%AF%91/</guid>
     <description><![CDATA[chrome单元测试 单独编译chromium的Gtest 使用 编译单元测试模块 chromium 中以 *unittest 命名的文件为可以使用goole test进行单元编译，适用]]></description>
 </item>
 </channel>
